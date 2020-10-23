@@ -7,7 +7,9 @@ defmodule Krptkn.Scholar do
 
   def init(producers) do
     producers = Enum.map(producers, fn prod ->
-      {prod, max_demand: 1, min_demand: 0}
+      {prod, max_demand: 1, min_demand: 0, selector: fn {t, u, b} ->
+        Regex.match?(~r{text/.*}, t)
+      end}
     end)
 
     # Our state will keep all producers and their pending demand

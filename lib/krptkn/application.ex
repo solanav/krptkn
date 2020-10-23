@@ -1,22 +1,37 @@
 defmodule Krptkn.Application do
+  import ExProf.Macro
+
   use Application
 
+  @starting_page "https://stallman.org"
+  @producers 12
+  @consumers 24
+
   def start(_type, _args) do
-    children = [
-      # Queue for the URLs
-      {Krptkn.UrlQueue, "https://stallman.org"},
+    # Start the queue
+    children = [{Krptkn.UrlQueue, @starting_page}]
 
-      # Start the producers
-      Supervisor.child_spec({Krptkn.Spider, :p1}, id: :p1),
-      Supervisor.child_spec({Krptkn.Spider, :p2}, id: :p2),
+    # Start the producers
+    {names, producers} = Enum.reduce(0..@producers-1, {[], []}, fn i, {n, p} ->
+      name = String.to_atom("p#{i}")
+      {
+        [name | n],
+        [Supervisor.child_spec({Krptkn.Spider, name}, id: name) | p]
+      }
+    end)
+    children = children ++ producers
 
-      # Start the consumers
-      Supervisor.child_spec({Krptkn.Scholar, [:p1, :p2]}, id: :c1),
-      Supervisor.child_spec({Krptkn.Scholar, [:p1, :p2]}, id: :c2),
-      Supervisor.child_spec({Krptkn.Scholar, [:p1, :p2]}, id: :c3),
-    ]
+    # Start the consumers
+    children = children ++ Enum.map(0..@consumers-1, fn i ->
+      name = String.to_atom("c#{i}")
+      Supervisor.child_spec({Krptkn.Scholar, names}, id: name)
+    end)
 
+    # Start the HTTP client
     HTTPoison.start()
+
+    # Start erlangs viewer
+    :observer.start()
 
     Supervisor.start_link(children, strategy: :one_for_one)
   end

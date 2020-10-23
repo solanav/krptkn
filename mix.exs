@@ -26,6 +26,8 @@ defmodule Krptkn.MixProject do
       {:gen_stage, "~> 1.0.0"},
       {:floki, "~> 0.29.0"},
       {:httpoison, "~> 1.6"},
+      {:exprof, "~> 0.2.0"},
+      {:html5ever, "~> 0.8.0"},
     ]
   end
 end
