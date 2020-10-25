@@ -1,4 +1,4 @@
-defmodule Krptkn.Metadata.PngExtractor do
+defmodule Krptkn.PngExtractor do
   @moduledoc """
   This module uses naive techniques to extract the metadata inside PNG
   files. It also uses Exexif if exif info is found inside the PNG file.
