@@ -66,13 +66,6 @@ defmodule Krptkn.Spider.HtmlParser do
     %{uri | fragment: nil, path: path}
   end
 
-  def type_filter(%URI{path: path}) do
-    Regex.match?(~r{\.html$}, path) or # HTML files
-    Regex.match?(~r{\.htm$}, path) or
-    Regex.match?(~r{\.php$}, path) or # PHP files
-    Regex.match?(~r{\/[a-zA-Z]+$}, path) # Directories
-  end
-
   def get_urls(req_url, string) do
     case Floki.parse_document(string) do
       {:ok, document} ->
@@ -82,8 +75,16 @@ defmodule Krptkn.Spider.HtmlParser do
           _ -> req_uri
         end
 
-        # Get all the links in the document
-        Floki.attribute(document, "a", "href")
+        links = []
+
+        # Add all the links to the list
+        links = links ++ Floki.attribute(document, "a", "href")
+        links = links ++ Floki.attribute(document, "area", "href")
+        links = links ++ Floki.attribute(document, "base", "href")
+        links = links ++ Floki.attribute(document, "link", "href")
+        links = links ++ Floki.attribute(document, "img", "src")
+
+        links
         |> Enum.map(&String.trim/1)
         # Complete the URI (missing paths, missing hosts, etc.)
         |> Enum.map(fn url -> add_defaults(req_uri, url) end)
@@ -91,8 +92,6 @@ defmodule Krptkn.Spider.HtmlParser do
         |> Enum.filter(fn %URI{host: host} -> host == req_uri.host end)
         # Clean to avoid duplicates
         |> Enum.map(&clear_url/1)
-        # Only visit some files
-        |> Enum.filter(&type_filter/1)
         # Turn into string
         |> Enum.map(&URI.to_string/1)
       {:error, _err} ->
