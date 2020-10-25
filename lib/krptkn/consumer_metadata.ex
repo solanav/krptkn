@@ -1,4 +1,9 @@
 defmodule Krptkn.ConsumerMetadata do
+  @moduledoc """
+  This module defines the consumer that analyzes the metadata of the files
+  that the spider module generates.
+  """
+
   require Logger
 
   use GenStage

@@ -1,17 +1,15 @@
 defmodule Krptkn.Metadata.PngExtractor do
+  @moduledoc """
+  This module uses naive techniques to extract the metadata inside PNG
+  files. It also uses Exexif if exif info is found inside the PNG file.
+  """
+
   @image_start_marker 0x89_50_4E_47_0D_0A_1A_0A
   @tEXt 0x74_45_58_74
   @iTXt 0x69_54_58_74
   @zTXt 0x7A_54_58_74
 
   defstruct [:width, :height, :bit_depth, :color_type, :compression, :filter, :interlace, :chunks]
-
-  def list2ele(l) do
-    case l do
-      e when is_list(e) -> list2ele(Enum.at(e, 0))
-      e -> e
-    end
-  end
 
   def raw2exif(raw_profile_type_exif) do
     # Decompress the field (its zTXt)

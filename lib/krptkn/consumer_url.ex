@@ -1,4 +1,10 @@
 defmodule Krptkn.ConsumerUrl do
+  @moduledoc """
+  This module defines the consumer that extracts URLs from the files
+  that the spider module generates. After extracting the URLs, they are put
+  into a global queue that the producer can pop from.
+  """
+
   use GenStage
 
   def start_link(producers) do
@@ -19,7 +25,7 @@ defmodule Krptkn.ConsumerUrl do
   def handle_events(events, _from, state) do
     # Consume the events
     for {_type, url, html} <- events do
-      Krptkn.Spider.HtmlParser.get_urls(url, html)
+      Krptkn.HtmlParser.get_urls(url, html)
       |> Enum.map(&Krptkn.UrlQueue.push/1)
     end
 

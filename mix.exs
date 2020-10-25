@@ -26,7 +26,6 @@ defmodule Krptkn.MixProject do
       {:floki, "~> 0.29.0"},
       {:httpoison, "~> 1.6"},
       {:exprof, "~> 0.2.0"},
-      {:html5ever, "~> 0.8.0"},
       {:mongodb, "~> 0.5.1"},
     ]
   end

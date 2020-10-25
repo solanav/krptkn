@@ -1,4 +1,9 @@
 defmodule Krptkn.Spider do
+  @moduledoc """
+  This module is the producer that extracts the HTML from a given URL.
+  The URLs are popped from a global queue defined in UrlQueue.
+  """
+
   require Logger
 
   use GenStage, restart: :transient

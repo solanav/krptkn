@@ -1,10 +1,15 @@
-defmodule Krptkn.Spider.HtmlParser do
+defmodule Krptkn.HtmlParser do
+  @moduledoc """
+  This module parses and extracts as many as URLs as possible
+  from a given HTML file.
+  """
+
   require Logger
 
-  def remove_file(%URI{path: path} = uri) do
+  defp remove_file(%URI{path: path} = uri) do
     split_string = Regex.split(~r{\/}, path)
 
-    # Divide by "/", remove the last and then rejoin them
+    # Split by "/", remove the last and then rejoin them
     path = Enum.reverse(split_string)
     |> tl()
     |> Enum.reverse()
@@ -13,16 +18,10 @@ defmodule Krptkn.Spider.HtmlParser do
       s, acc -> acc <> "/" <> s
     end)
 
-    # Path will be empty on root directories
-    path = case path do
-      "" -> "/"
-      p -> p
-    end
-
-    %{uri | path: path}
+    %{uri | path: path <> "/"}
   end
 
-  def add_defaults(%URI{host: host} = req_uri, string) do
+  defp add_defaults(%URI{host: host} = req_uri, string) do
     uri = URI.parse(string)
 
     # Add a default authority
@@ -49,13 +48,13 @@ defmodule Krptkn.Spider.HtmlParser do
       "/" <> _ -> uri
       p ->
         %URI{path: path} = remove_file(req_uri)
-        %{uri | path: path <> "/" <> p}
+        %{uri | path: path <> p}
     end
 
     uri
   end
 
-  def clear_url(%URI{path: path} = uri) do
+  defp clear_url(%URI{path: path} = uri) do
     # Remove ./
     path = Regex.replace(~r/\.\//, path, "")
 

@@ -1,4 +1,9 @@
 defmodule Krptkn.UrlQueue do
+  @moduledoc """
+  This module defines a GenServer that acts as a global queue so that consumers
+  can push new URLs that they find and producers can pop them to extract the HTML.
+  """
+
   use GenServer
 
   @visited_links :visited_links
