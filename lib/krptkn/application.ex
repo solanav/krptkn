@@ -47,8 +47,26 @@ defmodule Krptkn.Application do
     :zlib.inflateInit(z)
     <<type::8, zlib_text::binary()>> = data["Raw profile type exif"]
 
-    :zlib.inflate(z, zlib_text)
-    |> IO.inspect
+    data = :zlib.inflate(z, zlib_text)
+    |> Enum.at(0)
+    |> String.split("\n")
+    |> IO.inspect()
+
+    bin = Enum.slice(data, 3..Enum.count(data))
+    |> Enum.flat_map(fn p ->
+      String.codepoints(p)
+      |> Enum.chunk_every(2)
+      |> Enum.map(fn [a, b] ->
+        {num, s} = Integer.parse(a <> b, 16)
+        num
+      end)
+    end)
+    |> :binary.list_to_bin()
+
+    bin = <<0xFFE17414::32>> <> bin
+
+    Exexif.read_exif(bin)
+    |> IO.inspect()
 
     :zlib.inflateEnd(z)
 
