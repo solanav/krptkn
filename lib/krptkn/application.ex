@@ -39,38 +39,10 @@ defmodule Krptkn.Application do
     # Start the HTTP client
     HTTPoison.start()
 
-    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get("https://pine64.com/wp-content/uploads/2020/09/Pinebook.png")
-    {:ok, data} = Krptkn.Metadata.PngExtractor.extract_from_png_buffer(body)
-
-    z = :zlib.open()
-
-    :zlib.inflateInit(z)
-    <<type::8, zlib_text::binary()>> = data["Raw profile type exif"]
-
-    data = :zlib.inflate(z, zlib_text)
-    |> Enum.at(0)
-    |> String.split("\n")
-    |> IO.inspect()
-
-    bin = Enum.slice(data, 3..Enum.count(data))
-    |> Enum.flat_map(fn p ->
-      String.codepoints(p)
-      |> Enum.chunk_every(2)
-      |> Enum.map(fn [a, b] ->
-        {num, s} = Integer.parse(a <> b, 16)
-        num
-      end)
-    end)
-    |> :binary.list_to_bin()
-
-    bin = <<0xFFE17414::32>> <> bin
-
-    Exexif.read_exif(bin)
-    |> IO.inspect()
-
-    :zlib.inflateEnd(z)
-
-    Process.sleep(100_000)
+    #{:ok, %HTTPoison.Response{body: body}} = HTTPoison.get("https://pine64.com/wp-content/uploads/2020/09/PinecilS-1.png")
+    #{:ok, data} = Krptkn.Metadata.PngExtractor.extract_from_png_buffer(body)
+    #|> IO.inspect
+    #Process.sleep(100_000)
 
     Supervisor.start_link(children, strategy: :one_for_one)
   end

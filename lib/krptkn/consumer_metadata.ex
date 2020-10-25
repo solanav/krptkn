@@ -36,6 +36,7 @@ defmodule Krptkn.ConsumerMetadata do
             else
               {key, %BSON.Binary{binary: data, subtype: :generic}}
             end
+          {key, data} -> {key, data}
         end)
 
         Krptkn.Db.insert_mongo("exif_png", exif)

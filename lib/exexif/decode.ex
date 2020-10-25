@@ -102,7 +102,10 @@ defmodule Exexif.Decode do
   end)
 
   def tag(type, tag, value) do
-    {~s[#{type} tag(0x#{:io_lib.format("~.16B", [tag])})], inspect(value)}
+    {
+      String.to_atom(~s[#{type}_tag(0x#{:io_lib.format("~.16B", [tag])})]),
+      inspect(value)
+    }
   end
 
   # Value decodes
