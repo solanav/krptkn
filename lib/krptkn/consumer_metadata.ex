@@ -24,40 +24,20 @@ defmodule Krptkn.ConsumerMetadata do
     {:consumer, :na, subscribe_to: producers}
   end
 
-  defp handle_jpg(buffer) do
-    case Exexif.exif_from_jpeg_buffer(buffer) do
-      {:ok, exif} -> Krptkn.Db.insert_mongo("exif_jpg", exif)
-      _ -> Logger.info("No exif on jpg")
-    end
-  end
-
-  defp handle_png(buffer) do
-    case Krptkn.Metadata.PngExtractor.extract_from_png_buffer(buffer) do
-      {:ok, exif} ->
-        exif = Enum.map(exif, fn
-          {key, data} when is_binary(data) ->
-            if String.valid?(data) do
-              {key, data}
-            else
-              {key, %BSON.Binary{binary: data, subtype: :generic}}
-            end
-          {key, data} -> {key, data}
-        end)
-
-        Krptkn.Db.insert_mongo("exif_png", exif)
-      _ -> Logger.info("No exif on png")
-    end
-  end
-
   def handle_events(events, _from, state) do
     # Consume the events
-    for {type, _url, buffer} <- events do
-      case type do
-        "image/jpg" -> handle_jpg(buffer)
-        "image/jpeg" -> handle_jpg(buffer)
-        "image/png" -> handle_png(buffer)
-        t -> Logger.info("Filetype not supported: #{t}")
-      end
+    for {type, url, buffer} <- events do
+      metadata = Extractor.extract(buffer)
+      |> Enum.map(fn {plugin_name, type, format, mime_type, data} ->
+        data = List.to_string(data)
+        if String.starts_with?(data, "\nexif") do
+          {plugin_name, type, format, mime_type, Krptkn.PngExtractor.exifstr2map(data)}
+        else
+          {plugin_name, type, format, mime_type, data}
+        end
+      end)
+
+      Logger.debug(inspect({type, url, metadata}))
     end
 
     {:noreply, [], state}

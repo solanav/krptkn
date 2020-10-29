@@ -1,7 +1,7 @@
 defmodule Krptkn.Application do
   use Application
 
-  @starting_page "https://pine64.com/?v=0446c16e2e66"
+  @starting_page "https://ignisenergia.es/"
   @producers 6
   @consumers 6
 
@@ -39,10 +39,18 @@ defmodule Krptkn.Application do
     # Start the HTTP client
     HTTPoison.start()
 
-    #{:ok, %HTTPoison.Response{body: body}} = HTTPoison.get("https://pine64.com/wp-content/uploads/2020/09/PinecilS-1.png")
-    #{:ok, data} = Krptkn.Metadata.PngExtractor.extract_from_png_buffer(body)
-    #|> IO.inspect
-    #Process.sleep(100_000)
+    # {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get("https://pine64.com/wp-content/uploads/2020/09/PinecilS-1.png")
+    # Extractor.extract(body)
+    # |> Enum.map(fn {plugin_name, type, format, mime_type, data} ->
+    #   data = List.to_string(data)
+    #   if String.starts_with?(data, "\nexif") do
+    #     {plugin_name, type, format, mime_type, Krptkn.PngExtractor.exifstr2map(data)}
+    #   else
+    #     {plugin_name, type, format, mime_type, data}
+    #   end
+    # end)
+    # |> IO.inspect
+    # Process.sleep(100_000)
 
     Supervisor.start_link(children, strategy: :one_for_one)
   end

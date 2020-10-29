@@ -11,18 +11,8 @@ defmodule Krptkn.PngExtractor do
 
   defstruct [:width, :height, :bit_depth, :color_type, :compression, :filter, :interlace, :chunks]
 
-  def raw2exif(raw_profile_type_exif) do
-    # Decompress the field (its zTXt)
-    z = :zlib.open()
-
-    :zlib.inflateInit(z)
-    <<_type::8, zlib_text::binary()>> = raw_profile_type_exif
-
-    data = :zlib.inflate(z, zlib_text)
-    |> Enum.join()
-    |> String.split("\n")
-
-    :zlib.inflateEnd(z)
+  def exifstr2map(data) do
+    data = String.split(data, "\n")
 
     # Get the lenght
     <<_::32, len::binary()>> = Enum.at(data, 2)
@@ -45,6 +35,21 @@ defmodule Krptkn.PngExtractor do
 
     {:ok, data} = Exexif.read_exif(bin)
     data
+  end
+
+  def ztxt2map(raw_profile_type_exif) do
+    # Decompress the field (its zTXt)
+    z = :zlib.open()
+
+    :zlib.inflateInit(z)
+    <<_type::8, zlib_text::binary()>> = raw_profile_type_exif
+
+    data = :zlib.inflate(z, zlib_text)
+    |> Enum.join()
+
+    :zlib.inflateEnd(z)
+
+    exifstr2map(data)
   end
 
   def extract_from_png_buffer(
@@ -81,7 +86,7 @@ defmodule Krptkn.PngExtractor do
 
         # If we have raw profile type exif, extract it
         case chunk do
-          ["Raw profile type exif", v] -> {"Raw profile type exif", raw2exif(v)}
+          ["Raw profile type exif", v] -> {"Raw profile type exif", ztxt2map(v)}
           [k, v] -> {k, v}
         end
       end)
