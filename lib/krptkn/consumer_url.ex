@@ -7,19 +7,12 @@ defmodule Krptkn.ConsumerUrl do
 
   use GenStage
 
-  def start_link(producers) do
-    GenStage.start_link(__MODULE__, producers)
+  def start_link(_) do
+    GenStage.start_link(__MODULE__, [])
   end
 
-  def init(producers) do
-    producers = Enum.map(producers, fn prod ->
-      {prod, max_demand: 1, min_demand: 0, selector: fn {t, _u, _b} ->
-        t == :error or String.contains?(t, "text/html")
-      end}
-    end)
-
-    # Our state will keep all producers and their pending demand
-    {:consumer, :na, subscribe_to: producers}
+  def init(_) do
+    {:consumer, :na, subscribe_to: [Krptkn.DistributorUrl]}
   end
 
   def handle_events(events, _from, state) do

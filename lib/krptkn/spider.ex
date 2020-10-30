@@ -34,11 +34,38 @@ defmodule Krptkn.Spider do
     end
   end
 
+  defp change_redirect_url(url, res) do
+    uri = URI.parse(url)
+    
+    new_path = Enum.reduce(res.headers, "", fn {header, content}, acc ->
+      if header == "Location" do
+        if String.starts_with?(content, "/") do
+          content
+        else
+          uri.path <> content
+        end
+      else
+        acc
+      end
+    end)
+
+    URI.to_string(%{uri | path: new_path})
+  end
+
   defp get_type(%HTTPoison.Response{} = res) do
     Enum.reduce(res.headers, :error, fn
       {"Content-Type", type}, _ -> type
       _header, acc -> acc
     end)
+  end
+
+  defp request(url) do
+    case HTTPoison.get(url) do
+      {:ok, %HTTPoison.Response{status_code: 302} = res} ->
+        url = change_redirect_url(url, res)
+        request(url)
+      res -> res
+    end
   end
 
   def handle_demand(demand, {name, count}) when demand > 0 do
@@ -47,11 +74,10 @@ defmodule Krptkn.Spider do
       {:ok, url} ->
         Logger.info("Pop ok | #{name} | #{url}")
         # Hacemos la peticion y sacamos el HTML
-        case HTTPoison.get(url) do
+        case request(url) do
           {:ok, %HTTPoison.Response{} = res} ->
             {:ok,  get_type(res), url, res.body}
-          {:error, _} ->
-            :error
+          {:error, _} -> :error
         end
       {:error, _} ->
         Logger.error("Pop failed | #{name}")

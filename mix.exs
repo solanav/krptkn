@@ -27,7 +27,8 @@ defmodule Krptkn.MixProject do
       {:httpoison, "~> 1.6"},
       {:exprof, "~> 0.2.0"},
       {:mongodb, "~> 0.5.1"},
-      {:extractor, path: "extractor", tag: "v0.1.0"}
+      {:extractor, path: "extractor", tag: "v0.1.0"},
+      {:fast_html, "~> 2.0"}
     ]
   end
 end

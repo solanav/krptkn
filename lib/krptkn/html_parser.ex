@@ -88,7 +88,9 @@ defmodule Krptkn.HtmlParser do
         # Complete the URI (missing paths, missing hosts, etc.)
         |> Enum.map(fn url -> add_defaults(req_uri, url) end)
         # Only visit URI of our same host
-        |> Enum.filter(fn %URI{host: host} -> host == req_uri.host end)
+        |> Enum.filter(fn %URI{host: host, scheme: scheme} ->
+          host == req_uri.host and String.contains?(scheme, "http")
+        end)
         # Clean to avoid duplicates
         |> Enum.map(&clear_url/1)
         # Turn into string

@@ -1,0 +1,22 @@
+defmodule Krptkn.DistributorUrl do
+  use GenStage
+
+  def start_link(producers) do
+    GenStage.start_link(__MODULE__, producers, name: __MODULE__)
+  end
+
+  def init(producers) do
+    producers = Enum.map(producers, fn prod ->
+      {prod, max_demand: 1, min_demand: 0, selector: fn
+        {:error, _u, _b} -> true
+        {t, _u, _b} -> String.contains?(t, "text/html")
+      end}
+    end)
+
+    {:producer_consumer, :na, subscribe_to: producers}
+  end
+
+  def handle_events(events, _from, producers) do
+    {:noreply, events, producers}
+  end
+end
