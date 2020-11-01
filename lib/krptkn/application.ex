@@ -1,6 +1,37 @@
 defmodule Krptkn.Application do
   use Application
 
+  import ExProf.Macro
+
+  def test do
+    profile do
+      url = "https://uam.es/UAM/imagen424/1446810134146/2020_10_30_Izquierdo_web.jpg"
+      {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(url)
+      metadata = Extractor.extract(body)
+      |> Enum.map(fn {plugin_name, type, format, mime_type, data} ->
+        data = List.to_string(data)
+        if String.starts_with?(data, "\nexif") do
+          [
+            List.to_string(plugin_name),
+            List.to_string(type),
+            format,
+            List.to_string(mime_type),
+            Krptkn.PngExtractor.exifstr2map(data)
+          ]
+        else
+          [
+            List.to_string(plugin_name),
+            List.to_string(type),
+            format,
+            List.to_string(mime_type),
+            data
+          ]
+        end
+      end)
+      |> IO.inspect
+    end
+  end
+
   def start(_type, _args) do
     # Read the config to start the application
     starting_page = Application.get_env(:krptkn, Krptkn.Application)[:starting_url]
@@ -13,7 +44,14 @@ defmodule Krptkn.Application do
       {Krptkn.UrlQueue, starting_page},
 
       # Start the connection to MongoD
-      {Mongo, [name: :mongo, hostname: "127.0.0.1", database: "krptkn"]}
+      {Mongo, [name: :mongo, hostname: "127.0.0.1", database: "krptkn"]},
+      {Postgrex, [
+        name: :psql,
+        hostname: "localhost",
+        username: "postgres",
+        password: "1234",
+        database: "krptkn"
+      ]},
     ]
 
     # Start the producers
@@ -48,19 +86,6 @@ defmodule Krptkn.Application do
 
     # Start the HTTP client
     HTTPoison.start()
-
-    #{:ok, %HTTPoison.Response{body: body}} = HTTPoison.get("https://uam.es/UAM/imagen424/1446810134146/2020_10_30_Izquierdo_web.jpg")
-    #Extractor.extract(body)
-    #|> Enum.map(fn {plugin_name, type, format, mime_type, data} ->
-    #  data = List.to_string(data)
-    #  if String.starts_with?(data, "\nexif") do
-    #    {plugin_name, type, format, mime_type, Krptkn.PngExtractor.exifstr2map(data)}
-    #  else
-    #    {plugin_name, type, format, mime_type, data}
-    #  end
-    #end)
-    #|> IO.inspect
-    #Process.sleep(100_000)
 
     Supervisor.start_link(children, strategy: :one_for_one)
   end

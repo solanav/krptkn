@@ -22,13 +22,22 @@ defmodule Krptkn.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      # General
       {:gen_stage, "~> 1.0.0"},
-      {:floki, "~> 0.29.0"},
-      {:httpoison, "~> 1.6"},
-      {:exprof, "~> 0.2.0"},
-      {:mongodb, "~> 0.5.1"},
       {:extractor, path: "extractor", tag: "v0.1.0"},
-      {:fast_html, "~> 2.0"}
+
+      # HTTP and HTML
+      {:httpoison, "~> 1.6"},
+      {:floki, "~> 0.29.0"},
+      {:fast_html, "~> 2.0"},
+      
+      # Database
+      {:mongodb, "~> 0.5.1"},
+      {:postgrex, "~> 0.15.7"},
+      {:jason, "~> 1.0"},
+
+      # Development
+      {:exprof, "~> 0.2.0"},
     ]
   end
 end

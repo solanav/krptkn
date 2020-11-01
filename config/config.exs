@@ -1,10 +1,11 @@
 import Config
 
 config :krptkn, Krptkn.Application,
-  starting_url: "https://uam.es",
-  producers: 256,
+  session_name: "stallman",
+  starting_url: "https://stallman.org/civillibertiesminute/",
+  producers: 64,
   url_consumers: 128,
-  metadata_consumers: 1
+  metadata_consumers: 128
 
 config :logger, :console,
   format: "$time $metadata[$level] $levelpad$message\n"

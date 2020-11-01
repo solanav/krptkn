@@ -72,16 +72,15 @@ defmodule Krptkn.Spider do
     # Sacamos una URL de la queue
     res = case pop_timeout() do
       {:ok, url} ->
-        Logger.info("Pop ok | #{name} | #{url}")
         # Hacemos la peticion y sacamos el HTML
         case request(url) do
           {:ok, %HTTPoison.Response{} = res} ->
+            Logger.info("#{name} | #{url}")
+            Krptkn.Db.insert_url(url)
             {:ok,  get_type(res), url, res.body}
           {:error, _} -> :error
         end
-      {:error, _} ->
-        Logger.error("Pop failed | #{name}")
-        :error
+      {:error, _} -> :error
     end
 
     case res do
