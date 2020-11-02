@@ -70,6 +70,7 @@ defmodule Krptkn.ConsumerMetadata do
     # Consume the events
     for {type, url, buffer} <- events do
       metadata = Extractor.extract(buffer)
+      |> IO.inspect
       |> Enum.filter(fn {_, type, _, _, _} -> interesting_type?(to_string(type)) end)
       |> Enum.filter(fn {_, _, _, _, data} -> interesting_data?(to_string(data)) end)
       |> Enum.map(fn {_, type, _, _, data} ->

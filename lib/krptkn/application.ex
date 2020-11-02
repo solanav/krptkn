@@ -5,9 +5,9 @@ defmodule Krptkn.Application do
 
   def test do
     profile do
-      url = "https://uam.es/UAM/imagen424/1446810134146/2020_10_30_Izquierdo_web.jpg"
+      url = "https://uam.es/UAM/documento/1446806015659/Codigo_etico_UAM.pdf"
       {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(url)
-      metadata = Extractor.extract(body)
+      Extractor.extract(body)
       |> Enum.map(fn {plugin_name, type, format, mime_type, data} ->
         data = List.to_string(data)
         if String.starts_with?(data, "\nexif") do
@@ -43,14 +43,17 @@ defmodule Krptkn.Application do
       # Start the URL queue
       {Krptkn.UrlQueue, starting_page},
 
-      # Start the connection to MongoD
-      {Mongo, [name: :mongo, hostname: "127.0.0.1", database: "krptkn"]},
+      # Start the database wrapper
+      Krptkn.Db,
+
+      # Start the connection to Postgresql
       {Postgrex, [
         name: :psql,
         hostname: "localhost",
         username: "postgres",
         password: "1234",
-        database: "krptkn"
+        database: "krptkn",
+        pool_size: 10,
       ]},
     ]
 

@@ -9,7 +9,8 @@ defmodule Krptkn.DistributorMetadata do
     producers = Enum.map(producers, fn prod ->
       {prod, max_demand: 1, min_demand: 0, selector: fn
         {:error, _u, _b} -> false
-        {t, _u, _b} -> Regex.match?(~r{[image|video]\/.*}, t)
+        {"text/html", _u, _b} -> false
+        _ -> true
       end}
     end)
 
