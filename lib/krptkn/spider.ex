@@ -7,6 +7,7 @@ defmodule Krptkn.Spider do
   require Logger
 
   use GenStage, restart: :transient
+  use Appsignal.Instrumentation.Decorators
 
   def start_link(name) do
     GenStage.start_link(__MODULE__, name, name: name)
@@ -16,6 +17,7 @@ defmodule Krptkn.Spider do
     {:producer, {name, 0}, dispatcher: GenStage.BroadcastDispatcher}
   end
 
+  @decorate transaction_event()
   defp pop_timeout do
     url = Enum.reduce_while(0..50, "", fn
       50, "" -> {:halt, ""}
@@ -34,6 +36,7 @@ defmodule Krptkn.Spider do
     end
   end
 
+  @decorate transaction_event()
   defp change_redirect_url(url, res) do
     uri = URI.parse(url)
     
@@ -52,6 +55,7 @@ defmodule Krptkn.Spider do
     URI.to_string(%{uri | path: new_path})
   end
 
+  @decorate transaction_event()
   defp get_type(%HTTPoison.Response{} = res) do
     Enum.reduce(res.headers, :error, fn
       {"Content-Type", type}, _ -> type
@@ -59,6 +63,7 @@ defmodule Krptkn.Spider do
     end)
   end
 
+  @decorate transaction_event()
   defp request(url) do
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 302} = res} ->
@@ -68,6 +73,7 @@ defmodule Krptkn.Spider do
     end
   end
 
+  @decorate transaction()
   def handle_demand(demand, {name, count}) when demand > 0 do
     # Sacamos una URL de la queue
     res = case pop_timeout() do
