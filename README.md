@@ -8,13 +8,9 @@ Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
   - [x] Extract URLs from HTML
   - [ ] Dictionary of common directories
   - [ ] Extract from Robots.txt and other files
-- [ ] Metadata extractor
-  - [x] JPG extractor
-  - [x] PNG extractor
-  - [ ] PDF extractor
-  - [ ] ODT extractor
-  - [ ] Word extractor
+- [x] NIF with libextractor
 - [ ] Metadata analyzer
+- [x] Metadata filter
 - [ ] Report generator
 - [ ] Meta
   - [x] Create tests
