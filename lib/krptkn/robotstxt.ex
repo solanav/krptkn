@@ -1,5 +1,5 @@
 defmodule Krptkn.Prelaunch do
-  def robotstxt do
+  def robotstxt(uri, ) do
     uri = URI.parse("https://stallman.org")
     text = "User-agent: *\nDisallow: /*?comments=all\nDisallow: /wp-content/themes/neilpatel/js/script-comments.js\nDisallow: /home\nDisallow: /admin"
 

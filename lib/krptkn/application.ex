@@ -71,20 +71,20 @@ defmodule Krptkn.Application do
 
     # Start the distributors and subscribe them to the producers
     children = children ++ [
-      {Krptkn.DistributorUrl, names},
-      {Krptkn.DistributorMetadata, names},
+      {Krptkn.Distributors.Url, names},
+      {Krptkn.Distributors.Metadata, names},
     ]
 
     # Start the consumers of URLs and subscribe them to the url distributor
     children = children ++ Enum.map(0..url_consumers-1, fn i ->
       name = String.to_atom("cu#{i}")
-      Supervisor.child_spec({Krptkn.ConsumerUrl, []}, id: name)
+      Supervisor.child_spec({Krptkn.Consumers.Url, []}, id: name)
     end)
 
-    # Start the consumers if metadata and subscribe them to the metadata distributor
+    # Start the consumers of metadata and subscribe them to the metadata distributor
     children = children ++ Enum.map(0..metadata_consumers-1, fn i ->
       name = String.to_atom("cm#{i}")
-      Supervisor.child_spec({Krptkn.ConsumerMetadata, []}, id: name)
+      Supervisor.child_spec({Krptkn.Consumers.Metadata, []}, id: name)
     end)
 
     # Start the HTTP client

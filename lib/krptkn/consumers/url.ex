@@ -1,4 +1,4 @@
-defmodule Krptkn.ConsumerUrl do
+defmodule Krptkn.Consumers.Url do
   @moduledoc """
   This module defines the consumer that extracts URLs from the files
   that the spider module generates. After extracting the URLs, they are put
@@ -12,7 +12,7 @@ defmodule Krptkn.ConsumerUrl do
   end
 
   def init(_) do
-    {:consumer, :na, subscribe_to: [Krptkn.DistributorUrl]}
+    {:consumer, :na, subscribe_to: [Krptkn.Distributors.Url]}
   end
 
   def handle_events(events, _from, state) do
