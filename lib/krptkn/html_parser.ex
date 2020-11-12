@@ -74,6 +74,12 @@ defmodule Krptkn.HtmlParser do
           _ -> req_uri
         end
 
+        # Get the base domain name so as not to leave the site
+        domain = req_uri.host
+        |> String.split(".")
+        |> Enum.take(-2)
+        |> Enum.join(".")
+
         links = []
 
         # Add all the links to the list
@@ -87,14 +93,20 @@ defmodule Krptkn.HtmlParser do
         |> Enum.map(&String.trim/1)
         # Complete the URI (missing paths, missing hosts, etc.)
         |> Enum.map(fn url -> add_defaults(req_uri, url) end)
-        # Only visit URI of our same host
-        |> Enum.filter(fn %URI{host: host, scheme: scheme} ->
-          host == req_uri.host and String.contains?(scheme, "http")
+        # Only visit URI of our same domain and subdomains
+        |> Enum.filter(fn %URI{host: host} ->
+          host == req_uri.host or String.ends_with?(host, domain)
+        end)
+        # Only visit http and https pages
+        |> Enum.filter(fn %URI{scheme: scheme} ->
+          String.contains?(scheme, "http")
         end)
         # Clean to avoid duplicates
         |> Enum.map(&clear_url/1)
         # Turn into string
         |> Enum.map(&URI.to_string/1)
+        # Remove duplicates
+        |> Enum.uniq()
       {:error, _err} ->
         Logger.error("Parser error")
         []

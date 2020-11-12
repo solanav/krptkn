@@ -7,21 +7,23 @@ defmodule Krptkn.Consumers.Url do
 
   use GenStage
 
-  def start_link(_) do
-    GenStage.start_link(__MODULE__, [])
+  def start_link(name) do
+    GenStage.start_link(__MODULE__, [], name: name)
   end
 
   def init(_) do
-    {:consumer, :na, subscribe_to: [Krptkn.Distributors.Url]}
+    {:producer_consumer, :na, subscribe_to: [Krptkn.Distributors.Url]}
   end
 
   def handle_events(events, _from, state) do
-    # Consume the events
-    for {_type, url, html} <- events do
+    events = Enum.map(events, fn {type, url, html} ->
+      # Extract the URLs and filter ones we already found
       Krptkn.HtmlParser.get_urls(url, html)
       |> Enum.map(&Krptkn.UrlQueue.push/1)
-    end
+      
+      {:url, {type, url}}
+    end)
 
-    {:noreply, [], state}
+    {:noreply, events, state}
   end
 end

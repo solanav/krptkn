@@ -14,7 +14,7 @@ defmodule Krptkn.MetadataFilter do
     end
   end
 
-  def interesting_type?(type) do
+    def interesting_type?(type) do
     boring_types = [
       "mimetype",
       "image dimensions",
@@ -48,6 +48,7 @@ defmodule Krptkn.MetadataFilter do
   end
 
   def extract_data(string) do
-
+    email_regex = ~r/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/
+    Enum.at(Regex.scan(email_regex, string), 0)
   end
 end

@@ -8,28 +8,36 @@ defmodule Krptkn.UrlQueue do
 
   @visited_links :visited_links
 
-  def start_link(initial_url) do
-    GenServer.start_link(__MODULE__, initial_url, name: __MODULE__)
+  def start_link(initial_urls) do
+    GenServer.start_link(__MODULE__, initial_urls, name: __MODULE__)
   end
 
-  def push(element) do
-    if :ets.lookup(@visited_links, element) == [] do
-      :ets.insert(@visited_links, {element, NaiveDateTime.utc_now()})
-      GenServer.cast(__MODULE__, {:push, element})
+    def push(url) do
+    if not found?(url) do
+      :ets.insert(@visited_links, {url, NaiveDateTime.utc_now()})
+      GenServer.cast(__MODULE__, {:push, url})
     end
   end
 
-  def pop do
+    def pop do
     GenServer.call(__MODULE__, :pop)
   end
 
+  defp found?(url), do: :ets.lookup(@visited_links, url) != []
+
   @impl true
-  def init(initial_url) when is_binary(initial_url) do
+  def init(initial_urls) when is_list(initial_urls) do
     # Start an ets for saving visited links
     :ets.new(@visited_links, [:set, :public, :named_table])
 
     q = :queue.new()
-    {:ok, :queue.in(initial_url, q)}
+
+    # Insert the initial urls
+    q = Enum.reduce(initial_urls, q, fn url, q ->
+      :queue.in(url, q)
+    end)
+
+    {:ok, q}
   end
 
   @impl true
@@ -41,7 +49,7 @@ defmodule Krptkn.UrlQueue do
   end
 
   @impl true
-  def handle_cast({:push, element}, queue) do
-    {:noreply, :queue.in(element, queue)}
+  def handle_cast({:push, url}, queue) do
+    {:noreply, :queue.in(url, queue)}
   end
 end

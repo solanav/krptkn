@@ -1,12 +1,10 @@
 defmodule Krptkn.Prelaunch do
-  def robotstxt(uri, ) do
-    uri = URI.parse("https://stallman.org")
-    text = "User-agent: *\nDisallow: /*?comments=all\nDisallow: /wp-content/themes/neilpatel/js/script-comments.js\nDisallow: /home\nDisallow: /admin"
-
+  def robotstxt(uri, text) do
     Regex.scan(~r/Disallow:(.*)/, text)
-    |> Enum.map(fn [a, b] -> String.trim(b) end)
+    |> Enum.map(fn [_, value] -> String.trim(value) end)
     |> Enum.filter(fn path -> not String.contains?(path, "*") end)
     |> Enum.map(fn path -> %{uri | path: path} end)
+    |> Enum.map(&URI.to_string/1)
   end
 
   def dictionary(uri) do

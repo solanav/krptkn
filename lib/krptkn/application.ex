@@ -34,17 +34,19 @@ defmodule Krptkn.Application do
 
   def start(_type, _args) do
     # Read the config to start the application
-    starting_page = Application.get_env(:krptkn, Krptkn.Application)[:starting_url]
+    initial_url = Application.get_env(:krptkn, Krptkn.Application)[:starting_url]
     producers = Application.get_env(:krptkn, Krptkn.Application)[:producers]
     url_consumers = Application.get_env(:krptkn, Krptkn.Application)[:url_consumers]
     metadata_consumers = Application.get_env(:krptkn, Krptkn.Application)[:metadata_consumers]
+    db_consumers = Application.get_env(:krptkn, Krptkn.Application)[:db_consumers]
+
+    # Expand the initial URL into a list
+    initial_uri = URI.parse(initial_url)
+    initial_urls = [initial_url | Krptkn.Prelaunch.dictionary(initial_uri)]
 
     children = [
       # Start the URL queue
-      {Krptkn.UrlQueue, starting_page},
-
-      # Start the database wrapper
-      Krptkn.Db,
+      {Krptkn.UrlQueue, initial_urls},
 
       # Start the connection to Postgresql
       {Postgrex, [
@@ -58,7 +60,7 @@ defmodule Krptkn.Application do
     ]
 
     # Start the producers
-    {names, producers} = Enum.reduce(0..producers-1, {[], []}, fn i, {n, p} ->
+    {spider_names, spider_producers} = Enum.reduce(0..producers-1, {[], []}, fn i, {n, p} ->
       num = String.pad_leading(Integer.to_string(i), 3, "0")
       name = String.to_atom("p" <> num)
 
@@ -67,24 +69,45 @@ defmodule Krptkn.Application do
         [Supervisor.child_spec({Krptkn.Spider, name}, id: name) | p]
       }
     end)
-    children = children ++ producers
+    children = children ++ spider_producers
 
     # Start the distributors and subscribe them to the producers
     children = children ++ [
-      {Krptkn.Distributors.Url, names},
-      {Krptkn.Distributors.Metadata, names},
+      {Krptkn.Distributors.Url, spider_names},
+      {Krptkn.Distributors.Metadata, spider_names},
     ]
 
     # Start the consumers of URLs and subscribe them to the url distributor
-    children = children ++ Enum.map(0..url_consumers-1, fn i ->
+    {cu_names, cu} = Enum.reduce(0..url_consumers-1, {[], []}, fn i, {n, p} ->
       name = String.to_atom("cu#{i}")
-      Supervisor.child_spec({Krptkn.Consumers.Url, []}, id: name)
+
+      {
+        [name | n],
+        [Supervisor.child_spec({Krptkn.Consumers.Url, name}, id: name) | p]
+      }
     end)
+    children = children ++ cu
 
     # Start the consumers of metadata and subscribe them to the metadata distributor
-    children = children ++ Enum.map(0..metadata_consumers-1, fn i ->
+    {cm_names, cm} = Enum.reduce(0..metadata_consumers-1, {[], []}, fn i, {n, p} ->
       name = String.to_atom("cm#{i}")
-      Supervisor.child_spec({Krptkn.Consumers.Metadata, []}, id: name)
+
+      {
+        [name | n],
+        [Supervisor.child_spec({Krptkn.Consumers.Metadata, name}, id: name) | p]
+      }
+    end)
+    children = children ++ cm
+
+    # Start the distributor for the database inserters
+    children = children ++ [
+      {Krptkn.Distributors.Db, cu_names ++ cm_names}
+    ]
+
+    # Start the consumers of database data and subscribe them to the db distributor
+    children = children ++ Enum.map(0..db_consumers-1, fn i ->
+      name = String.to_atom("cdb#{i}")
+      Supervisor.child_spec({Krptkn.Consumers.Db, []}, id: name)
     end)
 
     # Start the HTTP client
