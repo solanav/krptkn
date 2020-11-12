@@ -32,7 +32,6 @@ defmodule Krptkn.MixProject do
       {:fast_html, "~> 2.0"},
       
       # Database
-      {:mongodb, "~> 0.5.1"},
       {:postgrex, "~> 0.15.7"},
       {:jason, "~> 1.0"},
 

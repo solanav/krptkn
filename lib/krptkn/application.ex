@@ -113,6 +113,9 @@ defmodule Krptkn.Application do
     # Start the HTTP client
     HTTPoison.start()
 
+    # Start the observer
+    :observer.start()
+
     Supervisor.start_link(children, strategy: :one_for_one)
   end
 end

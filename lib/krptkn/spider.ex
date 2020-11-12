@@ -16,7 +16,7 @@ defmodule Krptkn.Spider do
     {:producer, {name, 0}, dispatcher: GenStage.BroadcastDispatcher}
   end
 
-    defp pop_timeout do
+  defp pop_timeout do
     url = Enum.reduce_while(0..50, "", fn
       50, "" -> {:halt, ""}
       _, "" ->
@@ -34,7 +34,7 @@ defmodule Krptkn.Spider do
     end
   end
 
-    defp change_redirect_url(url, res) do
+  defp change_redirect_url(url, res) do
     uri = URI.parse(url)
     
     new_path = Enum.reduce(res.headers, "", fn {header, content}, acc ->
@@ -52,14 +52,14 @@ defmodule Krptkn.Spider do
     URI.to_string(%{uri | path: new_path})
   end
 
-    defp get_type(%HTTPoison.Response{} = res) do
+  defp get_type(%HTTPoison.Response{} = res) do
     Enum.reduce(res.headers, :error, fn
       {"Content-Type", type}, _ -> type
       _header, acc -> acc
     end)
   end
 
-    defp request(url) do
+  defp request(url) do
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 302} = res} ->
         url = change_redirect_url(url, res)
@@ -68,7 +68,7 @@ defmodule Krptkn.Spider do
     end
   end
 
-    def handle_demand(demand, {name, count}) when demand > 0 do
+  def handle_demand(demand, {name, count}) when demand > 0 do
     # Sacamos una URL de la queue
     res = case pop_timeout() do
       {:ok, url} ->
