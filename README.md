@@ -4,10 +4,10 @@ Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
 
 # Roadmap
 
-- [ ] Spider
+- [x] Spider
   - [x] Extract URLs from HTML
-  - [ ] Dictionary of common directories
-  - [ ] Extract from Robots.txt and other files
+  - [x] Dictionary of common directories
+  - [x] Extract from Robots.txt and other files
 - [x] NIF with libextractor
 - [ ] Metadata analyzer
 - [x] Metadata filter
@@ -17,14 +17,10 @@ Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
   - [x] Continuous integration
   - [x] Module documentation
   - [ ] Function documentation
-  - [ ] Schematics
+  - [x] Schematics
 
 # Schematics
 
-Krptkn's current data flow:
+Krptkn's data flow:
 
 ![alt text](krptkn.png "Data flow for krptkn")
-
-Krptkn's future data flow:
-
-![alt text](krptkn_future.png "Data flow for krptkn")
