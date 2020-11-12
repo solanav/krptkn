@@ -23,4 +23,4 @@ Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
 
 Krptkn's data flow:
 
-![alt text](krptkn.png "Data flow for krptkn")
+![alt text](final_form.png "Data flow for krptkn")
