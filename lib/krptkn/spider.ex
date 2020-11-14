@@ -36,7 +36,7 @@ defmodule Krptkn.Spider do
 
   defp change_redirect_url(url, res) do
     uri = URI.parse(url)
-    
+
     new_path = Enum.reduce(res.headers, "", fn {header, content}, acc ->
       if header == "Location" do
         if String.starts_with?(content, "/") do

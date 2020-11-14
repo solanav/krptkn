@@ -1,10 +1,10 @@
 import Config
 
 config :krptkn, Krptkn.Application,
-  session_name: "debugging_001",
-  starting_url: "https://www.tumblr.com/",
-  producers: 8,
-  url_consumers: 16,
+  session_name: "debugging_002",
+  starting_url: "https://archive.synology.com/download/",
+  producers: 32,
+  url_consumers: 32,
   metadata_consumers: 1,
   db_consumers: 8
 

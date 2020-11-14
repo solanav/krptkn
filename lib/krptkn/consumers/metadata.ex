@@ -16,21 +16,26 @@ defmodule Krptkn.Consumers.Metadata do
     {:producer_consumer, :na, subscribe_to: [Krptkn.Distributors.Metadata]}
   end
 
+  defp extract_metadata(buffer) do
+    Extractor.flat_extract(buffer)
+    |> Enum.filter(fn {_, type, _, _, _} -> Krptkn.MetadataFilter.interesting_type?(to_string(type)) end)
+    |> Enum.filter(fn {_, _, _, _, data} -> Krptkn.MetadataFilter.interesting_data?(to_string(data)) end)
+    |> Enum.map(fn {_, type, _, _, data} ->
+      data = to_string(data)
+      if String.starts_with?(data, "\nexif") do
+        {to_string(type), Krptkn.PngExtractor.exifstr2map(data)}
+      else
+        {to_string(type), data}
+      end
+    end)
+    |> Map.new()
+  end
+
   def handle_events(events, _from, state) do
     # Extract the metadata and save it to events
     events = Enum.map(events, fn {type, url, buffer} ->
-      metadata = Extractor.extract(buffer)
-      |> Enum.filter(fn {_, type, _, _, _} -> Krptkn.MetadataFilter.interesting_type?(to_string(type)) end)
-      |> Enum.filter(fn {_, _, _, _, data} -> Krptkn.MetadataFilter.interesting_data?(to_string(data)) end)
-      |> Enum.map(fn {_, type, _, _, data} ->
-        data = to_string(data)
-        if String.starts_with?(data, "\nexif") do
-          {to_string(type), Krptkn.PngExtractor.exifstr2map(data)}
-        else
-          {to_string(type), data}
-        end
-      end)
-      |> Map.new()
+      # Extract metadata from the file
+      metadata = extract_metadata(buffer)
 
       {:metadata, {type, url, metadata}}
     end)
