@@ -75,8 +75,13 @@ defmodule Krptkn.Spider do
         # Hacemos la peticion y sacamos el HTML
         case request(url) do
           {:ok, %HTTPoison.Response{} = res} ->
+            type = get_type(res)
+
             Logger.info("#{name} | #{url}")
-            {:ok,  get_type(res), url, res.body}
+            Krptkn.Api.add(:url)
+            Krptkn.Api.add_file_type(type)
+
+            {:ok, type, url, res.body}
           {:error, _} -> :error
         end
       {:error, _} -> :error

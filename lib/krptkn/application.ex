@@ -57,6 +57,9 @@ defmodule Krptkn.Application do
       # Start the Endpoint (http/https)
       KrptknWeb.Endpoint,
 
+      # Start the API genserver
+      Krptkn.Api,
+
       # Start the URL queue
       {Krptkn.UrlQueue, []},
     ]

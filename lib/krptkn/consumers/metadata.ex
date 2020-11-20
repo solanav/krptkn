@@ -29,6 +29,8 @@ defmodule Krptkn.Consumers.Metadata do
       end
     end)
     |> Map.new()
+
+    Krptkn.Api.add(:metadata)
   end
 
   def handle_events(events, _from, state) do
@@ -41,6 +43,11 @@ defmodule Krptkn.Consumers.Metadata do
     end)
     # Remove the empty maps
     |> Enum.filter(fn {:metadata, {_type, _url, m}} -> not Enum.empty?(m) end)
+    # Count fmetadata
+    |> Enum.map(fn v ->
+      Krptkn.Api.add(:fmetadata)
+      v
+    end)
 
     {:noreply, events, state}
   end

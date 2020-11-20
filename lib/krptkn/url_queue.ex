@@ -12,14 +12,14 @@ defmodule Krptkn.UrlQueue do
     GenServer.start_link(__MODULE__, initial_urls, name: __MODULE__)
   end
 
-    def push(url) do
+  def push(url) do
     if not found?(url) do
       :ets.insert(@visited_links, {url, NaiveDateTime.utc_now()})
       GenServer.cast(__MODULE__, {:push, url})
     end
   end
 
-    def pop do
+  def pop do
     GenServer.call(__MODULE__, :pop)
   end
 
