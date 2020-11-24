@@ -49,6 +49,7 @@ defmodule Krptkn.MixProject do
 
       # General
       {:gen_stage, "~> 1.0.0"},
+      {:extractor, git: "https://git.solana.miami/solanav/extractor"},
 
       # HTTP and HTML
       {:httpoison, "~> 1.6"},
@@ -57,9 +58,6 @@ defmodule Krptkn.MixProject do
 
       # Development
       {:exprof, "~> 0.2.0"},
-
-      # Metrics
-      {:extractor, path: "extractor", tag: "v0.1.0"},
     ]
   end
 
