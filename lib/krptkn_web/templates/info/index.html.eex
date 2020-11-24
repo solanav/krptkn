@@ -1,14 +1,6 @@
 <div id="wrapper">
   <div class="content-area">
     <div class="main">
-      <div class="row mt-3">
-        <div class="col-md-12">
-          <div class="box">
-
-          </div>
-        </div>
-      </div>
-
       <div class="row sparkboxes mt-4">
         <div class="col-md-3">
           <div class="box box1">
@@ -431,16 +423,24 @@ var optionsBar = {
       horizontal: false,
     },
   },
-  series: [{
-    name: 'PRODUCT A',
-    data: [14, 25, 21, 17, 12, 13, 11, 19]
-  }, {
-    name: 'PRODUCT B',
-    data: [13, 23, 20, 8, 13, 27, 33, 12]
-  }, {
-    name: 'PRODUCT C',
-    data: [11, 17, 15, 15, 21, 14, 15, 13]
-  }],
+  series: [
+    {
+      name: 'Process #1',
+      data: [14, 25, 21, 17, 12, 13, 11, 19]
+    }, {
+      name: 'Process #2',
+      data: [13, 23, 20, 8, 13, 27, 33, 12]
+    }, {
+      name: 'Process #3',
+      data: [11, 17, 15, 15, 21, 14, 15, 13]
+    }, {
+      name: 'Process #4',
+      data: [11, 17, 15, 15, 21, 14, 15, 13]
+    }, {
+      name: 'Process #5',
+      data: [11, 17, 15, 15, 21, 14, 15, 13]
+    }
+  ],
   xaxis: {
     categories: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2', '2012 Q3', '2012 Q4'],
   },

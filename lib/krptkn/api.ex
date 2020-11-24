@@ -24,12 +24,16 @@ defmodule Krptkn.Api do
     GenServer.cast(__MODULE__, {:add_file_type, file_type})
   end
 
-  def add_file_type(response_type) do
+  def add_response_type(response_type) do
     GenServer.cast(__MODULE__, {:add_response, response_type})
   end
 
   def memory do
     GenServer.call(__MODULE__, :memory)
+  end
+
+  def reductions do
+    GenServer.call(__MODULE__, :reductions)
   end
 
   @impl true
@@ -44,6 +48,7 @@ defmodule Krptkn.Api do
       http_responses: [],
       file_types: [],
       memory: [],
+      reductions: [],
     }
 
     {:ok, state}
@@ -72,7 +77,7 @@ defmodule Krptkn.Api do
 
   @impl true
   def handle_cast({:add_response, http_response}, state) do
-    {http_responses, res} = Enum.map_reduce(state.http_responses, :not_found, fn {response, count}, acc ->
+    {http_responses, res} = Enum.map_reduce(state.http_responses, :not_found, fn {response, count}, _acc ->
       if response == http_response do
         {{response, count + 1}, :found}
       end
@@ -87,7 +92,7 @@ defmodule Krptkn.Api do
 
   @impl true
   def handle_cast({:add_file_type, file_type}, state) do
-    {file_types, res} = Enum.map_reduce(state.file_types, :not_found, fn {type, count}, acc ->
+    {file_types, res} = Enum.map_reduce(state.file_types, :not_found, fn {type, count}, _acc ->
       if type == file_type do
         {{type, count + 1}, :found}
       end
@@ -126,11 +131,33 @@ defmodule Krptkn.Api do
     {:reply, state.memory, state}
   end
 
+  @impl true
+  def handle_call(:reductions, _from, state) do
+    {:reply, state.reductions, state}
+  end
+
+  defp get_reductions do
+    :erlang.processes()
+    |> Enum.map(fn pid ->
+      info = :erlang.process_info(pid)
+      %{
+        reductions: info[:reductions],
+        name: info[:registered_name],
+        current_function: info[:current_function],
+      }
+    end)
+    |> Enum.sort(&(&1[:reductions] >= &2[:reductions]))
+    |> Enum.take(5)
+  end
+
   # Automatic stuff
   @impl true
   def handle_info(:regular_capture, state) do
     # We save the memory state
     state = %{state | memory: [:erlang.memory | state.memory]}
+
+    # We save the reduction state
+    state = %{state | reductions: [get_reductions() | state.reductions]}
 
     schedule_rc()
 

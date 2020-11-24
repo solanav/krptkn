@@ -20,7 +20,7 @@ defmodule KrptknWeb.Info do
       :ets -> 8
     end
 
-    Krptkn.Api.memory
+    Krptkn.Api.memory()
     |> Enum.map(fn l ->
       val = Enum.at(l, i)
       |> elem(1)
@@ -28,6 +28,18 @@ defmodule KrptknWeb.Info do
       val / 1_000_000
     end)
     |> Enum.take(30)
+    |> Enum.reverse()
     |> inspect(limit: :infinity)
+  end
+
+  def reductions do
+    Krptkn.Api.reductions()
+    |> Enum.take(5)
+    |> Enum.reverse()
+    |> Enum.map(fn functions ->
+      Enum.reduce(functions, {[], [], []}, fn %{current_function: cf, name: name, reductions: red}, {cfs, names, reds} ->
+        {[cf | cfs], [name | names], [red | reds]}
+      end)
+    end)
   end
 end

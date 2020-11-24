@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :krptkn, Krptkn.Repo,
-  username: "krptkn",
-  password: "1234",
+  username: "krptkn-dev",
+  password: "xz3uz3Md4lFeHXOi3lOH",
   database: "krptkn_dev",
-  hostname: "localhost",
+  hostname: "192.168.1.144",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

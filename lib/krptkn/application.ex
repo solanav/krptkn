@@ -32,17 +32,21 @@ defmodule Krptkn.Application do
     end
   end
 
+  def manual_start(initial_url) do
+    initial_uri = URI.parse(initial_url)
+    initial_urls = [initial_url | Krptkn.Prelaunch.dictionary(initial_uri)]
+
+    for url <- initial_urls do
+      Krptkn.UrlQueue.push(url)
+    end
+  end
+
   def start(_type, _args) do
     # Read the config to start the application
-    #initial_url = Application.get_env(:krptkn, Krptkn.Application)[:starting_url]
     producers = Application.get_env(:krptkn, Krptkn.Application)[:producers]
     url_consumers = Application.get_env(:krptkn, Krptkn.Application)[:url_consumers]
     metadata_consumers = Application.get_env(:krptkn, Krptkn.Application)[:metadata_consumers]
     db_consumers = Application.get_env(:krptkn, Krptkn.Application)[:db_consumers]
-
-    # Expand the initial URL into a list
-    #initial_uri = URI.parse(initial_url)
-    #initial_urls = [initial_url | Krptkn.Prelaunch.dictionary(initial_uri)]
 
     children = [
       # Start the Ecto repository
