@@ -6,10 +6,10 @@ use Mix.Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :krptkn, Krptkn.Repo,
-  username: "krptkn",
+  username: "krptkn-test",
   password: "bPCxPyQsoRfcaWiSK2W4",
   database: "krptkn_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
+  hostname: "192.168.1.144",
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
