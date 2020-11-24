@@ -43,10 +43,14 @@ defmodule Krptkn.Application do
 
   def start(_type, _args) do
     # Read the config to start the application
+    initial_url = Application.get_env(:krptkn, Krptkn.Application)[:initial_url]
     producers = Application.get_env(:krptkn, Krptkn.Application)[:producers]
     url_consumers = Application.get_env(:krptkn, Krptkn.Application)[:url_consumers]
     metadata_consumers = Application.get_env(:krptkn, Krptkn.Application)[:metadata_consumers]
     db_consumers = Application.get_env(:krptkn, Krptkn.Application)[:db_consumers]
+
+    initial_uri = URI.parse(initial_url)
+    initial_urls = [initial_url | Krptkn.Prelaunch.dictionary(initial_uri)]
 
     children = [
       # Start the Ecto repository
@@ -65,7 +69,7 @@ defmodule Krptkn.Application do
       Krptkn.Api,
 
       # Start the URL queue
-      {Krptkn.UrlQueue, []},
+      {Krptkn.UrlQueue, initial_urls},
     ]
 
     # Start the producers
@@ -123,6 +127,7 @@ defmodule Krptkn.Application do
     HTTPoison.start()
 
     opts = [strategy: :one_for_one, name: Krptkn.Supervisor]
+
     Supervisor.start_link(children, opts)
   end
 

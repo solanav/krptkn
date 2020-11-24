@@ -1,4 +1,4 @@
-defmodule KrptknWeb.Info do
+defmodule KrptknWeb.InfoController do
   use KrptknWeb, :controller
 
   def index(conn, _params) do

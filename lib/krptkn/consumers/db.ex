@@ -7,19 +7,20 @@ defmodule Krptkn.Consumers.Db do
 
   use GenStage
 
-  defp insert_url(type, url) do
-    session = Application.get_env(:krptkn, Krptkn.Application)[:session_name]
-    query = "INSERT INTO visited_urls (session, url, type) VALUES ($1, $2, $3)"
-    Postgrex.query!(:psql, query, [session, url, type])
+  defp insert_url(_type, _url) do
+    # session = Application.get_env(:krptkn, Krptkn.Application)[:session_name]
+    # query = "INSERT INTO visited_urls (session, url, type) VALUES ($1, $2, $3)"
+    # Postgrex.query!(:psql, query, [session, url, type])
   end
 
-  defp insert_metadata(type, url, metadata) do
-    session = Application.get_env(:krptkn, Krptkn.Application)[:session_name]
-    query = "INSERT INTO metadata (session, url, type, metadata) VALUES ($1, $2, $3, $4)"
-    Postgrex.query!(:psql, query, [session, url, type, metadata])
+  defp insert_metadata(_type, _url, _metadata) do
+    # session = Application.get_env(:krptkn, Krptkn.Application)[:session_name]
+    # query = "INSERT INTO metadata (session, url, type, metadata) VALUES ($1, $2, $3, $4)"
+    # Postgrex.query!(:psql, query, [session, url, type, metadata])
   end
 
   def start_link(_) do
+    Krptkn.Api.register_process(__MODULE__, "", self())
     GenStage.start_link(__MODULE__, [])
   end
 

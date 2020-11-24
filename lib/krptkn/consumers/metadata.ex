@@ -9,6 +9,7 @@ defmodule Krptkn.Consumers.Metadata do
   use GenStage
 
   def start_link(name) do
+    Krptkn.Api.register_process(__MODULE__, name, self())
     GenStage.start_link(__MODULE__, [], name: name)
   end
 
@@ -17,6 +18,8 @@ defmodule Krptkn.Consumers.Metadata do
   end
 
   defp extract_metadata(buffer) do
+    Krptkn.Api.add(:metadata)
+
     Extractor.flat_extract(buffer)
     |> Enum.map(fn metadata ->
       metadata
@@ -32,8 +35,6 @@ defmodule Krptkn.Consumers.Metadata do
       end)
       |> Map.new()
     end)
-
-    Krptkn.Api.add(:metadata)
   end
 
   def handle_events(events, _from, state) do

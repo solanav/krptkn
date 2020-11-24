@@ -13,11 +13,11 @@ config :krptkn,
 # Configure the application
 config :krptkn, Krptkn.Application,
   session_name: "debugging_002",
-  starting_url: "https://archive.synology.com/download/",
-  producers: 32,
-  url_consumers: 32,
+  initial_url: "https://archive.synology.com/download/",
+  producers: 1,
+  url_consumers: 1,
   metadata_consumers: 1,
-  db_consumers: 8
+  db_consumers: 1
 
 # Configure the HTML parser
 config :floki, :html_parser, Floki.HTMLParser.FastHtml

@@ -9,6 +9,7 @@ defmodule Krptkn.Spider do
   use GenStage, restart: :transient
 
   def start_link(name) do
+    Krptkn.Api.register_process(__MODULE__, name, self())
     GenStage.start_link(__MODULE__, name, name: name)
   end
 

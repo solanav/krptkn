@@ -8,6 +8,7 @@ defmodule Krptkn.Consumers.Url do
   use GenStage
 
   def start_link(name) do
+    Krptkn.Api.register_process(__MODULE__, name, self())
     GenStage.start_link(__MODULE__, [], name: name)
   end
 
@@ -20,7 +21,7 @@ defmodule Krptkn.Consumers.Url do
       # Extract the URLs and filter ones we already found
       Krptkn.HtmlParser.get_urls(url, html)
       |> Enum.map(&Krptkn.UrlQueue.push/1)
-      
+
       {:url, {type, url}}
     end)
 

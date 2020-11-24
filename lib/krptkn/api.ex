@@ -1,7 +1,7 @@
 defmodule Krptkn.Api do
   @moduledoc """
   This "API" allows to save meta information about Krptkn's state
-  and exposes functions so phoenix can get the information.
+  and exposes functions so phoenix can get the information and display it.
   """
 
   use GenServer
@@ -10,14 +10,54 @@ defmodule Krptkn.Api do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
+  def register_process(module, name, pid) do
+    GenServer.cast(__MODULE__, {:register_process, module, name, pid})
+  end
+
+  def processes do
+    GenServer.call(__MODULE__, :processes)
+    |> Enum.map(fn {module, name, pid, state} ->
+      id = if name == "" do
+        inspect(pid)
+      else
+        name
+      end
+
+      proc_info = Process.info(pid)
+      {fun_module, fun_name, fun_arity} = proc_info[:current_function]
+
+      %{
+        module: module,
+        id: id,
+        state: state,
+        function: "#{fun_module}.#{Atom.to_string(fun_name)}/#{fun_arity}",
+        reductions: proc_info[:reductions],
+        heap: proc_info[:heap_size],
+        stack: proc_info[:stack_size],
+      }
+    end)
+  end
+
   @spec add(:url | :danger | :metadata | :fmetadata) :: any
   def add(type) do
-    GenServer.cast(__MODULE__, type)
+    type = String.to_atom("#{Atom.to_string(type)}_count")
+    GenServer.cast(__MODULE__, {:add, type})
   end
 
   @spec count(:url | :danger | :metadata | :fmetadata) :: any
   def count(type) do
-    GenServer.call(__MODULE__, type)
+    type = String.to_atom("#{Atom.to_string(type)}_count")
+    GenServer.call(__MODULE__, {:count, type})
+  end
+
+  def scheduler do
+    GenServer.call(__MODULE__, :scheduler)
+  end
+
+  @spec count_history(:url | :danger | :metadata | :fmetadata) :: any
+  def count_history(type) do
+    type = String.to_atom("#{Atom.to_string(type)}_history")
+    GenServer.call(__MODULE__, {:history, type}) |> Enum.reverse()
   end
 
   def add_file_type(file_type) do
@@ -32,10 +72,6 @@ defmodule Krptkn.Api do
     GenServer.call(__MODULE__, :memory)
   end
 
-  def reductions do
-    GenServer.call(__MODULE__, :reductions)
-  end
-
   @impl true
   def init([]) do
     schedule_rc()
@@ -45,34 +81,41 @@ defmodule Krptkn.Api do
       danger_count: 0,
       metadata_count: 0,
       fmetadata_count: 0,
+
+      url_history: [],
+      danger_history: [],
+      metadata_history: [],
+      fmetadata_history: [],
+
       http_responses: [],
       file_types: [],
       memory: [],
-      reductions: [],
+      processes: [],
+      scheduler: [],
     }
 
     {:ok, state}
   end
 
-  # No reply
+  defp add_to_history(history, element, limit \\ 10) do
+    if Enum.count(history) == limit do
+      history = List.delete_at(history, limit - 1)
+      [element | history]
+    else
+      [element | history]
+    end
+  end
+
+  # Update state
   @impl true
-  def handle_cast(:url, state) do
-    {:noreply, %{state | url_count: state.url_count + 1}}
+  def handle_cast({:register_process, module, name, pid}, state) do
+    Supervisor.which_children(pid)
+    {:noreply, %{state | processes: [{module, name, pid, :online} | state.processes]}}
   end
 
   @impl true
-  def handle_cast(:danger, state) do
-    {:noreply, %{state | danger_count: state.danger_count + 1}}
-  end
-
-  @impl true
-  def handle_cast(:metadata, state) do
-    {:noreply, %{state | metadata_count: state.metadata_count + 1}}
-  end
-
-  @impl true
-  def handle_cast(:fmetadata, state) do
-    {:noreply, %{state | fmetadata_count: state.fmetadata_count + 1}}
+  def handle_cast({:add, type}, state) do
+    {:noreply, %{state | type => state[type] + 1}}
   end
 
   @impl true
@@ -92,9 +135,11 @@ defmodule Krptkn.Api do
 
   @impl true
   def handle_cast({:add_file_type, file_type}, state) do
-    {file_types, res} = Enum.map_reduce(state.file_types, :not_found, fn {type, count}, _acc ->
+    {file_types, res} = Enum.map_reduce(state.file_types, :not_found, fn {type, count}, acc ->
       if type == file_type do
         {{type, count + 1}, :found}
+      else
+        {{type, count}, acc}
       end
     end)
 
@@ -105,25 +150,20 @@ defmodule Krptkn.Api do
     end
   end
 
-  # Yes reply
+  # Retreive state
   @impl true
-  def handle_call(:url, _from, state) do
-    {:reply, state.url_count, state}
+  def handle_call(:processes, _from, state) do
+    {:reply, state.processes, state}
   end
 
   @impl true
-  def handle_call(:danger, _from, state) do
-    {:reply, state.danger_count, state}
+  def handle_call({:count, type}, _from, state) do
+    {:reply, state[type], state}
   end
 
   @impl true
-  def handle_call(:metadata, _from, state) do
-    {:reply, state.metadata_count, state}
-  end
-
-  @impl true
-  def handle_call(:fmetadata, _from, state) do
-    {:reply, state.fmetadata_count, state}
+  def handle_call({:history, type}, _from, state) do
+    {:reply, state[type], state}
   end
 
   @impl true
@@ -132,22 +172,13 @@ defmodule Krptkn.Api do
   end
 
   @impl true
-  def handle_call(:reductions, _from, state) do
-    {:reply, state.reductions, state}
+  def handle_call(:scheduler, _from, state) do
+    {:reply, state.scheduler, state}
   end
 
-  defp get_reductions do
-    :erlang.processes()
-    |> Enum.map(fn pid ->
-      info = :erlang.process_info(pid)
-      %{
-        reductions: info[:reductions],
-        name: info[:registered_name],
-        current_function: info[:current_function],
-      }
-    end)
-    |> Enum.sort(&(&1[:reductions] >= &2[:reductions]))
-    |> Enum.take(5)
+  @impl true
+  def handle_call(:reductions, _from, state) do
+    {:reply, state.reductions, state}
   end
 
   # Automatic stuff
@@ -156,8 +187,25 @@ defmodule Krptkn.Api do
     # We save the memory state
     state = %{state | memory: [:erlang.memory | state.memory]}
 
-    # We save the reduction state
-    state = %{state | reductions: [get_reductions() | state.reductions]}
+    # We check if our processes are still online
+    state = %{state | processes: Enum.map(state.processes, fn {module, name, pid, _state} ->
+      new_state = case Process.alive?(pid) do
+        true -> :online
+        false -> :offline
+      end
+
+      {module, name, pid, new_state}
+    end)}
+
+    # We save the counts on their histories
+    state = %{state | url_history: add_to_history(state.url_history, state.url_count)}
+    state = %{state | danger_history: add_to_history(state.danger_history, state.danger_count)}
+    state = %{state | metadata_history: add_to_history(state.metadata_history, state.metadata_count)}
+    state = %{state | fmetadata_history: add_to_history(state.fmetadata_history, state.fmetadata_count)}
+
+    # Save scheduler state
+    scheduler_slice = :scheduler.utilization(:scheduler.sample_all())
+    state = %{state | scheduler: add_to_history(state.scheduler, scheduler_slice, 30)}
 
     schedule_rc()
 

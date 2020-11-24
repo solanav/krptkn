@@ -17,7 +17,9 @@ defmodule KrptknWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/info", Info, :index
+    get "/info", InfoController, :index
+    get "/state/:param", StateController, :index
+    get "/state/:param/:type", StateController, :index
   end
 
   # Other scopes may use custom stacks.
