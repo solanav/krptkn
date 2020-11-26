@@ -44,7 +44,7 @@
       <div class="row mt-4">
         <div class="col-md-12">
           <div class="box shadow mt-4">
-            <div id="scheduler_chart"></div>
+            <canvas id="scheduler_chart" width="100" height="50"></canvas>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
       <div class="row mt-4">
         <div class="col-md-12">
           <div class="box shadow mt-4">
-            <div id="areachart"></div>
+            <canvas id="memory_chart" width="100" height="50"></canvas>
           </div>
         </div>
       </div>
@@ -83,355 +83,8 @@
 </div>
 
 <script>
-function json_get(yourUrl){
-  var Httpreq = new XMLHttpRequest(); // a new request
-  Httpreq.open("GET",yourUrl,false);
-  Httpreq.send(null);
-  return JSON.parse(Httpreq.responseText);
-}
-
-window.Apex = {
-  chart: {
-    animations: {
-      enabled: false
-    },
-    foreColor: '#ccc',
-    toolbar: {
-      show: false
-    },
-  },
-  stroke: {
-    width: 3
-  },
-  dataLabels: {
-    enabled: false
-  },
-  tooltip: {
-    enabled: false
-  },
-  grid: {
-    borderColor: "#535A6C",
-    xaxis: {
-      lines: {
-        show: true
-      }
-    }
-  }
-};
-
-var spark1 = {
-  chart: {
-    animations: {
-      enabled: false
-    },
-    id: 'spark1',
-    group: 'sparks',
-    type: 'line',
-    height: 80,
-    sparkline: {
-      enabled: true
-    },
-    dropShadow: {
-      enabled: true,
-      top: 1,
-      left: 1,
-      blur: 2,
-      opacity: 0.2,
-    }
-  },
-  series: [{
-    data: []
-  }],
-  stroke: {
-    curve: 'smooth'
-  },
-  markers: {
-    size: 0
-  },
-  tooltip: {
-    enabled: false
-  },
-  grid: {
-    padding: {
-      top: 20,
-      bottom: 10,
-      left: 110
-    }
-  },
-  colors: ['#fff']
-}
-
-var spark2 = {
-  chart: {
-    animations: {
-      enabled: false
-    },
-    id: 'spark2',
-    group: 'sparks',
-    type: 'line',
-    height: 80,
-    sparkline: {
-      enabled: true
-    },
-    dropShadow: {
-      enabled: true,
-      top: 1,
-      left: 1,
-      blur: 2,
-      opacity: 0.2,
-    }
-  },
-  series: [{
-    data: []
-  }],
-  stroke: {
-    curve: 'smooth'
-  },
-  tooltip: {
-    enabled: false
-  },
-  grid: {
-    padding: {
-      top: 20,
-      bottom: 10,
-      left: 110
-    }
-  },
-  markers: {
-    size: 0
-  },
-  colors: ['#fff']
-}
-
-var spark3 = {
-  chart: {
-    animations: {
-      enabled: false
-    },
-    id: 'spark3',
-    group: 'sparks',
-    type: 'line',
-    height: 80,
-    sparkline: {
-      enabled: true
-    },
-    dropShadow: {
-      enabled: true,
-      top: 1,
-      left: 1,
-      blur: 2,
-      opacity: 0.2,
-    }
-  },
-  series: [{
-    data: []
-  }],
-  stroke: {
-    curve: 'smooth'
-  },
-  markers: {
-    size: 0
-  },
-  tooltip: {
-    enabled: false
-  },
-  grid: {
-    padding: {
-      top: 20,
-      bottom: 10,
-      left: 110
-    }
-  },
-  colors: ['#fff'],
-  xaxis: {
-    crosshairs: {
-      width: 1
-    },
-  }
-}
-
-var spark4 = {
-  chart: {
-    animations: {
-      enabled: false
-    },
-    id: 'spark4',
-    group: 'sparks',
-    type: 'line',
-    height: 80,
-    sparkline: {
-      enabled: true
-    },
-    dropShadow: {
-      enabled: true,
-      top: 1,
-      left: 1,
-      blur: 2,
-      opacity: 0.2,
-    }
-  },
-  series: [{
-    data: []
-  }],
-  stroke: {
-    curve: 'smooth'
-  },
-  markers: {
-    size: 0
-  },
-  tooltip: {
-    enabled: false
-  },
-  grid: {
-    padding: {
-      top: 20,
-      bottom: 10,
-      left: 110
-    }
-  },
-  colors: ['#fff'],
-  xaxis: {
-    crosshairs: {
-      width: 1
-    },
-  }
-}
-
-spark1 = new ApexCharts(document.querySelector("#spark1"), spark1);
-spark1.render();
-
-spark2 = new ApexCharts(document.querySelector("#spark2"), spark2);
-spark2.render();
-
-spark3 = new ApexCharts(document.querySelector("#spark3"), spark3);
-spark3.render();
-
-spark4 = new ApexCharts(document.querySelector("#spark4"), spark4);
-spark4.render();
-
-var optionsArea = {
-    series: [],
-    chart: {
-    animations: {
-      enabled: false
-    },
-    height: 450,
-    type: 'line',
-    zoom: {
-      enabled: false
-    },
-  },
-  dataLabels: {
-    enabled: false
-  },
-  stroke: {
-    width: [3, 2, 2, 2, 2, 2],
-    curve: 'straight',
-    dashArray: [0, 8, 5, 3, 1, 3, 2]
-  },
-  title: {
-    text: 'Scheduler (last 30 seconds)',
-    align: 'left'
-  },
-  markers: {
-    size: 0
-  },
-  xaxis: {
-    categories: ["t - 30", "t - 29", "t - 28", "t - 27", "t - 26", "t - 25", "t - 24", "t - 23", "t - 22", "t - 21", "t - 20", "t - 19", "t - 18", "t - 17", "t - 16", "t - 15", "t - 14", "t - 13", "t - 12", "t - 11", "t - 10", "t - 9", "t - 8", "t - 7", "t - 6", "t - 5", "t - 4", "t - 3", "t - 2", "t - 1", "t - 0"]
-  },
-  tooltip: {
-    enabled: false
-  },
-  grid: {
-    show: true,
-    padding: {
-      bottom: 0
-    }
-  }
-  };
-
-  var scheduler_chart = new ApexCharts(
-    document.querySelector("#scheduler_chart"),
-    optionsArea
-  );
-
-  scheduler_chart.render();
-
-  var optionsArea = {
-    series: [{
-      name: "Total",
-      data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "total") %>")
-    },
-    {
-      name: "Processes",
-      data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "processes") %>")
-    },
-    {
-      name: 'System',
-      data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "system") %>")
-    },
-    {
-      name: 'Atom',
-      data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "atom") %>")
-    },
-    {
-      name: 'Binary',
-      data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "binary") %>")
-    },
-    {
-      name: 'Code',
-      data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "code") %>")
-    },
-    {
-      name: 'Ets',
-      data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>")
-    }
-  ],
-    chart: {
-    animations: {
-      enabled: false
-    },
-    height: 450,
-    type: 'line',
-    zoom: {
-      enabled: false
-    },
-  },
-  dataLabels: {
-    enabled: false
-  },
-  stroke: {
-    width: [3, 2, 2, 2, 2, 2],
-    curve: 'straight',
-    dashArray: [0, 8, 5, 3, 1, 3, 2]
-  },
-  title: {
-    text: 'Memory (last 30 seconds)',
-    align: 'left'
-  },
-  markers: {
-    size: 0
-  },
-  xaxis: {
-    categories: ["t - 30", "t - 29", "t - 28", "t - 27", "t - 26", "t - 25", "t - 24", "t - 23", "t - 22", "t - 21", "t - 20", "t - 19", "t - 18", "t - 17", "t - 16", "t - 15", "t - 14", "t - 13", "t - 12", "t - 11", "t - 10", "t - 9", "t - 8", "t - 7", "t - 6", "t - 5", "t - 4", "t - 3", "t - 2", "t - 1", "t - 0"]
-  },
-  tooltip: {
-    enabled: false
-  },
-  grid: {
-    show: true,
-    padding: {
-      bottom: 0
-    }
-  }
-  };
-
-  var chartArea = new ApexCharts(
-    document.querySelector("#areachart"),
-    optionsArea
-  );
-
-  chartArea.render();
+var memoryChart = initMemoryChart();
+var schedulerChart = initSchedulerChart();
 
 function updateAll() {
   // Update the URL count
@@ -456,70 +109,57 @@ function updateAll() {
 
   // Update the scheduler chart
   data = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "scheduler") %>")
-  lista = []
+  lista = [];
+  var i = 0;
   for (s in data) {
     lista.push({
-      "name": s,
-      "data": data[s]
-    })
+      data: data[s],
+      borderColor: colors[i],
+      label: s,
+      fill: false
+    });
+    i++;
   }
-  console.log(lista)
+  console.log(data)
 
-  scheduler_chart.updateSeries(lista)
+  schedulerChart.data.datasets = lista;
+  schedulerChart.update(0)
 
-  // Update the Memory chart
-  chartArea.updateSeries(
-    [
-      {
-        name: "Total",
-        data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "total") %>")
-      },
-      {
-        name: "Processes",
-        data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "processes") %>")
-      },
-      {
-        name: 'System',
-        data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "system") %>")
-      },
-      {
-        name: 'Atom',
-        data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "atom") %>")
-      },
-      {
-        name: 'Binary',
-        data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "binary") %>")
-      },
-      {
-        name: 'Code',
-        data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "code") %>")
-      },
-      {
-        name: 'Ets',
-        data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>")
-      }
-    ]
-  )
-
-  // Update sparks
-  spark1.updateSeries([{
-    data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count_history", "url") %>")
-  }])
-
-  spark2.updateSeries([{
-    data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count_history", "danger") %>")
-  }])
-
-  spark3.updateSeries([{
-    data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count_history", "metadata") %>")
-  }])
-
-  spark4.updateSeries([{
-    data: json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count_history", "fmetadata") %>")
-  }])
+  memoryChart.data.datasets.forEach((dataset) => {
+    switch (dataset.label) {
+      case "Total":
+        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>");
+        dataset.data = values;
+        break;
+      case "Processes":
+        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "processes") %>");
+        dataset.data = values;
+        break;
+      case "System":
+        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "system") %>");
+        dataset.data = values;
+        break;
+      case "Atom":
+        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "atom") %>");
+        dataset.data = values;
+        break;
+      case "Binary":
+        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "binary") %>");
+        dataset.data = values;
+        break;
+      case "Code":
+        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "code") %>");
+        dataset.data = values;
+        break;
+      case "Ets":
+        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>");
+        dataset.data = values;
+        break;
+    }
+  });
+  memoryChart.update(0)
 
   // Update process table
-
   processes = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "processes") %>")
   document.getElementById("process_table").innerHTML = ""
   for (p of processes) {
@@ -549,5 +189,5 @@ function updateAll() {
 
 const interval = setInterval(function() {
   updateAll();
-}, 1000);
+}, 1500);
 </script>

@@ -1,20 +1,5 @@
 defmodule Krptkn.MetadataFilter do
-  def interesting_data?(data) do
-    boring_data = [
-      "sof-marker",
-    ]
-
-    if data == "" do
-      false
-    else
-      not Enum.reduce(boring_data, false, fn
-        _, true -> true
-        bd, _ -> String.contains?(data, bd)
-      end)
-    end
-  end
-
-    def interesting_type?(type) do
+  def interesting_type?(type) do
     boring_types = [
       "mimetype",
       "image dimensions",
@@ -47,8 +32,34 @@ defmodule Krptkn.MetadataFilter do
     not Enum.member?(boring_types, type)
   end
 
-  def extract_data(string) do
+  defp extract_emails(string) do
     email_regex = ~r/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/
     Enum.at(Regex.scan(email_regex, string), 0)
+    |> Enum.uniq()
+  end
+
+  def interesting_data?(string) do
+    keywords = [
+      "password",
+      "user",
+      "email",
+      "token",
+      "key",
+      "api",
+      "address",
+      "ip",
+      "hash",
+      "protocol",
+      "access"
+    ]
+
+    res = String.contains?(string, keywords)
+
+    if res do
+      Krptkn.Api.add(:danger)
+      Krptkn.Api.add_dangerous_metadata(string)
+    end
+
+    res
   end
 end

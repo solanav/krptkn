@@ -50,6 +50,14 @@ defmodule Krptkn.Api do
     GenServer.call(__MODULE__, {:count, type})
   end
 
+  def dangerous_metadata do
+    GenServer.call(__MODULE__, :dangerous_metadata)
+  end
+
+  def add_dangerous_metadata(metadata) do
+    GenServer.call(__MODULE__, {:add_dangerous_metadata, metadata})
+  end
+
   def scheduler do
     GenServer.call(__MODULE__, :scheduler)
   end
@@ -92,6 +100,8 @@ defmodule Krptkn.Api do
       memory: [],
       processes: [],
       scheduler: [],
+
+      dangerous_metadata: [],
     }
 
     {:ok, state}
@@ -111,6 +121,11 @@ defmodule Krptkn.Api do
   def handle_cast({:register_process, module, name, pid}, state) do
     Supervisor.which_children(pid)
     {:noreply, %{state | processes: [{module, name, pid, :online} | state.processes]}}
+  end
+
+  @impl true
+  def handle_cast({:add_dangerous_metadata, metadata}, state) do
+    {:noreply, %{state | dangerous_metadata: [metadata | state.dangerous_metadata]}, state}
   end
 
   @impl true
@@ -154,6 +169,11 @@ defmodule Krptkn.Api do
   @impl true
   def handle_call(:processes, _from, state) do
     {:reply, state.processes, state}
+  end
+
+  @impl true
+  def handle_call(:dangerous_metadata, _from, state) do
+    {:reply, state.dangerous_metadata, state}
   end
 
   @impl true

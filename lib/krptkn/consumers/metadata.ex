@@ -42,7 +42,13 @@ defmodule Krptkn.Consumers.Metadata do
     events = Enum.flat_map(events, fn {type, url, buffer} ->
       # Extract metadata from the file
       extract_metadata(buffer)
-      |> Enum.map(fn metadata -> {:metadata, {type, url, metadata}} end)
+      |> Enum.uniq()
+      |> Enum.filter(fn metadata ->
+        Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
+      end)
+      |> Enum.map(fn metadata ->
+        {:metadata, {type, url, metadata}}
+      end)
     end)
     # Remove the empty maps
     |> Enum.filter(fn {:metadata, {_type, _url, m}} -> not Enum.empty?(m) end)

@@ -58,4 +58,8 @@ defmodule KrptknWeb.StateController do
   def index(conn, %{"param" => "memory", "type" => type}) do
     json(conn, memory(String.to_atom(type)))
   end
+
+  def index(conn, %{"param" => "dangerous_metadata"}) do
+    json(conn, Krptkn.Api.dangerous_metadata())
+  end
 end
