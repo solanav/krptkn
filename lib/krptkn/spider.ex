@@ -14,7 +14,7 @@ defmodule Krptkn.Spider do
   end
 
   def init(name) do
-    {:producer, {name, 0}, dispatcher: GenStage.BroadcastDispatcher}
+    {:producer, name, dispatcher: GenStage.BroadcastDispatcher}
   end
 
   defp pop_timeout do
@@ -69,7 +69,7 @@ defmodule Krptkn.Spider do
     end
   end
 
-  def handle_demand(demand, {name, count}) when demand > 0 do
+  def handle_demand(demand, name) when demand > 0 do
     # Sacamos una URL de la queue
     res = case pop_timeout() do
       {:ok, url} ->
@@ -77,11 +77,6 @@ defmodule Krptkn.Spider do
         case request(url) do
           {:ok, %HTTPoison.Response{} = res} ->
             type = get_type(res)
-
-            Logger.info("#{name} | #{url}")
-            Krptkn.Api.add(:url)
-            Krptkn.Api.add_file_type(type)
-
             {:ok, type, url, res.body}
           {:error, _} -> :error
         end
@@ -89,8 +84,15 @@ defmodule Krptkn.Spider do
     end
 
     case res do
-      {:ok, type, url, body} -> {:noreply, [{type, url, body}], {name, count}}
-      :error -> {:noreply, [], {name, count + 1}}
+      {:ok, type, url, body} ->
+        Logger.info("#{name} | #{url}")
+        Krptkn.Api.add(:url)
+        Krptkn.Api.add_file_type(type)
+
+        {:noreply, [{type, url, body}], name}
+      :error ->
+        Logger.info("#{name} | No URL in database")
+        {:noreply, [{:error, "", ""}], name}
     end
   end
 end

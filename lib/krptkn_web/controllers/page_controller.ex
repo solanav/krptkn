@@ -1,12 +1,10 @@
 defmodule KrptknWeb.PageController do
   use KrptknWeb, :controller
 
-  def new(conn, params) do
-    IO.inspect(params)
+  def new(conn, %{"starting_url" => url}) do
+    Krptkn.UrlQueue.push(url)
 
-    Process.sleep(100_000)
-
-    redirect(conn, to: "/info")
+    render(conn, "index.html")
   end
 
   def index(conn, params) do

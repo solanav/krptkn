@@ -8,7 +8,7 @@ defmodule Krptkn.Distributors.Url do
   def init(producers) do
     producers = Enum.map(producers, fn prod ->
       {prod, max_demand: 1, min_demand: 0, selector: fn
-        {:error, _u, _b} -> true
+        {:error, _u, _b} -> false
         {t, _u, _b} -> String.contains?(t, "text/html")
       end}
     end)

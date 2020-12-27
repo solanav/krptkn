@@ -8,6 +8,9 @@
 
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/apex.css") %>"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -35,9 +38,21 @@
         <h1> <b>Кропоткин</b> Framework </h1>
       </section>
     </header>
+
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <div class="box shadow mt-4">
+            <a href="<%= Routes.page_path(@conn, :index) %>"><p class="navbar-link">Home</p></a>
+            <p class="navbar-link">|</p>
+            <a href="<%= Routes.info_path(@conn, :index) %>"><p class="navbar-link">Information</p></a>
+          </div>
+        </div>
+      </div>
+
       <%= @inner_content %>
     </main>
   </body>

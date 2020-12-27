@@ -2,16 +2,24 @@
   <div class="content-area">
     <div class="main">
 
-    <%= form_for @conn, Routes.page_path(@conn, :new), [class: "form-inline"], fn f -> %>
-      <div class="row">
-        <div class="form-group col-md-9">
-          <%= text_input f, :starting_url, placeholder: "Starting URL" %>
-        </div>
-        <div class="form-group col-md-3">
-          <%= submit "Run", id: "submit-su"%>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="box shadow mt-4">
+          <p class="box-title">Control Panel</p>
+
+          <%= form_for @conn, Routes.page_path(@conn, :new), [class: "form-inline"], fn f -> %>
+            <div class="row">
+              <div class="form-group col-md-9">
+                <%= text_input f, :starting_url, placeholder: "Initial URL" %>
+              </div>
+              <div class="form-group col-md-3">
+                <%= submit "Start spider", id: "submit-su"%>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
 
     </div>
   </div>

@@ -88,106 +88,131 @@ var schedulerChart = initSchedulerChart();
 
 function updateAll() {
   // Update the URL count
-  document.getElementById("url_count").innerHTML = json_get(
-    "<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "url") %>"
-  );
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "url") %>", function(data) {
+    document.getElementById("url_count").innerHTML = data
+  });
 
   // Update the Danger count
-  document.getElementById("danger_count").innerHTML = json_get(
-    "<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "danger") %>"
-  );
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "danger") %>", function(data) {
+    document.getElementById("danger_count").innerHTML = data
+  });
 
   // Update the Metadata count
-  document.getElementById("metadata_count").innerHTML = json_get(
-    "<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "metadata") %>"
-  );
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "metadata") %>", function(data) {
+    document.getElementById("metadata_count").innerHTML = data
+  });
 
   // Update the Fmetadata count
-  document.getElementById("fmetadata_count").innerHTML = json_get(
-    "<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "fmetadata") %>"
-  );
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "fmetadata") %>", function(data) {
+    document.getElementById("fmetadata_count").innerHTML = data
+  });
 
   // Update the scheduler chart
-  data = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "scheduler") %>")
-  lista = [];
-  var i = 0;
-  for (s in data) {
-    lista.push({
-      data: data[s],
-      borderColor: colors[i],
-      label: s,
-      fill: false
-    });
-    i++;
-  }
-  console.log(data)
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "scheduler") %>", function(data) {
+    lista = [];
+    var i = 0;
+    for (s in data) {
+      lista.push({
+        data: data[s],
+        borderColor: colors[i],
+        label: s,
+        fill: false
+      });
+      i++;
+    }
 
-  schedulerChart.data.datasets = lista;
-  schedulerChart.update(0)
+    schedulerChart.data.datasets = lista;
+    schedulerChart.update(0)
+  });
 
   memoryChart.data.datasets.forEach((dataset) => {
     switch (dataset.label) {
       case "Total":
-        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>");
-        dataset.data = values;
+        $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>", function(values) {
+          dataset.data = values;
+          memoryChart.update(0)
+        });
         break;
       case "Processes":
-        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "processes") %>");
-        dataset.data = values;
+        $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "processes") %>", function(values) {
+          dataset.data = values;
+          memoryChart.update(0)
+        });
         break;
       case "System":
-        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "system") %>");
-        dataset.data = values;
+        $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "system") %>", function(values) {
+          dataset.data = values;
+          memoryChart.update(0)
+        });
         break;
       case "Atom":
-        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "atom") %>");
-        dataset.data = values;
+        $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "atom") %>", function(values) {
+          dataset.data = values;
+          memoryChart.update(0)
+        });
         break;
       case "Binary":
-        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "binary") %>");
-        dataset.data = values;
+        $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "binary") %>", function(values) {
+          dataset.data = values;
+          memoryChart.update(0)
+        });
         break;
       case "Code":
-        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "code") %>");
-        dataset.data = values;
+        $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "code") %>", function(values) {
+          dataset.data = values;
+          memoryChart.update(0)
+        });
         break;
       case "Ets":
-        values = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>");
-        dataset.data = values;
+        $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "memory", "ets") %>", function(values) {
+          dataset.data = values;
+          memoryChart.update(0)
+        });
         break;
     }
   });
-  memoryChart.update(0)
 
   // Update process table
-  processes = json_get("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "processes") %>")
-  document.getElementById("process_table").innerHTML = ""
-  for (p of processes) {
-    if (p.state == "online") {
-      document.getElementById("process_table").innerHTML +=
-        "<tr><td>" + p.module +
-        "</td><td>" + p.id +
-        "</td><td>"+ p.function +
-        "</td><td>"+ p.reductions +
-        "</td><td>"+ p.heap +
-        "</td><td>"+ p.stack +
-        "</td><td style=\"color:green\">"+ p.state +
-        "</td></tr>";
-    } else {
-      document.getElementById("process_table").innerHTML +=
-        "<tr class=\"bg-danger\"><td>" + p.module +
-        "</td><td>" + p.id +
-        "</td><td>"+ p.function +
-        "</td><td>"+ p.reductions +
-        "</td><td>"+ p.heap +
-        "</td><td>"+ p.stack +
-        "</td><td style=\"color:red\">"+ p.state +
-        "</td></tr>";
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "processes") %>", function(processes) {
+    document.getElementById("process_table").innerHTML = ""
+    for (p of processes) {
+      if (p.state == "online") {
+        document.getElementById("process_table").innerHTML +=
+          "<tr><td>" + p.module +
+          "</td><td>" + p.id +
+          "</td><td>"+ p.function +
+          "</td><td>"+ p.reductions +
+          "</td><td>"+ p.heap +
+          "</td><td>"+ p.stack +
+          "</td><td style=\"color:green\">"+ p.state +
+          "</td></tr>";
+      } else {
+        document.getElementById("process_table").innerHTML +=
+          "<tr class=\"bg-danger\"><td>" + p.module +
+          "</td><td>" + p.id +
+          "</td><td>"+ p.function +
+          "</td><td>"+ p.reductions +
+          "</td><td>"+ p.heap +
+          "</td><td>"+ p.stack +
+          "</td><td style=\"color:red\">"+ p.state +
+          "</td></tr>";
+      }
     }
-  }
+  });
 }
 
-const interval = setInterval(function() {
+$(document).ready(function() {
+  // Fill the charts
   updateAll();
-}, 1500);
+
+  // Change font color
+  Chart.defaults.global.defaultFontColor = 'white';
+
+  // Start the update interval
+  const interval = setInterval(function() {
+    updateAll();
+  }, 1500);
+});
+
+
 </script>
