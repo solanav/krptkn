@@ -4,6 +4,8 @@ defmodule Krptkn.Api do
   and exposes functions so phoenix can get the information and display it.
   """
 
+  require Logger
+
   use GenServer
 
   def start_link([]) do
@@ -55,7 +57,7 @@ defmodule Krptkn.Api do
   end
 
   def add_dangerous_metadata(metadata) do
-    GenServer.call(__MODULE__, {:add_dangerous_metadata, metadata})
+    GenServer.cast(__MODULE__, {:add_dangerous_metadata, metadata})
   end
 
   def scheduler do
@@ -234,5 +236,14 @@ defmodule Krptkn.Api do
 
   defp schedule_rc do
     Process.send_after(self(), :regular_capture, 1_000)
+  end
+
+  def handle_info({:EXIT, _pid, reason}, _state) do
+    Logger.error("A child process died: #{reason}")
+  end
+
+  def handle_info(msg, state) do
+    Logger.error("Supervisor received unexpected message: #{inspect(msg)}")
+    {:noreply, state}
   end
 end

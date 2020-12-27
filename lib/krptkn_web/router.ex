@@ -17,6 +17,7 @@ defmodule KrptknWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    post "/", PageController, :new
     get "/info", InfoController, :index
     get "/state/:param", StateController, :index
     get "/state/:param/:type", StateController, :index

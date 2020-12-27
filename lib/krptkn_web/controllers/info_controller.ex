@@ -31,15 +31,4 @@ defmodule KrptknWeb.InfoController do
     |> Enum.reverse()
     |> inspect(limit: :infinity)
   end
-
-  def reductions do
-    Krptkn.Api.reductions()
-    |> Enum.take(5)
-    |> Enum.reverse()
-    |> Enum.map(fn functions ->
-      Enum.reduce(functions, {[], [], []}, fn %{current_function: cf, name: name, reductions: red}, {cfs, names, reds} ->
-        {[cf | cfs], [name | names], [red | reds]}
-      end)
-    end)
-  end
 end

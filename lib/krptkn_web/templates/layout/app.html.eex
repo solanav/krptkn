@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Krptkn</title>
+    <title>Кропоткин</title>
 
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/apex.css") %>"/>
@@ -32,7 +32,7 @@
   <body>
     <header>
       <section class="container">
-        <h1> <b>Krptkn</b> Framework </h1>
+        <h1> <b>Кропоткин</b> Framework </h1>
       </section>
     </header>
     <main role="main" class="container">

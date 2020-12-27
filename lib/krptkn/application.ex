@@ -1,36 +1,9 @@
 defmodule Krptkn.Application do
   use Application
 
-  import ExProf.Macro
+  require Logger
 
-  def test do
-    profile do
-      url = "https://uam.es/UAM/documento/1446806015659/Codigo_etico_UAM.pdf"
-      {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(url)
-      Extractor.extract(body)
-      |> Enum.map(fn {plugin_name, type, format, mime_type, data} ->
-        data = List.to_string(data)
-        if String.starts_with?(data, "\nexif") do
-          [
-            List.to_string(plugin_name),
-            List.to_string(type),
-            format,
-            List.to_string(mime_type),
-            Krptkn.PngExtractor.exifstr2map(data)
-          ]
-        else
-          [
-            List.to_string(plugin_name),
-            List.to_string(type),
-            format,
-            List.to_string(mime_type),
-            data
-          ]
-        end
-      end)
-      |> IO.inspect
-    end
-  end
+  import ExProf.Macro
 
   def manual_start(initial_url) do
     initial_uri = URI.parse(initial_url)
@@ -69,7 +42,7 @@ defmodule Krptkn.Application do
       Krptkn.Api,
 
       # Start the URL queue
-      {Krptkn.UrlQueue, initial_urls},
+      {Krptkn.UrlQueue, []}, # "https://archive.synology.com/download/Mobile/SamsungTV-DSvideo/"
     ]
 
     # Start the producers
@@ -126,8 +99,6 @@ defmodule Krptkn.Application do
     # Start the HTTP client
     HTTPoison.start()
 
-    :observer.start()
-
     opts = [strategy: :one_for_one, name: Krptkn.Supervisor]
     Supervisor.start_link(children, opts)
   end
@@ -135,5 +106,14 @@ defmodule Krptkn.Application do
   def config_change(changed, _new, removed) do
     KrptknWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  def handle_info({:EXIT, _pid, reason}, _state) do
+    Logger.error("A child process died: #{reason}")
+  end
+
+  def handle_info(msg, state) do
+    Logger.error("Supervisor received unexpected message: #{inspect(msg)}")
+    {:noreply, state}
   end
 end

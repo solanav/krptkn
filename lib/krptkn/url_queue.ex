@@ -41,7 +41,7 @@ defmodule Krptkn.UrlQueue do
   end
 
   @impl true
-  def handle_call(:pop, _from, queue) do
+  def handle_call(:pop, from, queue) do
     case :queue.out(queue) do
       {:empty, q} -> {:reply, {:error, []}, q}
       {{:value, value}, q} -> {:reply, {:ok, value}, q}
