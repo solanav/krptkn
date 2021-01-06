@@ -3,7 +3,7 @@ defmodule Krptkn.Application do
 
   require Logger
 
-  import ExProf.Macro
+  # import ExProf.Macro
 
   def manual_start(initial_url) do
     initial_uri = URI.parse(initial_url)
@@ -38,7 +38,7 @@ defmodule Krptkn.Application do
       Krptkn.Api,
 
       # Start the URL queue
-      {Krptkn.UrlQueue, []}, # "https://archive.synology.com/download"
+      {Krptkn.UrlQueue, []},
     ]
 
     # Start the producers
@@ -95,17 +95,36 @@ defmodule Krptkn.Application do
     # Start the HTTP client
     HTTPoison.start()
 
-    opts = [strategy: :one_for_one, name: Krptkn.Supervisor]
-    Supervisor.start_link(children, opts)
+    # Start the observer for ets et al
+    :observer.start()
+
+    opts = [
+      strategy: :one_for_one,
+      max_restarts: 100,
+      max_seconds: 1,
+      name: Krptkn.Supervisor,
+    ]
+
+    {:ok, pid} = Supervisor.start_link(children, opts)
+
+    # Monitor stuff
+    Supervisor.which_children(Krptkn.Supervisor)
+    |> Enum.map(fn
+      {_, :restarting, _, _} -> :ok
+      {_, :undefined, _, _} -> :ok
+      {_name, child, _, _} -> Process.monitor(child)
+    end)
+
+    receive do
+      msg -> Logger.error(inspect(msg))
+    end
+
+    {:ok, pid}
   end
 
   def config_change(changed, _new, removed) do
     KrptknWeb.Endpoint.config_change(changed, removed)
     :ok
-  end
-
-  def handle_info({:EXIT, _pid, reason}, _state) do
-    Logger.error("A child process died: #{reason}")
   end
 
   def handle_info(msg, state) do

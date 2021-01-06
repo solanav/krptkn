@@ -211,7 +211,7 @@ $(document).ready(function() {
   // Start the update interval
   const interval = setInterval(function() {
     updateAll();
-  }, 1500);
+  }, 4000);
 });
 
 

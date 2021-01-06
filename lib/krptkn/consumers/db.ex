@@ -33,6 +33,7 @@ defmodule Krptkn.Consumers.Db do
     Enum.map(events, fn
       {:url, {type, url}} -> insert_url(type, url)
       {:metadata, {type, url, metadata}} -> insert_metadata(type, url, metadata)
+      _ -> Logger.error("Unknown event in db inserter")
     end)
 
     {:noreply, [], state}

@@ -1,9 +1,30 @@
 defmodule Krptkn do
   @moduledoc """
-  Krptkn keeps the contexts that define your domain
-  and business logic.
+  # Krptkn
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
+  Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
+
+  # Roadmap
+
+  - [x] Spider
+    - [x] Extract URLs from HTML
+    - [x] Dictionary of common directories
+    - [x] Extract from Robots.txt and other files
+  - [x] NIF with libextractor
+  - [ ] Metadata analyzer
+  - [x] Metadata filter
+  - [ ] Report generator
+  - [ ] Meta
+    - [x] Create tests
+    - [x] Continuous integration
+    - [x] Module documentation
+    - [ ] Function documentation
+    - [x] Schematics
+
+  # Schematics
+
+  Krptkn's data flow:
+
+  ![alt text](final_form.png "Data flow for krptkn")
   """
 end

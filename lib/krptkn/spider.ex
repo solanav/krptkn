@@ -85,13 +85,19 @@ defmodule Krptkn.Spider do
 
     case res do
       {:ok, type, url, body} ->
-        Logger.info("#{name} | #{url}")
+        #Logger.info("#{name} | #{url}")
+
+        # Add count to url
         Krptkn.Api.add(:url)
         Krptkn.Api.add_file_type(type)
 
+        # Add url to list
+        index = Krptkn.Api.count(:url)
+        Krptkn.Api.add_last_url({index, url})
+
         {:noreply, [{type, url, body}], name}
       :error ->
-        Logger.info("#{name} | No URL in database")
+        #Logger.info("#{name} | No URL in database")
         {:noreply, [{:error, "", ""}], name}
     end
   end

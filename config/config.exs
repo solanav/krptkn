@@ -12,9 +12,9 @@ config :krptkn,
 
 # Configure the application
 config :krptkn, Krptkn.Application,
-  session_name: "debugging_002",
-  producers: 1,
-  url_consumers: 1,
+  session_name: "debugging_000",
+  producers: 64,
+  url_consumers: 4,
   metadata_consumers: 1,
   db_consumers: 1
 
@@ -32,7 +32,8 @@ config :krptkn, KrptknWeb.Endpoint,
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: [:request_id],
+  level: :info
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

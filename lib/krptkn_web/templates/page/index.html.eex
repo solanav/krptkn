@@ -13,7 +13,7 @@
                 <%= text_input f, :starting_url, placeholder: "Initial URL" %>
               </div>
               <div class="form-group col-md-3">
-                <%= submit "Start spider", id: "submit-su"%>
+                <%= submit "Push URL", id: "submit-su"%>
               </div>
             </div>
           <% end %>
@@ -21,6 +21,84 @@
       </div>
     </div>
 
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="box shadow mt-4">
+          <p class="box-title">Last URLs</p>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Index</th>
+                <th scope="col">URL</th>
+              </tr>
+            </thead>
+            <tbody id="url_table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="box shadow mt-4">
+          <p class="box-title">Last Metadata</p>
+
+          <table class="table">
+            <tbody id="metadata_table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     </div>
   </div>
 </div>
+
+<script>
+function updateTable() {
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "last_urls") %>", function(url) {
+    nuHTML = ""
+
+    for (p of url) {
+      nuHTML += "<tr><td>" + p.index + "</td><td>" + p.url + "</td></tr>";
+    }
+
+    document.getElementById("url_table").innerHTML = nuHTML
+  });
+}
+
+function updateTableMetadata() {
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "last_metadata") %>", function(metadata) {
+    nuHTML = ""
+
+    for (p of metadata) {
+      nuHTML += "<tr><td><ul>";
+
+      for (var key of Object.keys(p)) {
+        nuHTML += "<li>" + key + " -> " + p[key] + "</li>"
+        console.log(key + " -> " + p[key])
+      }
+
+      nuHTML += "</ul></td></tr>";
+    }
+
+    document.getElementById("metadata_table").innerHTML = nuHTML
+  });
+}
+
+$(document).ready(function() {
+  // Fill the charts
+  updateTable();
+
+  // Change font color
+  Chart.defaults.global.defaultFontColor = 'white';
+
+  /* Start the update interval */
+  const interval = setInterval(function() {
+    updateTable();
+    updateTableMetadata();
+  }, 1000);
+});
+
+</script>

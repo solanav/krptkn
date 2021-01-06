@@ -1,4 +1,5 @@
 defmodule Krptkn.Distributors.Db do
+  require Logger
   use GenStage
 
   def start_link(producers) do

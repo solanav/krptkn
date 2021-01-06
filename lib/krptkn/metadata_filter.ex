@@ -42,6 +42,7 @@ defmodule Krptkn.MetadataFilter do
     keywords = [
       "password",
       "user",
+      "username",
       "email",
       "token",
       "key",
@@ -50,16 +51,13 @@ defmodule Krptkn.MetadataFilter do
       "ip",
       "hash",
       "protocol",
-      "access"
+      "access",
+      "maintainer",
+      "name",
+      "software",
+      "comment",
     ]
 
-    res = String.contains?(string, keywords)
-
-    if res do
-      Krptkn.Api.add(:danger)
-      Krptkn.Api.add_dangerous_metadata(string)
-    end
-
-    res
+    String.contains?(string, keywords)
   end
 end

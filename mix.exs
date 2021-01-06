@@ -10,7 +10,12 @@ defmodule Krptkn.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "Кропоткин Framework",
+      source_url: "https://github.com/solanav/krptkn",
+      docs: [main: "Кропоткин"]
     ]
   end
 
@@ -20,7 +25,7 @@ defmodule Krptkn.MixProject do
   def application do
     [
       mod: {Krptkn.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :observer]
     ]
   end
 
@@ -49,7 +54,7 @@ defmodule Krptkn.MixProject do
 
       # General
       {:gen_stage, "~> 1.0.0"},
-      {:extractor, git: "https://git.solana.miami/solanav/extractor"},
+      {:extractor, git: "git@github.com:solanav/extractor.git"},
 
       # HTTP and HTML
       {:httpoison, "~> 1.6"},
@@ -58,6 +63,9 @@ defmodule Krptkn.MixProject do
 
       # Development
       {:exprof, "~> 0.2.0"},
+
+      # Documentation
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
     ]
   end
 

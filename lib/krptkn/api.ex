@@ -8,9 +8,12 @@ defmodule Krptkn.Api do
 
   use GenServer
 
+  @spec start_link([]) :: :ignore | {:error, any} | {:ok, pid}
   def start_link([]) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
+
+  # Process
 
   def register_process(module, name, pid) do
     GenServer.cast(__MODULE__, {:register_process, module, name, pid})
@@ -40,6 +43,8 @@ defmodule Krptkn.Api do
     end)
   end
 
+  # Counts of state
+
   @spec add(:url | :danger | :metadata | :fmetadata) :: any
   def add(type) do
     type = String.to_atom("#{Atom.to_string(type)}_count")
@@ -52,35 +57,57 @@ defmodule Krptkn.Api do
     GenServer.call(__MODULE__, {:count, type})
   end
 
-  def dangerous_metadata do
-    GenServer.call(__MODULE__, :dangerous_metadata)
-  end
-
-  def add_dangerous_metadata(metadata) do
-    GenServer.cast(__MODULE__, {:add_dangerous_metadata, metadata})
-  end
-
-  def scheduler do
-    GenServer.call(__MODULE__, :scheduler)
-  end
-
   @spec count_history(:url | :danger | :metadata | :fmetadata) :: any
   def count_history(type) do
     type = String.to_atom("#{Atom.to_string(type)}_history")
     GenServer.call(__MODULE__, {:history, type}) |> Enum.reverse()
   end
 
+  # Dangerous metadata
+
+  def add_dangerous_metadata(metadata) do
+    GenServer.cast(__MODULE__, {:add_dangerous_metadata, metadata})
+  end
+
+  def dangerous_metadata do
+    GenServer.call(__MODULE__, :dangerous_metadata)
+  end
+
+  # Scheduler
+
+  def scheduler do
+    GenServer.call(__MODULE__, :scheduler)
+  end
+
+  # File Type
+
   def add_file_type(file_type) do
     GenServer.cast(__MODULE__, {:add_file_type, file_type})
   end
+
+  # Response Type
 
   def add_response_type(response_type) do
     GenServer.cast(__MODULE__, {:add_response, response_type})
   end
 
+  # Last URLs
+
+  def last_urls do
+    GenServer.call(__MODULE__, :last_urls)
+  end
+
+  def add_last_url(url) do
+    GenServer.cast(__MODULE__, {:add_last_url, url})
+  end
+
+  # Memory
+
   def memory do
     GenServer.call(__MODULE__, :memory)
   end
+
+  # Init
 
   @impl true
   def init([]) do
@@ -104,6 +131,8 @@ defmodule Krptkn.Api do
       scheduler: [],
 
       dangerous_metadata: [],
+
+      last_urls: [],
     }
 
     {:ok, state}
@@ -119,20 +148,10 @@ defmodule Krptkn.Api do
   end
 
   # Update state
-  @impl true
-  def handle_cast({:register_process, module, name, pid}, state) do
-    Supervisor.which_children(pid)
-    {:noreply, %{state | processes: [{module, name, pid, :online} | state.processes]}}
-  end
 
   @impl true
-  def handle_cast({:add_dangerous_metadata, metadata}, state) do
-    {:noreply, %{state | dangerous_metadata: [metadata | state.dangerous_metadata]}, state}
-  end
-
-  @impl true
-  def handle_cast({:add, type}, state) do
-    {:noreply, %{state | type => state[type] + 1}}
+  def handle_cast({:add_last_url, url}, state) do
+    {:noreply, %{state | last_urls: Enum.slice([url | state.last_urls], 0..10)}}
   end
 
   @impl true
@@ -167,7 +186,28 @@ defmodule Krptkn.Api do
     end
   end
 
+  @impl true
+  def handle_cast({:add_dangerous_metadata, metadata}, state) do
+    {:noreply, %{state | dangerous_metadata: [metadata | state.dangerous_metadata]}}
+  end
+
+  @impl true
+  def handle_cast({:add, type}, state) do
+    {:noreply, %{state | type => state[type] + 1}}
+  end
+
+  @impl true
+  def handle_cast({:register_process, module, name, pid}, state) do
+    Supervisor.which_children(pid)
+    {:noreply, %{state | processes: [{module, name, pid, :online} | state.processes]}}
+  end
+
   # Retreive state
+  @impl true
+  def handle_call(:last_urls, _from, state) do
+    {:reply, state.last_urls, state}
+  end
+
   @impl true
   def handle_call(:processes, _from, state) do
     {:reply, state.processes, state}
@@ -204,6 +244,10 @@ defmodule Krptkn.Api do
   end
 
   # Automatic stuff
+  defp schedule_rc do
+    Process.send_after(self(), :regular_capture, 1_000)
+  end
+
   @impl true
   def handle_info(:regular_capture, state) do
     # We save the memory state
@@ -232,14 +276,6 @@ defmodule Krptkn.Api do
     schedule_rc()
 
     {:noreply, state}
-  end
-
-  defp schedule_rc do
-    Process.send_after(self(), :regular_capture, 1_000)
-  end
-
-  def handle_info({:EXIT, _pid, reason}, _state) do
-    Logger.error("A child process died: #{reason}")
   end
 
   def handle_info(msg, state) do

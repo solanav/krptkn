@@ -23,8 +23,9 @@ defmodule Krptkn.Consumers.Metadata do
     Extractor.flat_extract(buffer)
     |> Enum.map(fn metadata ->
       metadata
-      |> Enum.filter(fn {_, type, _, _, _} -> Krptkn.MetadataFilter.interesting_type?(to_string(type)) end)
-      |> Enum.filter(fn {_, _, _, _, data} -> Krptkn.MetadataFilter.interesting_data?(to_string(data)) end)
+      |> Enum.filter(fn {_, type, _, _, _} ->
+        Krptkn.MetadataFilter.interesting_type?(to_string(type))
+      end)
       |> Enum.map(fn {_, type, _, _, data} ->
         data = to_string(data)
         if String.starts_with?(data, "\nexif") do
@@ -35,6 +36,9 @@ defmodule Krptkn.Consumers.Metadata do
       end)
       |> Map.new()
     end)
+    |> Enum.filter(fn metadata ->
+      map_size(metadata) > 0
+    end)
   end
 
   def handle_events(events, _from, state) do
@@ -44,7 +48,14 @@ defmodule Krptkn.Consumers.Metadata do
       extract_metadata(buffer)
       |> Enum.uniq()
       |> Enum.filter(fn metadata ->
-        Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
+        res = Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
+
+        if res do
+          Krptkn.Api.add(:danger)
+          Krptkn.Api.add_dangerous_metadata(metadata)
+        end
+
+        res
       end)
       |> Enum.map(fn metadata ->
         {:metadata, {type, url, metadata}}
