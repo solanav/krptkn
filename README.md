@@ -12,7 +12,10 @@ Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
 - [ ] Metadata analyzer
 - [x] Metadata filter
 - [ ] Report generator
-- [ ] Meta
+- [ ] Control panel
+  - [x] Start URL
+  - [ ] Pause / Stop
+- [ ] Quality control
   - [x] Create tests
   - [x] Continuous integration
   - [x] Module documentation
