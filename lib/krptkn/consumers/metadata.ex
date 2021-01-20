@@ -47,6 +47,13 @@ defmodule Krptkn.Consumers.Metadata do
       # Extract metadata from the file
       extract_metadata(buffer)
       |> Enum.uniq()
+      # Remove empty values
+      |> Enum.map(fn metadata ->
+        Enum.filter(metadata, fn {_key, value} ->
+          value != ""
+        end)
+        |> Map.new()
+      end)
       |> Enum.filter(fn metadata ->
         res = Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
 
@@ -61,7 +68,7 @@ defmodule Krptkn.Consumers.Metadata do
         {:metadata, {type, url, metadata}}
       end)
     end)
-    # Remove the empty maps
+    # Remove empty maps
     |> Enum.filter(fn {:metadata, {_type, _url, m}} -> not Enum.empty?(m) end)
     # Count fmetadata
     |> Enum.map(fn v ->
