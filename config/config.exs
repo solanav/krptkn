@@ -12,7 +12,7 @@ config :krptkn,
 
 # Configure the application
 config :krptkn, Krptkn.Application,
-  session_name: "debugging_000",
+  session_name: "debugging_001",
   producers: 64,
   url_consumers: 4,
   metadata_consumers: 1,

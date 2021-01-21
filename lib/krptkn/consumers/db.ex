@@ -9,14 +9,27 @@ defmodule Krptkn.Consumers.Db do
 
   defp insert_url(type, url) do
     session = Application.get_env(:krptkn, Krptkn.Application)[:session_name]
-    query = "INSERT INTO visited_urls (session, url, type) VALUES ($1, $2, $3)"
-    Postgrex.query!(:psql, query, [session, url, type])
+
+    url = %Krptkn.Url{
+      session: session,
+      type: type,
+      url: url,
+    }
+
+    Krptkn.Repo.insert!(url)
   end
 
   defp insert_metadata(type, url, metadata) do
     session = Application.get_env(:krptkn, Krptkn.Application)[:session_name]
-    query = "INSERT INTO metadata (session, url, type, metadata) VALUES ($1, $2, $3, $4)"
-    Postgrex.query!(:psql, query, [session, url, type, metadata])
+
+    url = %Krptkn.Metadata{
+      metadata: metadata,
+      session: session,
+      type: type,
+      url: url,
+    }
+
+    Krptkn.Repo.insert!(url)
   end
 
   def start_link(_) do
