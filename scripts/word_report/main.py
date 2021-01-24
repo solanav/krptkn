@@ -1,10 +1,15 @@
 import psycopg2
+import matplotlib.pyplot as plt
 
-from docxtpl import DocxTemplate
+from docxtpl import DocxTemplate, InlineImage
+from docx.shared import Inches
 from datetime import datetime
 from collections import Counter
 from pprint import pprint
 
+IMAGE_DIR = "images/"
+TEMPLATE_DIR = "templates/"
+OUTPUT_DIR = "output/"
 MAX_FREQ_ITEMS = 10
 
 def get_domain(full_url):
@@ -14,6 +19,19 @@ def get_metadata(conn, session):
   cur = conn.cursor()
   cur.execute(f"SELECT * FROM metadata WHERE session='{session}'")
   return cur.fetchall()
+
+def freq_plot(output_name, data, title, xlabel):
+  tmp_c = dict(Counter(data))
+  x = list(tmp_c.keys())
+  y = list(tmp_c.values())
+  plt.figure(figsize = (10, 5))
+  plt.barh(x, y, align='center', height=.8)
+  plt.xlabel(title)
+  plt.title(xlabel)
+  plt.tight_layout()
+  plt.savefig(IMAGE_DIR + output_name)
+  plt.clf()
+
 
 def metadata_analyze(raw_metadata):
   session = raw_metadata[0][1]
@@ -61,19 +79,54 @@ def metadata_analyze(raw_metadata):
       "freq": freq
     })
 
+  # Domain freq plot
+  freq_plot(
+    "subdomains_freq.png",
+    subdomains,
+    "Frequency",
+    "Domains that contained metadata",
+  )
+
+  freq_plot(
+    "types_freq.png",
+    types,
+    "Frequency",
+    "File type frequency",
+  )
+  
+  freq_plot(
+    "mk_freq.png",
+    mk,
+    "Frequency",
+    "Metadata key frequency",
+  )
+
+  freq_plot(
+    "mv_freq.png",
+    mv,
+    "Frequency",
+    "Metadata value frequency",
+  )
+
   return o_subdomains, o_types, o_mk, o_mv
 
 def generate_report(output_file, data):
   subdomains, types, mk, mv = data
 
-  doc = DocxTemplate("report_template.docx")
+  doc = DocxTemplate(TEMPLATE_DIR + "report_template.docx")
   context = {
     "session_name": "Debugging",
     "current_date": datetime.now().strftime("%I:%M%p on %B %d, %Y"),
     "subdomains": subdomains[:MAX_FREQ_ITEMS],
     "types": types[:MAX_FREQ_ITEMS],
     "mk": mk[:MAX_FREQ_ITEMS],
-    "mv": mv[:MAX_FREQ_ITEMS]
+    "mv": mv[:MAX_FREQ_ITEMS],
+    
+    # Images
+    "domainf_image": InlineImage(doc, 'images/subdomains_freq.png', Inches(6.5)),
+    "typef_image": InlineImage(doc, 'images/types_freq.png', Inches(6.5)),
+    "mkf_image": InlineImage(doc, 'images/mk_freq.png', Inches(6.5)),
+    "mvf_image": InlineImage(doc, 'images/mv_freq.png', Inches(6.5)),
   }
 
   doc.render(context)
@@ -97,7 +150,7 @@ def main():
   metadata_analysis = metadata_analyze(raw_metadata)
 
   # Save the report
-  generate_report("report.docx", metadata_analysis)
+  generate_report(OUTPUT_DIR + "report.docx", metadata_analysis)
 
 if __name__ == "__main__":
   main()
