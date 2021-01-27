@@ -1,0 +1,7 @@
+README.md
+setup.py
+libgnis/__init__.py
+libgnis.egg-info/PKG-INFO
+libgnis.egg-info/SOURCES.txt
+libgnis.egg-info/dependency_links.txt
+libgnis.egg-info/top_level.txt
