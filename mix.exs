@@ -66,6 +66,9 @@ defmodule Krptkn.MixProject do
 
       # Documentation
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+
+      # Deployment
+      {:distillery, "~> 2.1"},
     ]
   end
 
