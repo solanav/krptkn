@@ -1,0 +1,15 @@
+2021-02-03 16:27:46.983 UTC [1921] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-03 16:27:46.987 UTC [1921] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-03 16:27:46.998 UTC [1922] LOG:  database system was shut down at 2021-02-03 16:27:46 UTC
+2021-02-03 16:27:47.001 UTC [1921] LOG:  database system is ready to accept connections
+2021-02-03 16:29:15.924 UTC [2108] FATAL:  database "solanav" does not exist
+2021-02-03 17:07:49.338 UTC [1927] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No such file or directory
+2021-02-03 17:07:49.362 UTC [1921] LOG:  could not open file "postmaster.pid": No such file or directory
+2021-02-03 17:07:49.362 UTC [1921] LOG:  performing immediate shutdown because data directory lock file is invalid
+2021-02-03 17:07:49.362 UTC [1921] LOG:  received immediate shutdown request
+2021-02-03 17:07:49.362 UTC [1921] LOG:  could not open file "postmaster.pid": No such file or directory
+2021-02-03 17:07:49.362 UTC [1927] LOG:  could not open temporary statistics file "pg_stat/global.tmp": No such file or directory
+2021-02-03 17:07:49.362 UTC [1926] WARNING:  terminating connection because of crash of another server process
+2021-02-03 17:07:49.362 UTC [1926] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-02-03 17:07:49.362 UTC [1926] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-02-03 17:07:49.367 UTC [1921] LOG:  database system is shut down

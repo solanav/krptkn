@@ -19,10 +19,19 @@ pkgs.mkShell {
 
         # For scripts
         pkgs.python38
+
+        # PSQL for local instance
+        pkgs.postgresql
     ] ++ optional pkgs.stdenv.isLinux pkgs.inotify-tools;
 
     shellHook = ''
-        echo
-        echo Welcome to Krptkn Development Shell
+        initdb -D .tmp/mydb
+        pg_ctl -D .tmp/mydb -l logfile -o "--unix_socket_directories='$PWD'" start
+
+        echo ====================================================================
+        echo == Welcome to Krptkn Development Shell
+        echo == You can stop the PSQL instance with:
+        echo == $ pg_ctl -D .tmp/mydb stop
+        echo ====================================================================
     '';
 }
