@@ -1,0 +1,5 @@
+2021-02-03 16:27:46.983 UTC [1921] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-03 16:27:46.987 UTC [1921] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-03 16:27:46.998 UTC [1922] LOG:  database system was shut down at 2021-02-03 16:27:46 UTC
+2021-02-03 16:27:47.001 UTC [1921] LOG:  database system is ready to accept connections
+2021-02-03 16:29:15.924 UTC [2108] FATAL:  database "solanav" does not exist

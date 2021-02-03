@@ -1,0 +1,1 @@
+/nix/store/dn40d2h1kkqijs416rliq3hbpnp7v8d2-postgresql-11.10/bin/postgres "-D" ".tmp/mydb" "--unix_socket_directories=/home/solanav/krptkn"
