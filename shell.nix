@@ -16,6 +16,7 @@ pkgs.mkShell {
         pkgs.libextractor
         pkgs.git
         pkgs.gcc
+        pkgs.cmake
 
         # For scripts
         pkgs.python38
