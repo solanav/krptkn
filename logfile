@@ -13,3 +13,92 @@
 2021-02-03 17:07:49.362 UTC [1926] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
 2021-02-03 17:07:49.362 UTC [1926] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
 2021-02-03 17:07:49.367 UTC [1921] LOG:  database system is shut down
+2021-02-04 10:12:18.339 UTC [2010] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-04 10:12:18.342 UTC [2010] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-04 10:12:18.355 UTC [2011] LOG:  database system was shut down at 2021-02-04 10:12:18 UTC
+2021-02-04 10:12:18.358 UTC [2010] LOG:  database system is ready to accept connections
+2021-02-04 10:12:49.349 UTC [2104] FATAL:  role "postgres" does not exist
+2021-02-04 10:14:44.372 UTC [2010] LOG:  received fast shutdown request
+2021-02-04 10:14:44.382 UTC [2010] LOG:  aborting any active transactions
+2021-02-04 10:14:44.383 UTC [2010] LOG:  background worker "logical replication launcher" (PID 2017) exited with exit code 1
+2021-02-04 10:14:44.383 UTC [2012] LOG:  shutting down
+2021-02-04 10:14:44.398 UTC [2010] LOG:  database system is shut down
+2021-02-04 10:14:51.078 UTC [2371] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-04 10:14:51.082 UTC [2371] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-04 10:14:51.095 UTC [2372] LOG:  database system was shut down at 2021-02-04 10:14:44 UTC
+2021-02-04 10:14:51.098 UTC [2371] LOG:  database system is ready to accept connections
+2021-02-04 10:15:00.215 UTC [2371] LOG:  received fast shutdown request
+2021-02-04 10:15:00.216 UTC [2371] LOG:  aborting any active transactions
+2021-02-04 10:15:00.217 UTC [2371] LOG:  background worker "logical replication launcher" (PID 2378) exited with exit code 1
+2021-02-04 10:15:00.217 UTC [2373] LOG:  shutting down
+2021-02-04 10:15:00.228 UTC [2371] LOG:  database system is shut down
+2021-02-04 10:16:09.353 UTC [2597] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-04 10:16:09.357 UTC [2597] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-04 10:16:09.369 UTC [2598] LOG:  database system was shut down at 2021-02-04 10:16:09 UTC
+2021-02-04 10:16:09.373 UTC [2597] LOG:  database system is ready to accept connections
+2021-02-04 10:16:36.115 UTC [2597] LOG:  received fast shutdown request
+2021-02-04 10:16:36.126 UTC [2597] LOG:  aborting any active transactions
+2021-02-04 10:16:36.127 UTC [2597] LOG:  background worker "logical replication launcher" (PID 2604) exited with exit code 1
+2021-02-04 10:16:36.128 UTC [2599] LOG:  shutting down
+2021-02-04 10:16:36.141 UTC [2597] LOG:  database system is shut down
+2021-02-04 10:16:38.568 UTC [2728] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-04 10:16:38.571 UTC [2728] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-04 10:16:38.582 UTC [2729] LOG:  database system was shut down at 2021-02-04 10:16:36 UTC
+2021-02-04 10:16:38.585 UTC [2728] LOG:  database system is ready to accept connections
+2021-02-04 10:17:15.632 UTC [2817] FATAL:  role "postgres" does not exist
+2021-02-04 10:17:27.773 UTC [2845] FATAL:  role "root" does not exist
+2021-02-04 10:30:07.822 UTC [4361] FATAL:  lock file "postmaster.pid" already exists
+2021-02-04 10:30:07.822 UTC [4361] HINT:  Is another postmaster (PID 2728) running in data directory "/home/solanav/krptkn/.tmp/mydb"?
+2021-02-04 10:30:07.922 UTC [4363] ERROR:  database "krptkn_dev" already exists
+2021-02-04 10:30:07.922 UTC [4363] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-04 10:37:07.537 UTC [5190] FATAL:  lock file "postmaster.pid" already exists
+2021-02-04 10:37:07.537 UTC [5190] HINT:  Is another postmaster (PID 2728) running in data directory "/home/solanav/krptkn/.tmp/mydb"?
+2021-02-04 10:37:07.636 UTC [5192] ERROR:  database "krptkn_dev" already exists
+2021-02-04 10:37:07.636 UTC [5192] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-04 10:37:27.483 UTC [5280] FATAL:  lock file "postmaster.pid" already exists
+2021-02-04 10:37:27.483 UTC [5280] HINT:  Is another postmaster (PID 2728) running in data directory "/home/solanav/krptkn/.tmp/mydb"?
+2021-02-04 10:37:27.583 UTC [5282] ERROR:  database "krptkn_dev" already exists
+2021-02-04 10:37:27.583 UTC [5282] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-04 10:37:33.474 UTC [2728] LOG:  received fast shutdown request
+2021-02-04 10:37:33.485 UTC [2728] LOG:  aborting any active transactions
+2021-02-04 10:37:33.486 UTC [2728] LOG:  background worker "logical replication launcher" (PID 2735) exited with exit code 1
+2021-02-04 10:37:33.486 UTC [2730] LOG:  shutting down
+2021-02-04 10:37:33.499 UTC [2728] LOG:  database system is shut down
+2021-02-04 10:37:42.647 UTC [5390] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-04 10:37:42.650 UTC [5390] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-04 10:37:42.664 UTC [5391] LOG:  database system was shut down at 2021-02-04 10:37:42 UTC
+2021-02-04 10:37:42.668 UTC [5390] LOG:  database system is ready to accept connections
+2021-02-04 10:37:42.743 UTC [5399] FATAL:  role "solanav" does not exist
+2021-02-04 10:37:42.744 UTC [5400] FATAL:  role "solanav" does not exist
+2021-02-04 10:39:26.355 UTC [5609] FATAL:  role "solanav" does not exist
+2021-02-04 10:39:31.458 UTC [5627] FATAL:  database "krptkn-dev" does not exist
+2021-02-04 10:44:14.205 UTC [5390] LOG:  received fast shutdown request
+2021-02-04 10:44:14.207 UTC [5390] LOG:  aborting any active transactions
+2021-02-04 10:44:14.208 UTC [5390] LOG:  background worker "logical replication launcher" (PID 5397) exited with exit code 1
+2021-02-04 10:44:14.248 UTC [5392] LOG:  shutting down
+2021-02-04 10:44:14.269 UTC [5390] LOG:  database system is shut down
+2021-02-04 10:55:20.342 UTC [7817] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-04 10:55:20.346 UTC [7817] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-04 10:55:20.358 UTC [7818] LOG:  database system was shut down at 2021-02-04 10:44:14 UTC
+2021-02-04 10:55:20.361 UTC [7817] LOG:  database system is ready to accept connections
+2021-02-04 10:55:20.439 UTC [7826] ERROR:  database "krptkn_dev" already exists
+2021-02-04 10:55:20.439 UTC [7826] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-04 11:03:20.778 UTC [9907] FATAL:  lock file "postmaster.pid" already exists
+2021-02-04 11:03:20.778 UTC [9907] HINT:  Is another postmaster (PID 7817) running in data directory "/home/solanav/krptkn/.tmp/mydb"?
+2021-02-04 11:03:20.878 UTC [9909] ERROR:  database "krptkn_dev" already exists
+2021-02-04 11:03:20.878 UTC [9909] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-04 11:05:36.712 UTC [11695] FATAL:  lock file "postmaster.pid" already exists
+2021-02-04 11:05:36.712 UTC [11695] HINT:  Is another postmaster (PID 7817) running in data directory "/home/solanav/krptkn/.tmp/mydb"?
+2021-02-04 11:05:36.811 UTC [11697] ERROR:  database "krptkn_dev" already exists
+2021-02-04 11:05:36.811 UTC [11697] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-04 11:07:44.941 UTC [12837] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-04 11:07:44.941 UTC [12837] DETAIL:  Key (url)=(https://remarkable.com/) already exists.
+2021-02-04 11:07:44.941 UTC [12837] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-04 11:07:45.724 UTC [12832] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-04 11:07:45.724 UTC [12832] DETAIL:  Key (url)=(https://support.remarkable.com/hc) already exists.
+2021-02-04 11:07:45.724 UTC [12832] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-04 11:30:15.102 UTC [7817] LOG:  received fast shutdown request
+2021-02-04 11:30:15.104 UTC [7817] LOG:  aborting any active transactions
+2021-02-04 11:30:15.105 UTC [7817] LOG:  background worker "logical replication launcher" (PID 7824) exited with exit code 1
+2021-02-04 11:30:15.105 UTC [7819] LOG:  shutting down
+2021-02-04 11:30:15.119 UTC [7817] LOG:  database system is shut down

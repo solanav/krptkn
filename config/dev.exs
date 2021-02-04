@@ -5,7 +5,8 @@ config :krptkn, Krptkn.Repo,
   username: "krptkn-dev",
   password: "xz3uz3Md4lFeHXOi3lOH",
   database: "krptkn_dev",
-  hostname: "192.168.1.144",
+  socket_dir: "./",
+  #hostname: "127.0.0.1",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
