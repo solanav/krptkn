@@ -25,13 +25,19 @@ pkgs.mkShell {
     ] ++ optional pkgs.stdenv.isLinux pkgs.inotify-tools;
 
     shellHook = ''
-        initdb -D .tmp/mydb
-        pg_ctl -D .tmp/mydb -l logfile -o "--unix_socket_directories='$PWD'" start
+        export LOCALE_ARCHIVE=${pkgs.glibcLocales}/lib/locale/locale-archive
+        export LANG=en_US.UTF-8
+        export EXTRACTOR_PATH=${pkgs.libextractor.outPath}/lib
+        export LD_LIBRARY_PATH=$EXTRACTOR_PATH
 
-        echo ====================================================================
+        initdb -D .tmp/mydb --username=krptkn-dev --pwfile=$PWD/config/pgpass
+        pg_ctl -D .tmp/mydb -l logfile -o "--unix_socket_directories='$PWD'" start
+        createdb krptkn_dev -h $PWD -U krptkn-dev
+
+        echo ========================================
         echo == Welcome to Krptkn Development Shell
         echo == You can stop the PSQL instance with:
         echo == $ pg_ctl -D .tmp/mydb stop
-        echo ====================================================================
+        echo ========================================
     '';
 }
