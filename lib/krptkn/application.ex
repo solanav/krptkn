@@ -96,7 +96,7 @@ defmodule Krptkn.Application do
     HTTPoison.start()
 
     # Start the observer for ets et al
-    :observer.start()
+    # :observer.start()
 
     opts = [
       strategy: :one_for_one,

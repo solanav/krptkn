@@ -8,10 +8,13 @@ defmodule KrptknWeb.PageController do
   end
 
   def new(conn, %{"action" => "pause"}) do
-    IO.inspect("This button does nothing yet")
-    IO.inspect("This button does nothing yet")
-    IO.inspect("This button does nothing yet")
-    IO.inspect("This button does nothing yet")
+    Krptkn.UrlQueue.pause()
+
+    render(conn, "index.html")
+  end
+
+  def new(conn, %{"action" => "resume"}) do
+    Krptkn.UrlQueue.resume()
 
     render(conn, "index.html")
   end
@@ -31,10 +34,8 @@ defmodule KrptknWeb.PageController do
   end
 
   def new(conn, %{"action" => "cleardb"}) do
-    IO.inspect("This button does nothing yet")
-    IO.inspect("This button does nothing yet")
-    IO.inspect("This button does nothing yet")
-    IO.inspect("This button does nothing yet")
+    Krptkn.Repo.delete_all(Krptkn.Metadata)
+    Krptkn.Repo.delete_all(Krptkn.Url)
 
     render(conn, "index.html")
   end

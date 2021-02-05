@@ -551,18 +551,6 @@ header section {
     justify-content: space-between;
 }
 
-.navbar-link {
-    font-size: 2em;
-    display: inline-block;
-    margin: 0 1em 0 0;
-    text-decoration: none;
-    color: white;
-}
-
-.navbar-link:hover {
-    color: #606c76;
-}
-
 header section :first-child {
     order: 2;
 }

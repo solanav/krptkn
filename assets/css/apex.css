@@ -4,8 +4,32 @@ body {
     font-family: Montserrat, Arial, sans-serif;
 }
 
+.container h1 {
+    width: 100%;
+}
+
+.navbar-link {
+    font-size: 2em;
+    display: inline-block;
+    margin: 0 1em 0 0;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-link:hover {
+    color: #606c76;
+}
+
 button {
     width: 100%;
+    background-color: #0d1117 !important;
+    border: 0.2rem solid #21262d !important;
+    border-radius: 1rem !important;
+}
+
+tr,
+th {
+    border: 0.2rem solid #21262d !important;
 }
 
 table {

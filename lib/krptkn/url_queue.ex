@@ -12,6 +12,8 @@ defmodule Krptkn.UrlQueue do
     GenServer.start_link(__MODULE__, initial_urls, name: __MODULE__)
   end
 
+  # Admin utils
+
   def clear_queue do
     GenServer.cast(__MODULE__, :clear_queue)
   end
@@ -19,6 +21,16 @@ defmodule Krptkn.UrlQueue do
   def clear_visited do
     :ets.delete_all_objects(@visited_links)
   end
+
+  def resume do
+    GenServer.cast(__MODULE__, :resume)
+  end
+
+  def pause do
+    GenServer.cast(__MODULE__, :pause)
+  end
+
+  # Queue utils
 
   def push(url) do
     if not found?(url) do
@@ -45,24 +57,39 @@ defmodule Krptkn.UrlQueue do
       :queue.in(url, q)
     end)
 
-    {:ok, q}
+    {:ok, {q, :running}}
   end
 
   @impl true
-  def handle_call(:pop, _from, queue) do
+  def handle_call(:pop, _from, {queue, :paused}) do
+    {:reply, {:error, []}, {queue, :paused}}
+  end
+
+  @impl true
+  def handle_call(:pop, _from, {queue, :running}) do
     case :queue.out(queue) do
-      {:empty, q} -> {:reply, {:error, []}, q}
-      {{:value, value}, q} -> {:reply, {:ok, value}, q}
+      {:empty, q} -> {:reply, {:error, []}, {q, :running}}
+      {{:value, value}, q} -> {:reply, {:ok, value}, {q, :running}}
     end
   end
 
   @impl true
-  def handle_cast({:push, url}, queue) do
-    {:noreply, :queue.in(url, queue)}
+  def handle_cast({:push, url}, {queue, state}) do
+    {:noreply, {:queue.in(url, queue), state}}
   end
 
   @impl true
-  def handle_cast(:clear_queue, _old_queue) do
-    {:noreply, :queue.new()}
+  def handle_cast(:resume, {queue, _old_state}) do
+    {:noreply, {queue, :running}}
+  end
+
+  @impl true
+  def handle_cast(:pause, {queue, _old_state}) do
+    {:noreply, {queue, :paused}}
+  end
+
+  @impl true
+  def handle_cast(:clear_queue, {_old_queue, state}) do
+    {:noreply, {:queue.new(), state}}
   end
 end
