@@ -17,7 +17,9 @@ Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
   - [ ] URL frequency analyzer
 - [ ] Control panel
   - [x] Start URL
-  - [ ] Pause / Stop
+  - [x] Pause / Stop / Resume
+  - [x] Clear RAM / Clear DB
+  - [x] Information Leds
 - [ ] Quality control
   - [x] Create tests
   - [x] Continuous integration
