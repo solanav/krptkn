@@ -7,6 +7,12 @@
         <div class="box shadow mt-4">
           <p class="box-title">Control Panel</p>
 
+          <div class="row">
+            <div class="form-group col-md-1">
+              <p>State <span id="queue_state"><div class=\"led led-blue\"></div></span></p>
+            </div>
+          </div>
+
           <%= form_for @conn, Routes.page_path(@conn, :new), [class: "form-inline"], fn f -> %>
             <div class="row">
               <div class="form-group col-md-9">
@@ -93,6 +99,21 @@
 </div>
 
 <script>
+function updateState() {
+  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "queue_state") %>", function(state) {
+    console.log(state)
+    if (state == "running") {
+      document.getElementById("queue_state").innerHTML = "<div class=\"led led-green\"></div>"
+    } else if (state == "stopped") {
+      document.getElementById("queue_state").innerHTML = "<div class=\"led led-red\"></div>"
+    } else if (state == "paused") {
+      document.getElementById("queue_state").innerHTML = "<div class=\"led led-yellow\"></div>"
+    } else {
+      document.getElementById("queue_state").innerHTML = "<div class=\"led led-blue\"></div>"
+    }
+  });
+}
+
 function updateTable() {
   $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "last_urls") %>", function(url) {
     nuHTML = ""
@@ -135,6 +156,7 @@ $(document).ready(function() {
   const interval = setInterval(function() {
     updateTable();
     updateTableMetadata();
+    updateState();
   }, 1000);
 });
 

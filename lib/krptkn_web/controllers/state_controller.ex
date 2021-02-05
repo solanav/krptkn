@@ -59,6 +59,10 @@ defmodule KrptknWeb.StateController do
     json(conn, memory(String.to_atom(type)))
   end
 
+  def index(conn, %{"param" => "queue_state"}) do
+    json(conn, Krptkn.UrlQueue.state())
+  end
+
   def index(conn, %{"param" => "dangerous_metadata"}) do
     json(conn, Krptkn.Api.dangerous_metadata())
   end

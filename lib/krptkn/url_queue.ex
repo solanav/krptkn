@@ -14,6 +14,10 @@ defmodule Krptkn.UrlQueue do
 
   # Admin utils
 
+  def state do
+    GenServer.call(__MODULE__, :state)
+  end
+
   def clear_queue do
     GenServer.cast(__MODULE__, :clear_queue)
   end
@@ -58,6 +62,15 @@ defmodule Krptkn.UrlQueue do
     end)
 
     {:ok, {q, :running}}
+  end
+
+  @impl true
+  def handle_call(:state, _from, {queue, state}) do
+    if state == :running and :queue.is_empty(queue) do
+      {:reply, :stopped, {queue, state}}
+    else
+      {:reply, state, {queue, state}}
+    end
   end
 
   @impl true
