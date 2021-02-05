@@ -17,6 +17,33 @@
               </div>
             </div>
           <% end %>
+
+            <div class="row">
+              <div class="form-group col-md-3">
+                <%= form_for @conn, Routes.page_path(@conn, :new), [class: "form-inline"], fn f -> %>
+                  <%= hidden_input f, :action, value: "pause" %>
+                  <%= submit "Pause", id: "pause-su"%>
+                <% end %>
+              </div>
+              <div class="form-group col-md-3">
+                <%= form_for @conn, Routes.page_path(@conn, :new), [class: "form-inline"], fn f -> %>
+                  <%= hidden_input f, :action, value: "stop" %>
+                  <%= submit "Stop", id: "stop-su"%>
+                <% end %>
+              </div>
+              <div class="form-group col-md-3">
+                <%= form_for @conn, Routes.page_path(@conn, :new), [class: "form-inline"], fn f -> %>
+                  <%= hidden_input f, :action, value: "clearram" %>
+                  <%= submit "Clear RAM", id: "pause-su"%>
+                <% end %>
+              </div>
+              <div class="form-group col-md-3">
+                <%= form_for @conn, Routes.page_path(@conn, :new), [class: "form-inline"], fn f -> %>
+                  <%= hidden_input f, :action, value: "cleardb" %>
+                  <%= submit "Clear Database", id: "cleardb-su"%>
+                <% end %>
+              </div>
+            </div>
         </div>
       </div>
     </div>

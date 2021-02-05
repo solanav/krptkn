@@ -4,6 +4,10 @@ body {
     font-family: Montserrat, Arial, sans-serif;
 }
 
+button {
+    width: 100%;
+}
+
 table {
     color: white !important;
 }

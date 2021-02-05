@@ -13,6 +13,12 @@ defmodule Krptkn.Api do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
+  # Meta stuff
+
+  def delete_all do
+    GenServer.cast(__MODULE__, :clear)
+  end
+
   # Process
 
   def register_process(module, name, pid) do
@@ -109,11 +115,8 @@ defmodule Krptkn.Api do
 
   # Init
 
-  @impl true
-  def init([]) do
-    schedule_rc()
-
-    state = %{
+  def empty_state do
+    %{
       url_count: 0,
       danger_count: 0,
       metadata_count: 0,
@@ -134,8 +137,13 @@ defmodule Krptkn.Api do
 
       last_urls: [],
     }
+  end
 
-    {:ok, state}
+  @impl true
+  def init([]) do
+    schedule_rc()
+
+    {:ok, empty_state()}
   end
 
   defp add_to_history(history, element, limit \\ 10) do
@@ -148,6 +156,11 @@ defmodule Krptkn.Api do
   end
 
   # Update state
+
+  @impl true
+  def handle_cast(:clear, _old_state) do
+    {:noreply, empty_state()}
+  end
 
   @impl true
   def handle_cast({:add_last_url, url}, state) do

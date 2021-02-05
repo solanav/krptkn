@@ -102,3 +102,33 @@
 2021-02-04 11:30:15.105 UTC [7817] LOG:  background worker "logical replication launcher" (PID 7824) exited with exit code 1
 2021-02-04 11:30:15.105 UTC [7819] LOG:  shutting down
 2021-02-04 11:30:15.119 UTC [7817] LOG:  database system is shut down
+2021-02-05 10:16:32.649 UTC [484] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-05 10:16:32.653 UTC [484] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-05 10:16:32.668 UTC [485] LOG:  database system was shut down at 2021-02-05 10:16:32 UTC
+2021-02-05 10:16:32.672 UTC [484] LOG:  database system is ready to accept connections
+2021-02-05 10:17:49.700 UTC [484] LOG:  received fast shutdown request
+2021-02-05 10:17:49.703 UTC [484] LOG:  aborting any active transactions
+2021-02-05 10:17:49.703 UTC [484] LOG:  background worker "logical replication launcher" (PID 491) exited with exit code 1
+2021-02-05 10:17:49.703 UTC [486] LOG:  shutting down
+2021-02-05 10:17:49.722 UTC [484] LOG:  database system is shut down
+2021-02-05 10:18:12.829 UTC [1019] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-05 10:18:12.833 UTC [1019] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-05 10:18:12.845 UTC [1020] LOG:  database system was shut down at 2021-02-05 10:17:49 UTC
+2021-02-05 10:18:12.849 UTC [1019] LOG:  database system is ready to accept connections
+2021-02-05 10:18:12.927 UTC [1028] ERROR:  database "krptkn_dev" already exists
+2021-02-05 10:18:12.927 UTC [1028] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-05 11:04:59.828 UTC [1019] LOG:  received fast shutdown request
+2021-02-05 11:04:59.839 UTC [1019] LOG:  aborting any active transactions
+2021-02-05 11:04:59.840 UTC [9033] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.840 UTC [9041] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.840 UTC [9034] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.840 UTC [9039] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.840 UTC [9038] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.840 UTC [9040] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.840 UTC [9037] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.840 UTC [9032] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.841 UTC [9036] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.841 UTC [9035] FATAL:  terminating connection due to administrator command
+2021-02-05 11:04:59.842 UTC [1019] LOG:  background worker "logical replication launcher" (PID 1026) exited with exit code 1
+2021-02-05 11:04:59.842 UTC [1021] LOG:  shutting down
+2021-02-05 11:04:59.868 UTC [1019] LOG:  database system is shut down

@@ -12,6 +12,14 @@ defmodule Krptkn.UrlQueue do
     GenServer.start_link(__MODULE__, initial_urls, name: __MODULE__)
   end
 
+  def clear_queue do
+    GenServer.cast(__MODULE__, :clear_queue)
+  end
+
+  def clear_visited do
+    :ets.delete_all_objects(@visited_links)
+  end
+
   def push(url) do
     if not found?(url) do
       :ets.insert(@visited_links, {url, NaiveDateTime.utc_now()})
@@ -51,5 +59,10 @@ defmodule Krptkn.UrlQueue do
   @impl true
   def handle_cast({:push, url}, queue) do
     {:noreply, :queue.in(url, queue)}
+  end
+
+  @impl true
+  def handle_cast(:clear_queue, _old_queue) do
+    {:noreply, :queue.new()}
   end
 end
