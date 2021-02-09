@@ -36,3 +36,220 @@
 2021-02-09 13:42:21.606 UTC [1717] LOG:  background worker "logical replication launcher" (PID 1724) exited with exit code 1
 2021-02-09 13:42:21.606 UTC [1719] LOG:  shutting down
 2021-02-09 13:42:21.625 UTC [1717] LOG:  database system is shut down
+2021-02-09 13:52:13.866 UTC [3121] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-09 13:52:13.868 UTC [3121] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-09 13:52:13.881 UTC [3122] LOG:  database system was shut down at 2021-02-09 13:42:21 UTC
+2021-02-09 13:52:13.884 UTC [3121] LOG:  database system is ready to accept connections
+2021-02-09 13:52:13.964 UTC [3130] ERROR:  database "krptkn_dev" already exists
+2021-02-09 13:52:13.964 UTC [3130] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-09 13:56:26.999 UTC [3657] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:26.999 UTC [3657] DETAIL:  Key (url)=(https://stallman.org) already exists.
+2021-02-09 13:56:26.999 UTC [3657] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.172 UTC [3653] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.172 UTC [3653] DETAIL:  Key (url)=(https://stallman.org/) already exists.
+2021-02-09 13:56:27.172 UTC [3653] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.338 UTC [3650] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.338 UTC [3650] DETAIL:  Key (url)=(https://stallman.org/archives/polnotes.html) already exists.
+2021-02-09 13:56:27.338 UTC [3650] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.438 UTC [3655] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.438 UTC [3655] DETAIL:  Key (url)=(https://stallman.org/sayings.html) already exists.
+2021-02-09 13:56:27.438 UTC [3655] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.532 UTC [3654] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.532 UTC [3654] DETAIL:  Key (url)=(https://stallman.org/extra/personal.html) already exists.
+2021-02-09 13:56:27.532 UTC [3654] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.629 UTC [3653] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.629 UTC [3653] DETAIL:  Key (url)=(https://stallman.org/rms-lifestyle.html) already exists.
+2021-02-09 13:56:27.629 UTC [3653] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.721 UTC [3654] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.721 UTC [3654] DETAIL:  Key (url)=(https://stallman.org/gpg.html) already exists.
+2021-02-09 13:56:27.721 UTC [3654] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.829 UTC [3649] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.829 UTC [3649] DETAIL:  Key (url)=(https://stallman.org/airlines.html) already exists.
+2021-02-09 13:56:27.829 UTC [3649] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:27.918 UTC [3651] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:27.918 UTC [3651] DETAIL:  Key (url)=(https://stallman.org/biographies.html) already exists.
+2021-02-09 13:56:27.918 UTC [3651] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.012 UTC [3657] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.012 UTC [3657] DETAIL:  Key (url)=(https://stallman.org/comics.html) already exists.
+2021-02-09 13:56:28.012 UTC [3657] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.104 UTC [3658] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.104 UTC [3658] DETAIL:  Key (url)=(https://stallman.org/empire.html) already exists.
+2021-02-09 13:56:28.104 UTC [3658] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.199 UTC [3653] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.199 UTC [3653] DETAIL:  Key (url)=(https://stallman.org/media.html) already exists.
+2021-02-09 13:56:28.199 UTC [3653] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.290 UTC [3650] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.290 UTC [3650] DETAIL:  Key (url)=(https://stallman.org/links.html) already exists.
+2021-02-09 13:56:28.290 UTC [3650] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.387 UTC [3655] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.387 UTC [3655] DETAIL:  Key (url)=(https://stallman.org/archive.html) already exists.
+2021-02-09 13:56:28.387 UTC [3655] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.484 UTC [3654] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.484 UTC [3654] DETAIL:  Key (url)=(https://stallman.org/glossary.html) already exists.
+2021-02-09 13:56:28.484 UTC [3654] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.577 UTC [3649] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.577 UTC [3649] DETAIL:  Key (url)=(https://stallman.org/antiglossary.html) already exists.
+2021-02-09 13:56:28.577 UTC [3649] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.667 UTC [3656] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.667 UTC [3656] DETAIL:  Key (url)=(https://stallman.org/site-search/index.html) already exists.
+2021-02-09 13:56:28.667 UTC [3656] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.764 UTC [3652] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.764 UTC [3652] DETAIL:  Key (url)=(https://stallman.org/airbnb.html) already exists.
+2021-02-09 13:56:28.764 UTC [3652] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.868 UTC [3654] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.868 UTC [3654] DETAIL:  Key (url)=(https://stallman.org/amazon.html) already exists.
+2021-02-09 13:56:28.868 UTC [3654] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:28.953 UTC [3649] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:28.953 UTC [3649] DETAIL:  Key (url)=(https://stallman.org/amtrak.html) already exists.
+2021-02-09 13:56:28.953 UTC [3649] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:29.045 UTC [3656] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:29.045 UTC [3656] DETAIL:  Key (url)=(https://stallman.org/ancestry.html) already exists.
+2021-02-09 13:56:29.045 UTC [3656] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:29.425 UTC [3121] LOG:  received fast shutdown request
+2021-02-09 13:56:29.436 UTC [3121] LOG:  aborting any active transactions
+2021-02-09 13:56:29.437 UTC [3121] LOG:  background worker "logical replication launcher" (PID 3128) exited with exit code 1
+2021-02-09 13:56:29.437 UTC [3123] LOG:  shutting down
+2021-02-09 13:56:29.453 UTC [3121] LOG:  database system is shut down
+2021-02-09 13:56:35.957 UTC [3810] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-09 13:56:35.961 UTC [3810] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-09 13:56:35.972 UTC [3811] LOG:  database system was shut down at 2021-02-09 13:56:29 UTC
+2021-02-09 13:56:35.975 UTC [3810] LOG:  database system is ready to accept connections
+2021-02-09 13:56:36.056 UTC [3819] ERROR:  database "krptkn_dev" already exists
+2021-02-09 13:56:36.056 UTC [3819] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-09 13:56:47.218 UTC [3897] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:47.218 UTC [3897] DETAIL:  Key (url)=(https://stallman.org) already exists.
+2021-02-09 13:56:47.218 UTC [3897] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:47.485 UTC [3904] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:47.485 UTC [3904] DETAIL:  Key (url)=(https://stallman.org/) already exists.
+2021-02-09 13:56:47.485 UTC [3904] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:47.644 UTC [3903] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:47.644 UTC [3903] DETAIL:  Key (url)=(https://stallman.org/archives/polnotes.html) already exists.
+2021-02-09 13:56:47.644 UTC [3903] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:47.737 UTC [3897] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:47.737 UTC [3897] DETAIL:  Key (url)=(https://stallman.org/sayings.html) already exists.
+2021-02-09 13:56:47.737 UTC [3897] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:47.830 UTC [3904] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:47.830 UTC [3904] DETAIL:  Key (url)=(https://stallman.org/extra/personal.html) already exists.
+2021-02-09 13:56:47.830 UTC [3904] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:47.927 UTC [3900] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:47.927 UTC [3900] DETAIL:  Key (url)=(https://stallman.org/rms-lifestyle.html) already exists.
+2021-02-09 13:56:47.927 UTC [3900] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:48.020 UTC [3896] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:48.020 UTC [3896] DETAIL:  Key (url)=(https://stallman.org/gpg.html) already exists.
+2021-02-09 13:56:48.020 UTC [3896] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:48.115 UTC [3902] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 13:56:48.115 UTC [3902] DETAIL:  Key (url)=(https://stallman.org/airlines.html) already exists.
+2021-02-09 13:56:48.115 UTC [3902] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 13:56:48.456 UTC [3810] LOG:  received fast shutdown request
+2021-02-09 13:56:48.466 UTC [3810] LOG:  aborting any active transactions
+2021-02-09 13:56:48.467 UTC [3810] LOG:  background worker "logical replication launcher" (PID 3817) exited with exit code 1
+2021-02-09 13:56:48.467 UTC [3812] LOG:  shutting down
+2021-02-09 13:56:48.483 UTC [3810] LOG:  database system is shut down
+2021-02-09 13:56:55.925 UTC [3971] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-09 13:56:55.929 UTC [3971] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-09 13:56:55.940 UTC [3972] LOG:  database system was shut down at 2021-02-09 13:56:48 UTC
+2021-02-09 13:56:55.943 UTC [3971] LOG:  database system is ready to accept connections
+2021-02-09 13:56:56.023 UTC [3980] ERROR:  database "krptkn_dev" already exists
+2021-02-09 13:56:56.023 UTC [3980] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-09 13:57:31.280 UTC [3971] LOG:  received fast shutdown request
+2021-02-09 13:57:31.291 UTC [3971] LOG:  aborting any active transactions
+2021-02-09 13:57:31.292 UTC [3971] LOG:  background worker "logical replication launcher" (PID 3978) exited with exit code 1
+2021-02-09 13:57:31.292 UTC [3973] LOG:  shutting down
+2021-02-09 13:57:31.308 UTC [3971] LOG:  database system is shut down
+2021-02-09 13:57:50.566 UTC [4221] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-09 13:57:50.569 UTC [4221] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-09 13:57:50.580 UTC [4222] LOG:  database system was shut down at 2021-02-09 13:57:31 UTC
+2021-02-09 13:57:50.583 UTC [4221] LOG:  database system is ready to accept connections
+2021-02-09 13:57:50.665 UTC [4230] ERROR:  database "krptkn_dev" already exists
+2021-02-09 13:57:50.665 UTC [4230] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-09 14:04:22.357 UTC [4601] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:22.357 UTC [4601] DETAIL:  Key (url)=(https://stallman.org) already exists.
+2021-02-09 14:04:22.357 UTC [4601] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:22.620 UTC [4605] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:22.620 UTC [4605] DETAIL:  Key (url)=(https://stallman.org/) already exists.
+2021-02-09 14:04:22.620 UTC [4605] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:22.792 UTC [4604] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:22.792 UTC [4604] DETAIL:  Key (url)=(https://stallman.org/archives/polnotes.html) already exists.
+2021-02-09 14:04:22.792 UTC [4604] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:22.886 UTC [4610] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:22.886 UTC [4610] DETAIL:  Key (url)=(https://stallman.org/sayings.html) already exists.
+2021-02-09 14:04:22.886 UTC [4610] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:22.980 UTC [4602] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:22.980 UTC [4602] DETAIL:  Key (url)=(https://stallman.org/extra/personal.html) already exists.
+2021-02-09 14:04:22.980 UTC [4602] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.079 UTC [4607] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.079 UTC [4607] DETAIL:  Key (url)=(https://stallman.org/rms-lifestyle.html) already exists.
+2021-02-09 14:04:23.079 UTC [4607] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.170 UTC [4606] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.170 UTC [4606] DETAIL:  Key (url)=(https://stallman.org/gpg.html) already exists.
+2021-02-09 14:04:23.170 UTC [4606] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.265 UTC [4601] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.265 UTC [4601] DETAIL:  Key (url)=(https://stallman.org/airlines.html) already exists.
+2021-02-09 14:04:23.265 UTC [4601] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.358 UTC [4603] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.358 UTC [4603] DETAIL:  Key (url)=(https://stallman.org/biographies.html) already exists.
+2021-02-09 14:04:23.358 UTC [4603] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.451 UTC [4609] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.451 UTC [4609] DETAIL:  Key (url)=(https://stallman.org/comics.html) already exists.
+2021-02-09 14:04:23.451 UTC [4609] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.545 UTC [4608] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.545 UTC [4608] DETAIL:  Key (url)=(https://stallman.org/empire.html) already exists.
+2021-02-09 14:04:23.545 UTC [4608] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.638 UTC [4601] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.638 UTC [4601] DETAIL:  Key (url)=(https://stallman.org/media.html) already exists.
+2021-02-09 14:04:23.638 UTC [4601] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.731 UTC [4603] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.731 UTC [4603] DETAIL:  Key (url)=(https://stallman.org/links.html) already exists.
+2021-02-09 14:04:23.731 UTC [4603] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.826 UTC [4609] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.826 UTC [4609] DETAIL:  Key (url)=(https://stallman.org/archive.html) already exists.
+2021-02-09 14:04:23.826 UTC [4609] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:23.924 UTC [4608] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:23.924 UTC [4608] DETAIL:  Key (url)=(https://stallman.org/glossary.html) already exists.
+2021-02-09 14:04:23.924 UTC [4608] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.016 UTC [4610] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.016 UTC [4610] DETAIL:  Key (url)=(https://stallman.org/antiglossary.html) already exists.
+2021-02-09 14:04:24.016 UTC [4610] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.105 UTC [4605] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.105 UTC [4605] DETAIL:  Key (url)=(https://stallman.org/site-search/index.html) already exists.
+2021-02-09 14:04:24.105 UTC [4605] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.198 UTC [4604] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.198 UTC [4604] DETAIL:  Key (url)=(https://stallman.org/airbnb.html) already exists.
+2021-02-09 14:04:24.198 UTC [4604] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.303 UTC [4602] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.303 UTC [4602] DETAIL:  Key (url)=(https://stallman.org/amazon.html) already exists.
+2021-02-09 14:04:24.303 UTC [4602] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.388 UTC [4606] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.388 UTC [4606] DETAIL:  Key (url)=(https://stallman.org/amtrak.html) already exists.
+2021-02-09 14:04:24.388 UTC [4606] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.481 UTC [4607] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.481 UTC [4607] DETAIL:  Key (url)=(https://stallman.org/ancestry.html) already exists.
+2021-02-09 14:04:24.481 UTC [4607] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.588 UTC [4601] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.588 UTC [4601] DETAIL:  Key (url)=(https://stallman.org/apple.html) already exists.
+2021-02-09 14:04:24.588 UTC [4601] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.675 UTC [4602] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.675 UTC [4602] DETAIL:  Key (url)=(https://stallman.org/discord.html) already exists.
+2021-02-09 14:04:24.675 UTC [4602] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.865 UTC [4606] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.865 UTC [4606] DETAIL:  Key (url)=(https://stallman.org/eventbrite.html) already exists.
+2021-02-09 14:04:24.865 UTC [4606] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:24.966 UTC [4607] ERROR:  duplicate key value violates unique constraint "urls_url_index"
+2021-02-09 14:04:24.966 UTC [4607] DETAIL:  Key (url)=(https://stallman.org/evernote.html) already exists.
+2021-02-09 14:04:24.966 UTC [4607] STATEMENT:  INSERT INTO "urls" ("session","type","url","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5) RETURNING "id"
+2021-02-09 14:04:58.686 UTC [4221] LOG:  received fast shutdown request
+2021-02-09 14:04:58.688 UTC [4221] LOG:  aborting any active transactions
+2021-02-09 14:04:58.689 UTC [4221] LOG:  background worker "logical replication launcher" (PID 4228) exited with exit code 1
+2021-02-09 14:04:58.689 UTC [4223] LOG:  shutting down
+2021-02-09 14:04:58.707 UTC [4221] LOG:  database system is shut down
+2021-02-09 14:05:14.719 UTC [4685] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-09 14:05:14.722 UTC [4685] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-09 14:05:14.735 UTC [4686] LOG:  database system was shut down at 2021-02-09 14:04:58 UTC
+2021-02-09 14:05:14.739 UTC [4685] LOG:  database system is ready to accept connections
+2021-02-09 14:05:14.817 UTC [4694] ERROR:  database "krptkn_dev" already exists
+2021-02-09 14:05:14.817 UTC [4694] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-09 14:06:51.102 UTC [4685] LOG:  received fast shutdown request
+2021-02-09 14:06:51.112 UTC [4685] LOG:  aborting any active transactions
+2021-02-09 14:06:51.113 UTC [4685] LOG:  background worker "logical replication launcher" (PID 4692) exited with exit code 1
+2021-02-09 14:06:51.113 UTC [4687] LOG:  shutting down
+2021-02-09 14:06:51.130 UTC [4685] LOG:  database system is shut down

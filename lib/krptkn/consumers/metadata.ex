@@ -20,25 +20,25 @@ defmodule Krptkn.Consumers.Metadata do
   defp extract_metadata(buffer) do
     Krptkn.Api.add(:metadata)
 
-    #Extractor.flat_extract(buffer)
-    #|> Enum.map(fn metadata ->
-    #  metadata
-    #  |> Enum.filter(fn {_, type, _, _, _} ->
-    #    Krptkn.MetadataFilter.interesting_type?(to_string(type))
-    #  end)
-    #  |> Enum.map(fn {_, type, _, _, data} ->
-    #    data = to_string(data)
-    #    if String.starts_with?(data, "\nexif") do
-    #      {to_string(type), Krptkn.PngExtractor.exifstr2map(data)}
-    #    else
-    #      {to_string(type), data}
-    #    end
-    #  end)
-    #  |> Map.new()
-    #end)
-    #|> Enum.filter(fn metadata ->
-    #  map_size(metadata) > 0
-    #end)
+    Extractor.flat_extract(buffer)
+    |> Enum.map(fn metadata ->
+      metadata
+      |> Enum.filter(fn {_, type, _, _, _} ->
+        Krptkn.MetadataFilter.interesting_type?(to_string(type))
+      end)
+      |> Enum.map(fn {_, type, _, _, data} ->
+        data = to_string(data)
+        if String.starts_with?(data, "\nexif") do
+          {to_string(type), Krptkn.PngExtractor.exifstr2map(data)}
+        else
+          {to_string(type), data}
+        end
+      end)
+      |> Map.new()
+    end)
+    |> Enum.filter(fn metadata ->
+      map_size(metadata) > 0
+    end)
 
     []
   end
@@ -46,36 +46,27 @@ defmodule Krptkn.Consumers.Metadata do
   def handle_events(events, _from, state) do
     # Extract the metadata and save it to events
     events = Enum.flat_map(events, fn {type, url, buffer} ->
-      if String.contains?(type, "image") do
-        Exexif.exif_from_jpeg_buffer!(buffer)
-        |> IO.inspect()
-
-        []
-      else
-        # Extract metadata from the file
-        extract_metadata(buffer)
-        |> Enum.uniq()
-        # Remove empty values
-        |> Enum.map(fn metadata ->
-          Enum.filter(metadata, fn {_key, value} ->
-            value != ""
-          end)
-          |> Map.new()
+      # Extract metadata from the file
+      extract_metadata(buffer)
+      |> Enum.uniq()
+      # Remove empty values
+      |> Enum.map(fn metadata ->
+        Enum.filter(metadata, fn {_key, value} ->
+          value != ""
         end)
-        |> Enum.filter(fn metadata ->
-          res = Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
-
-          if res do
-            Krptkn.Api.add(:danger)
-            Krptkn.Api.add_dangerous_metadata(metadata)
-          end
-
-          res
-        end)
-        |> Enum.map(fn metadata ->
-          {:metadata, {type, url, metadata}}
-        end)
-      end
+        |> Map.new()
+      end)
+      |> Enum.filter(fn metadata ->
+        res = Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
+        if res do
+          Krptkn.Api.add(:danger)
+          Krptkn.Api.add_dangerous_metadata(metadata)
+        end
+        res
+      end)
+      |> Enum.map(fn metadata ->
+        {:metadata, {type, url, metadata}}
+      end)
     end)
     # Remove empty maps
     |> Enum.filter(fn {:metadata, {_type, _url, m}} -> not Enum.empty?(m) end)
