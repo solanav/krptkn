@@ -19,6 +19,12 @@ defmodule Krptkn.Distributors.Metadata do
   end
 
   def handle_events(events, _from, producers) do
+    events = Enum.map(events, fn {type, url, body} ->
+      <<header::binary-size(1024), _rest::binary>> = body
+
+      {type, url, header}
+    end)
+
     {:noreply, events, producers}
   end
 end
