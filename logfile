@@ -253,3 +253,21 @@
 2021-02-09 14:06:51.113 UTC [4685] LOG:  background worker "logical replication launcher" (PID 4692) exited with exit code 1
 2021-02-09 14:06:51.113 UTC [4687] LOG:  shutting down
 2021-02-09 14:06:51.130 UTC [4685] LOG:  database system is shut down
+2021-02-11 14:28:19.320 UTC [25351] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-11 14:28:19.323 UTC [25351] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-11 14:28:19.337 UTC [25352] LOG:  database system was shut down at 2021-02-09 14:06:51 UTC
+2021-02-11 14:28:19.345 UTC [25351] LOG:  database system is ready to accept connections
+2021-02-11 14:28:19.422 UTC [25360] ERROR:  database "krptkn_dev" already exists
+2021-02-11 14:28:19.422 UTC [25360] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-11 21:39:04.807 UTC [25351] LOG:  received SIGHUP, reloading configuration files
+2021-02-11 21:39:04.808 UTC [25351] LOG:  received SIGHUP, reloading configuration files
+2021-02-14 16:36:31.646 UTC [3461] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-14 16:36:31.652 UTC [3461] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-14 16:36:31.671 UTC [3462] LOG:  database system was interrupted; last known up at 2021-02-11 14:33:19 UTC
+2021-02-14 16:36:31.918 UTC [3462] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-02-14 16:36:31.923 UTC [3462] LOG:  redo starts at 0/25EF798
+2021-02-14 16:36:31.923 UTC [3462] LOG:  invalid record length at 0/25EF878: wanted 24, got 0
+2021-02-14 16:36:31.923 UTC [3462] LOG:  redo done at 0/25EF840
+2021-02-14 16:36:31.938 UTC [3461] LOG:  database system is ready to accept connections
+2021-02-14 16:36:32.043 UTC [3474] ERROR:  database "krptkn_dev" already exists
+2021-02-14 16:36:32.043 UTC [3474] STATEMENT:  CREATE DATABASE krptkn_dev;

@@ -32,11 +32,11 @@ defmodule Krptkn.MetadataFilter do
     not Enum.member?(boring_types, type)
   end
 
-  #defp extract_emails(string) do
-  #  email_regex = ~r/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/
-  #  Enum.at(Regex.scan(email_regex, string), 0)
-  #  |> Enum.uniq()
-  #end
+  defp extract_emails(string) do
+    email_regex = ~r/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/
+    Enum.at(Regex.scan(email_regex, string), 0)
+    |> Enum.uniq()
+  end
 
   def interesting_data?(string) do
     keywords = [
@@ -56,6 +56,7 @@ defmodule Krptkn.MetadataFilter do
       "name",
       "software",
       "comment",
+      "@"
     ]
 
     String.contains?(string, keywords)

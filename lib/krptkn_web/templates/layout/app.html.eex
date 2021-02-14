@@ -41,16 +41,6 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <div class="row mt-4">
-        <div class="col-md-12">
-          <div class="box shadow mt-4">
-            <a href="<%= Routes.page_path(@conn, :index) %>"><p class="navbar-link">Home</p></a>
-            <p class="navbar-link">|</p>
-            <a href="<%= Routes.info_path(@conn, :index) %>"><p class="navbar-link">Information</p></a>
-          </div>
-        </div>
-      </div>
-
       <%= @inner_content %>
     </main>
   </body>
