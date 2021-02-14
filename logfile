@@ -271,3 +271,8 @@
 2021-02-14 16:36:31.938 UTC [3461] LOG:  database system is ready to accept connections
 2021-02-14 16:36:32.043 UTC [3474] ERROR:  database "krptkn_dev" already exists
 2021-02-14 16:36:32.043 UTC [3474] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-14 17:14:09.170 UTC [3461] LOG:  received fast shutdown request
+2021-02-14 17:14:09.185 UTC [3461] LOG:  aborting any active transactions
+2021-02-14 17:14:09.186 UTC [3461] LOG:  background worker "logical replication launcher" (PID 3468) exited with exit code 1
+2021-02-14 17:14:09.186 UTC [3463] LOG:  shutting down
+2021-02-14 17:14:09.199 UTC [3461] LOG:  database system is shut down
