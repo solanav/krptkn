@@ -15,7 +15,6 @@ defmodule Krptkn.MixProject do
       # Docs
       name: "Кропоткин Framework",
       source_url: "https://github.com/solanav/krptkn",
-      docs: [main: "Кропоткин"]
     ]
   end
 

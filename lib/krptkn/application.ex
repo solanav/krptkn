@@ -1,4 +1,10 @@
 defmodule Krptkn.Application do
+  @moduledoc """
+  This is the main file for Krptkn. Here the spiders and the consumers are launched
+  and linked together. The database connection and everything else necessary for
+  Phoenix is also launched here.
+  """
+
   use Application
 
   require Logger
