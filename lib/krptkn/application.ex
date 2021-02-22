@@ -3,8 +3,6 @@ defmodule Krptkn.Application do
 
   require Logger
 
-  # import ExProf.Macro
-
   def manual_start(initial_url) do
     initial_uri = URI.parse(initial_url)
     initial_urls = [initial_url | Krptkn.Prelaunch.dictionary(initial_uri)]
@@ -96,7 +94,7 @@ defmodule Krptkn.Application do
     HTTPoison.start()
 
     # Start the observer for ets et al
-    :observer.start()
+    # :observer.start()
 
     opts = [
       strategy: :one_for_one,

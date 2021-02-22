@@ -11,7 +11,7 @@ defmodule Krptkn.PngExtractor do
 
   defstruct [:width, :height, :bit_depth, :color_type, :compression, :filter, :interlace, :chunks]
 
-  def exifstr2map(data) do
+  defp exifstr2map(data) do
     data = String.split(data, "\n")
 
     # Get the lenght
@@ -37,7 +37,7 @@ defmodule Krptkn.PngExtractor do
     data
   end
 
-  def ztxt2map(raw_profile_type_exif) do
+  defp ztxt2map(raw_profile_type_exif) do
     # Decompress the field (its zTXt)
     z = :zlib.open()
 
@@ -52,6 +52,20 @@ defmodule Krptkn.PngExtractor do
     exifstr2map(data)
   end
 
+  @doc """
+  Extracts EXIF metadata from a PNG buffer (compressed or not).
+
+  Returns a dictionary with EXIF data.
+
+  ## Examples
+
+      iex> Krptkn.PngExtractor.extract_from_png_buffer(binary_data)
+      %{
+        size: "160x160",
+        "Created By Software": "Adobe Photoshop CC 2017 (Macintosh)",
+      }
+
+  """
   def extract_from_png_buffer(
     <<
       @image_start_marker::64,

@@ -65,6 +65,20 @@ defmodule Krptkn.HtmlParser do
     %{uri | fragment: nil, path: path}
   end
 
+  @doc """
+  Extracts the URLs of a given html page.
+
+  Returns a list of strings.
+
+  ## Examples
+
+      iex> Krptkn.HtmlParser.get_urls("https://stallman.org/index.html", "<html> [...] </html>")
+      [
+        "https://stallman.org/admin/",
+        "https://stallman.org/private-images/",
+      ]
+
+  """
   def get_urls(req_url, string) do
     case Floki.parse_document(string) do
       {:ok, document} ->

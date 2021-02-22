@@ -1,4 +1,19 @@
 defmodule Krptkn.MetadataFilter do
+  @moduledoc """
+  This module provides functions to mark metadata as dangerous or as not interesting.
+  """
+
+  @doc """
+  Checks if a type of metadata is known to be not useful or uninteresting.
+
+  Returns `true` or `false`.
+
+  ## Examples
+
+      iex> Krptkn.MetadataFilter.interesting_type?(string)
+      true
+
+  """
   def interesting_type?(type) do
     boring_types = [
       "mimetype",
@@ -30,16 +45,39 @@ defmodule Krptkn.MetadataFilter do
     ]
 
     not Enum.member?(boring_types, type)
-
-    true
   end
 
+  @doc """
+  Extracts email addresses from a string.
+
+  Returns a list of strings.
+
+  ## Examples
+
+      iex> Krptkn.MetadataFilter.extract_emails(string)
+      [
+        "aasdas.jqoweij@gmail.com",
+        "software_libre@gnu.org",
+      ]
+
+  """
   defp extract_emails(string) do
     email_regex = ~r/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/
     Enum.at(Regex.scan(email_regex, string), 0)
     |> Enum.uniq()
   end
 
+  @doc """
+  Checks if a string contains potentially dangerous or interesting data.
+
+  Returns `true` or `false`.
+
+  ## Examples
+
+      iex> Krptkn.MetadataFilter.interesting_data?(string)
+      true
+
+  """
   def interesting_data?(string) do
     keywords = [
       "password",
@@ -62,7 +100,5 @@ defmodule Krptkn.MetadataFilter do
     ]
 
     String.contains?(string, keywords)
-
-    true
   end
 end

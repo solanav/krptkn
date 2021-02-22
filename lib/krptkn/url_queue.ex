@@ -12,30 +12,94 @@ defmodule Krptkn.UrlQueue do
     GenServer.start_link(__MODULE__, initial_urls, name: __MODULE__)
   end
 
-  # Admin utils
+  @doc """
+  Checks the state of the framework.
 
+  Returns `:running` or `:stopped`.
+
+  ## Examples
+
+      iex> Krptkn.UrlQueue.state()
+      :running
+
+  """
   def state do
     GenServer.call(__MODULE__, :state)
   end
 
+  @doc """
+  Removes all elements from the url queue.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.UrlQueue.clear_queue()
+      :ok
+
+  """
   def clear_queue do
     GenServer.cast(__MODULE__, :clear_queue)
   end
 
+  @doc """
+  Removes all elements from the ETS table that
+  holds the already visited URLs.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.UrlQueue.clear_visited()
+      :ok
+
+  """
   def clear_visited do
     :ets.delete_all_objects(@visited_links)
   end
 
+  @doc """
+  Resumes the URL queue if it was paused.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.UrlQueue.resume()
+      :ok
+
+  """
   def resume do
     GenServer.cast(__MODULE__, :resume)
   end
 
+  @doc """
+  Pauses the URL queue so it will stop serving new URLs.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.UrlQueue.pause()
+      :ok
+
+  """
   def pause do
     GenServer.cast(__MODULE__, :pause)
   end
 
-  # Queue utils
+  @doc """
+  Pushes a URL to the queue and saves it on the ETS table (to
+  avoid visiting twice a URL).
 
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.UrlQueue.push("https://stallman.org/")
+      :ok
+
+  """
   def push(url) do
     if not found?(url) do
       :ets.insert(@visited_links, {url, NaiveDateTime.utc_now()})
@@ -43,6 +107,17 @@ defmodule Krptkn.UrlQueue do
     end
   end
 
+  @doc """
+  Pops a URL from the queue.
+
+  Returns a string with a URL.
+
+  ## Examples
+
+      iex> Krptkn.UrlQueue.pop()
+      "https://stallman.org/"
+
+  """
   def pop do
     GenServer.call(__MODULE__, :pop)
   end

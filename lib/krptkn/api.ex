@@ -13,18 +13,51 @@ defmodule Krptkn.Api do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
-  # Meta stuff
+  @doc """
+  Deletes all data saved on this module (URLs and the database remain intact).
 
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.delete_all()
+      :ok
+
+  """
   def delete_all do
     GenServer.cast(__MODULE__, :clear)
   end
 
-  # Process
+  @doc """
+  Adds a process to the list.
 
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.register_process(__MODULE__, name, self())
+      :ok
+
+  """
   def register_process(module, name, pid) do
     GenServer.cast(__MODULE__, {:register_process, module, name, pid})
   end
 
+  @doc """
+  Returns the list of processes.
+
+  Returns a list of maps.
+
+  ## Examples
+
+      iex> Krptkn.Api.processes()
+      [
+        %{...},
+        %{...},
+        %{...}
+      ]
+
+  """
   def processes do
     GenServer.call(__MODULE__, :processes)
     |> Enum.map(fn {module, name, pid, state} ->
@@ -49,14 +82,34 @@ defmodule Krptkn.Api do
     end)
   end
 
-  # Counts of state
+  @doc """
+  Adds one to a count.
 
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.add(:metadata)
+      :ok
+
+  """
   @spec add(:url | :danger | :metadata | :fmetadata) :: any
   def add(type) do
     type = String.to_atom("#{Atom.to_string(type)}_count")
     GenServer.cast(__MODULE__, {:add, type})
   end
 
+  @doc """
+  Gets the count of an element.
+
+  Returns a number.
+
+  ## Examples
+
+      iex> Krptkn.Api.count(:metadata)
+      132
+
+  """
   @spec count(:url | :danger | :metadata | :fmetadata) :: any
   def count(type) do
     type = String.to_atom("#{Atom.to_string(type)}_count")
@@ -64,6 +117,18 @@ defmodule Krptkn.Api do
   end
 
   @spec count_history(:url | :danger | :metadata | :fmetadata) :: any
+  @doc """
+  Returns history of counts of elements.
+  The interval is one second.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.count_history(:metadata)
+      [123, 145, 167, 178]
+
+  """
   def count_history(type) do
     type = String.to_atom("#{Atom.to_string(type)}_history")
     GenServer.call(__MODULE__, {:history, type}) |> Enum.reverse()
@@ -71,50 +136,123 @@ defmodule Krptkn.Api do
 
   # Dangerous metadata
 
+  @doc """
+  Adds a piece of metadata detected to be dangerous.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.add_dangerous_metadata(%{...})
+      :ok
+
+  """
   def add_dangerous_metadata(metadata) do
     GenServer.cast(__MODULE__, {:add_dangerous_metadata, metadata})
   end
 
+  @doc """
+  Returns the dangerous metadata we have saved until now.
+
+  Returns list of maps.
+
+  ## Examples
+
+      iex> Krptkn.Api.dangerous_metadata()
+      [
+        %{...},
+        %{...},
+        %{...}
+      ]
+
+  """
   def dangerous_metadata do
     GenServer.call(__MODULE__, :dangerous_metadata)
   end
 
-  # Scheduler
-
+  @doc """
+  Returns the scheduler state. To see the structure of the data, this is how it is saved:
+  `:scheduler.utilization(:scheduler.sample_all())`
+  """
   def scheduler do
     GenServer.call(__MODULE__, :scheduler)
   end
 
-  # File Type
+  @doc """
+  Adds a file type to the list.
 
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.add_file_type(file_type)
+      :ok
+
+  """
   def add_file_type(file_type) do
     GenServer.cast(__MODULE__, {:add_file_type, file_type})
   end
 
-  # Response Type
+  @doc """
+  Adds a response type to the list.
 
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.add_response_type(response_type)
+      :ok
+
+  """
   def add_response_type(response_type) do
     GenServer.cast(__MODULE__, {:add_response, response_type})
   end
 
-  # Last URLs
+  @doc """
+  Returns the last URLs that we have visited.
 
+  Returns a list of strings.
+
+  ## Examples
+
+      iex> Krptkn.Api.last_urls()
+      [
+        "https://hexdocs.pm/elixir/GenServer.html",
+        "https://hexdocs.pm/elixir/Kernel.SpecialForms.html",
+        "https://hexdocs.pm/elixir/Atom.html",
+      ]
+
+  """
   def last_urls do
     GenServer.call(__MODULE__, :last_urls)
   end
 
+  @doc """
+  Adds a URL to the last visited URLs list.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.add_last_url("https://stallman.org/")
+      :ok
+
+  """
   def add_last_url(url) do
     GenServer.cast(__MODULE__, {:add_last_url, url})
   end
 
-  # Memory
-
+  @doc """
+  Returns the memory state. To see the structure of the data, this is where it comes from:
+  `:erlang.memory`
+  """
   def memory do
     GenServer.call(__MODULE__, :memory)
   end
 
   # Init
 
+  @doc "State of the API module. This is all the information being saved."
   def empty_state do
     %{
       url_count: 0,
