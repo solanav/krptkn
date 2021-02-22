@@ -10,10 +10,22 @@ from pprint import pprint
 IMAGE_DIR = "images/"
 TEMPLATE_DIR = "templates/"
 OUTPUT_DIR = "output/"
-MAX_FREQ_ITEMS = 10
+
+MAX_FREQ_ITEMS = 15
+MAX_NAME_LEN = 50
 
 def get_domain(full_url):
-  return '/'.join(full_url.split("/")[:3])
+  return full_url.split("/")[2]
+
+def get_last_entry(conn, session):
+  cur = conn.cursor()
+  cur.execute(f"SELECT * FROM public.urls WHERE session='{session}' ORDER BY inserted_at DESC LIMIT 1")
+  return cur.fetchone()
+
+def get_first_entry(conn, session):
+  cur = conn.cursor()
+  cur.execute(f"SELECT * FROM public.urls WHERE session='{session}' ORDER BY inserted_at ASC LIMIT 1")
+  return cur.fetchone()
 
 def get_metadata(conn, session):
   cur = conn.cursor()
@@ -22,8 +34,14 @@ def get_metadata(conn, session):
 
 def freq_plot(output_name, data, title, xlabel):
   tmp_c = dict(Counter(data))
-  x = list(tmp_c.keys())
-  y = list(tmp_c.values())
+  tmp_c = sorted(tmp_c.items(), key=lambda item: item[1])[-MAX_FREQ_ITEMS:]
+
+  x = []
+  y = []
+  for xx, yy in tmp_c:
+    x.append(xx[:MAX_NAME_LEN])
+    y.append(yy)
+
   plt.figure(figsize = (10, 5))
   plt.barh(x, y, align='center', height=.8)
   plt.xlabel(title)
@@ -66,18 +84,30 @@ def metadata_analyze(raw_metadata):
       "value": k,
       "freq": freq
     })
-  
+
   for k, freq in Counter(mk).items():
     o_mk.append({
       "value": k,
       "freq": freq
     })
-  
+
   for k, freq in Counter(mv).items():
     o_mv.append({
       "value": k,
       "freq": freq
     })
+
+  o_subdomains.sort(reverse=True, key=lambda x: x["freq"])
+  o_subdomains = o_subdomains[:10]
+
+  o_types.sort(reverse=True, key=lambda x: x["freq"])
+  o_types = o_types[:10]
+
+  o_mk.sort(reverse=True, key=lambda x: x["freq"])
+  o_mk = o_mk[:10]
+
+  o_mv.sort(reverse=True, key=lambda x: x["freq"])
+  o_mv = o_mv[:10]
 
   # Domain freq plot
   freq_plot(
@@ -93,7 +123,7 @@ def metadata_analyze(raw_metadata):
     "Frequency",
     "File type frequency",
   )
-  
+
   freq_plot(
     "mk_freq.png",
     mk,
@@ -110,18 +140,27 @@ def metadata_analyze(raw_metadata):
 
   return o_subdomains, o_types, o_mk, o_mv
 
-def generate_report(output_file, data):
+def generate_report(conn, session, output_file, data):
   subdomains, types, mk, mv = data
+
+  first_entry = list(get_first_entry(conn, session))
 
   doc = DocxTemplate(TEMPLATE_DIR + "report_template.docx")
   context = {
-    "session_name": "Debugging",
+    "session_name": session,
     "current_date": datetime.now().strftime("%I:%M%p on %B %d, %Y"),
     "subdomains": subdomains[:MAX_FREQ_ITEMS],
     "types": types[:MAX_FREQ_ITEMS],
     "mk": mk[:MAX_FREQ_ITEMS],
     "mv": mv[:MAX_FREQ_ITEMS],
-    
+
+    # Header info
+    "base_domain": get_domain(first_entry[2]),
+    "starting_url": first_entry[2],
+    "danger_level": "76%",
+    "first_entry": str(first_entry[4]),
+    "last_entry": str(get_last_entry(conn, session)[4]),
+
     # Images
     "domainf_image": InlineImage(doc, 'images/subdomains_freq.png', Inches(6.5)),
     "typef_image": InlineImage(doc, 'images/types_freq.png', Inches(6.5)),
@@ -134,7 +173,7 @@ def generate_report(output_file, data):
 
 def main():
   # Session ID we want to analyze
-  session = "debugging_001"
+  session = "Stallman.org"
 
   # Connect to the database
   conn = psycopg2.connect(
@@ -150,7 +189,7 @@ def main():
   metadata_analysis = metadata_analyze(raw_metadata)
 
   # Save the report
-  generate_report(OUTPUT_DIR + "report.docx", metadata_analysis)
+  generate_report(conn, session, OUTPUT_DIR + "report.docx", metadata_analysis)
 
 if __name__ == "__main__":
   main()

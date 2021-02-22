@@ -30,6 +30,8 @@ defmodule Krptkn.MetadataFilter do
     ]
 
     not Enum.member?(boring_types, type)
+
+    true
   end
 
   defp extract_emails(string) do
@@ -60,5 +62,7 @@ defmodule Krptkn.MetadataFilter do
     ]
 
     String.contains?(string, keywords)
+
+    true
   end
 end

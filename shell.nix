@@ -31,9 +31,9 @@ pkgs.mkShell {
         export EXTRACTOR_PATH=${pkgs.libextractor.outPath}/lib
         export LD_LIBRARY_PATH=$EXTRACTOR_PATH
 
-        initdb -D .tmp/mydb --username=krptkn-dev --pwfile=$PWD/config/pgpass
-        pg_ctl -D .tmp/mydb -l logfile -o "--unix_socket_directories='$PWD'" start
-        createdb krptkn_dev -h $PWD -U krptkn-dev
+        #initdb -D .tmp/mydb --username=krptkn-dev --pwfile=$PWD/config/pgpass
+        #pg_ctl -D .tmp/mydb -l logfile -o "--unix_socket_directories='$PWD'" start
+        #createdb krptkn_dev -h $PWD -U krptkn-dev
 
         echo ========================================
         echo == Welcome to Krptkn Development Shell

@@ -39,8 +39,6 @@ defmodule Krptkn.Consumers.Metadata do
     |> Enum.filter(fn metadata ->
       map_size(metadata) > 0
     end)
-
-    []
   end
 
   def handle_events(events, _from, state) do

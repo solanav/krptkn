@@ -12,11 +12,11 @@ config :krptkn,
 
 # Configure the application
 config :krptkn, Krptkn.Application,
-  session_name: "debugging_001",
-  producers: 1,
-  url_consumers: 1,
+  session_name: "Stallman.org",
+  producers: 32,
+  url_consumers: 32,
   metadata_consumers: 1,
-  db_consumers: 1
+  db_consumers: 8
 
 # Configure the HTML parser
 config :floki, :html_parser, Floki.HTMLParser.FastHtml

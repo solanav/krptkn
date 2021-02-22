@@ -276,3 +276,40 @@
 2021-02-14 17:14:09.186 UTC [3461] LOG:  background worker "logical replication launcher" (PID 3468) exited with exit code 1
 2021-02-14 17:14:09.186 UTC [3463] LOG:  shutting down
 2021-02-14 17:14:09.199 UTC [3461] LOG:  database system is shut down
+2021-02-14 17:27:44.343 UTC [6194] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-14 17:27:44.347 UTC [6194] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-14 17:27:44.361 UTC [6195] LOG:  database system was shut down at 2021-02-14 17:14:09 UTC
+2021-02-14 17:27:44.366 UTC [6194] LOG:  database system is ready to accept connections
+2021-02-14 17:27:44.444 UTC [6203] ERROR:  database "krptkn_dev" already exists
+2021-02-14 17:27:44.444 UTC [6203] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-14 17:44:12.603 UTC [321] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-14 17:44:12.607 UTC [321] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-14 17:44:12.621 UTC [322] LOG:  database system was interrupted; last known up at 2021-02-14 17:32:44 UTC
+2021-02-14 17:44:12.848 UTC [322] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-02-14 17:44:12.851 UTC [322] LOG:  redo starts at 0/26C3650
+2021-02-14 17:44:12.851 UTC [322] LOG:  invalid record length at 0/26C3730: wanted 24, got 0
+2021-02-14 17:44:12.851 UTC [322] LOG:  redo done at 0/26C36F8
+2021-02-14 17:44:12.868 UTC [321] LOG:  database system is ready to accept connections
+2021-02-14 17:44:12.905 UTC [330] ERROR:  database "krptkn_dev" already exists
+2021-02-14 17:44:12.905 UTC [330] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-14 17:54:08.878 UTC [321] LOG:  received fast shutdown request
+2021-02-14 17:54:08.880 UTC [321] LOG:  aborting any active transactions
+2021-02-14 17:54:08.881 UTC [321] LOG:  background worker "logical replication launcher" (PID 328) exited with exit code 1
+2021-02-14 17:54:08.881 UTC [323] LOG:  shutting down
+2021-02-14 17:54:08.894 UTC [321] LOG:  database system is shut down
+2021-02-14 18:58:27.374 UTC [574] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-02-14 18:58:27.377 UTC [574] LOG:  listening on Unix socket "/home/solanav/krptkn/.s.PGSQL.5432"
+2021-02-14 18:58:27.391 UTC [575] LOG:  database system was shut down at 2021-02-14 17:54:08 UTC
+2021-02-14 18:58:27.400 UTC [574] LOG:  database system is ready to accept connections
+2021-02-14 18:58:27.480 UTC [583] ERROR:  database "krptkn_dev" already exists
+2021-02-14 18:58:27.480 UTC [583] STATEMENT:  CREATE DATABASE krptkn_dev;
+2021-02-14 18:59:27.469 UTC [580] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No such file or directory
+2021-02-14 18:59:27.495 UTC [574] LOG:  could not open file "postmaster.pid": No such file or directory
+2021-02-14 18:59:27.495 UTC [574] LOG:  performing immediate shutdown because data directory lock file is invalid
+2021-02-14 18:59:27.495 UTC [574] LOG:  received immediate shutdown request
+2021-02-14 18:59:27.495 UTC [574] LOG:  could not open file "postmaster.pid": No such file or directory
+2021-02-14 18:59:27.495 UTC [579] WARNING:  terminating connection because of crash of another server process
+2021-02-14 18:59:27.495 UTC [579] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-02-14 18:59:27.495 UTC [579] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-02-14 18:59:27.495 UTC [580] LOG:  could not open temporary statistics file "pg_stat/global.tmp": No such file or directory
+2021-02-14 18:59:27.497 UTC [574] LOG:  database system is shut down
