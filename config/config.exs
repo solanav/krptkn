@@ -12,7 +12,7 @@ config :krptkn,
 
 # Configure the application
 config :krptkn, Krptkn.Application,
-  session_name: "Stallman.org",
+  session_name: "real_stallman",
   producers: 32,
   url_consumers: 32,
   metadata_consumers: 1,

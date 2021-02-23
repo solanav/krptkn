@@ -27,3 +27,8 @@ class Database():
         cur = self.conn.cursor()
         cur.execute(f"SELECT * FROM metadata WHERE session='{session}'")
         return cur.fetchall()
+
+    def get_urls(self, session):
+        cur = self.conn.cursor()
+        cur.execute(f"SELECT url FROM urls WHERE session='{session}'")
+        return [u[0] for u in cur.fetchall()]

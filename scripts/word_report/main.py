@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
+import networkx as nx
 import argparse
 
+from graphviz import Digraph
 from database import Database
 from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Inches
@@ -13,6 +15,43 @@ OUTPUT_DIR = "output/"
 
 MAX_FREQ_ITEMS = 15
 MAX_NAME_LEN = 50
+
+def url_level(url):
+  s = url.split("/")
+  if s[-1] == "":
+    return len(s) - 4
+  return len(s) - 3
+
+def url_tree(db, session, domain):
+  urls = []
+  for u in db.get_urls(session):
+    if get_domain(u) == domain:
+      urls.append((url_level(u), u.replace(":", ";"), u.split("/")[2:]))
+
+  dot = Digraph(comment="The Round Table")
+  g = nx.DiGraph()
+  dot.format = "png"
+
+  nodes = []
+  for level, u, levels in urls:
+    if level > 1:
+      continue
+    print(level, u, levels)
+    nodes.append(u)
+    dot.node(u, u.replace(";", ":"))
+  g.add_nodes_from(nodes)
+
+  # Level 0 to level 1
+  for levelx, ux, levelsx in urls:
+    for levely, uy, levelsy in urls:
+      if levelx == levely - 1 and levelx < levely and levelsx[levelx] == levelsy[levelx]:
+        g.add_edge(ux, uy)
+        dot.edge(ux, uy)
+
+  nx.draw(g, with_labels=True)
+  plt.draw()
+  plt.savefig(IMAGE_DIR + "testing")
+  #dot.render("url_tree")
 
 def get_domain(full_url):
   return full_url.split("/")[2]
@@ -28,7 +67,7 @@ def freq_plot(output_name, data, title, xlabel):
     y.append(yy)
 
   plt.figure(figsize = (10, 5))
-  plt.barh(x, y, align='center', height=.8)
+  plt.barh(x, y, align="center", height=.8)
   plt.xlabel(title)
   plt.title(xlabel)
   plt.tight_layout()
@@ -94,10 +133,10 @@ def generate_report(db, session, output_file, data):
     "last_entry": str(db.get_last_entry(session)[4]),
 
     # Images
-    "domainf_image": InlineImage(doc, 'images/subdomains_freq.png', Inches(6.5)),
-    "typef_image": InlineImage(doc, 'images/types_freq.png', Inches(6.5)),
-    "mkf_image": InlineImage(doc, 'images/mk_freq.png', Inches(6.5)),
-    "mvf_image": InlineImage(doc, 'images/mv_freq.png', Inches(6.5)),
+    "domainf_image": InlineImage(doc, "images/subdomains_freq.png", Inches(6.5)),
+    "typef_image": InlineImage(doc, "images/types_freq.png", Inches(6.5)),
+    "mkf_image": InlineImage(doc, "images/mk_freq.png", Inches(6.5)),
+    "mvf_image": InlineImage(doc, "images/mv_freq.png", Inches(6.5)),
   }
 
   doc.render(context)
@@ -105,13 +144,15 @@ def generate_report(db, session, output_file, data):
 
 def main():
   # Parse arguments
-  parser = argparse.ArgumentParser(description='Generate metadata report for the given session.')
-  parser.add_argument('session', type=str, help='name of the session')
+  parser = argparse.ArgumentParser(description="Generate metadata report for the given session.")
+  parser.add_argument("session", type=str, help="name of the session")
   args = parser.parse_args()
   session = args.session
 
   # Get metadata from database and analyze it
   db = Database()
+  #url_tree(db, session, "stallman.org")
+
   raw_metadata = db.get_metadata(session)
   metadata_analysis = metadata_analyze(raw_metadata)
 

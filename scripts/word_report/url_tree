@@ -1,0 +1,418 @@
+// The Round Table
+digraph {
+	"https;//stallman.org/quebec.html" [label="https://stallman.org/quebec.html"]
+	"https;//stallman.org/bolzaneto.html" [label="https://stallman.org/bolzaneto.html"]
+	"https;//stallman.org/poppycock.html" [label="https://stallman.org/poppycock.html"]
+	"https;//stallman.org/blair.html" [label="https://stallman.org/blair.html"]
+	"https;//stallman.org/yuen-c.html" [label="https://stallman.org/yuen-c.html"]
+	"https;//stallman.org" [label="https://stallman.org"]
+	"https;//stallman.org/ancestry.html" [label="https://stallman.org/ancestry.html"]
+	"https;//stallman.org/salsanlabs-method.html" [label="https://stallman.org/salsanlabs-method.html"]
+	"https;//stallman.org/comics.html" [label="https://stallman.org/comics.html"]
+	"https;//stallman.org/Bob-Chassell/" [label="https://stallman.org/Bob-Chassell/"]
+	"https;//stallman.org/portuguese-puns.html" [label="https://stallman.org/portuguese-puns.html"]
+	"https;//stallman.org/apple.html" [label="https://stallman.org/apple.html"]
+	"https;//stallman.org/gofundme.html" [label="https://stallman.org/gofundme.html"]
+	"https;//stallman.org/stopping-terrorists.html" [label="https://stallman.org/stopping-terrorists.html"]
+	"https;//stallman.org/watch-over-me.html" [label="https://stallman.org/watch-over-me.html"]
+	"https;//stallman.org/chavez.html" [label="https://stallman.org/chavez.html"]
+	"https;//stallman.org/millions.html" [label="https://stallman.org/millions.html"]
+	"https;//stallman.org/twitter.html" [label="https://stallman.org/twitter.html"]
+	"https;//stallman.org/uber.html" [label="https://stallman.org/uber.html"]
+	"https;//stallman.org/evoting.html" [label="https://stallman.org/evoting.html"]
+	"https;//stallman.org/business-supremacy-treaties.html" [label="https://stallman.org/business-supremacy-treaties.html"]
+	"https;//stallman.org/civillibertiesminute/" [label="https://stallman.org/civillibertiesminute/"]
+	"https;//stallman.org/rms-lifestyle.html" [label="https://stallman.org/rms-lifestyle.html"]
+	"https;//stallman.org/biographies.html" [label="https://stallman.org/biographies.html"]
+	"https;//stallman.org/why-harry-harry.html" [label="https://stallman.org/why-harry-harry.html"]
+	"https;//stallman.org/microsoft.html" [label="https://stallman.org/microsoft.html"]
+	"https;//stallman.org/spotify.html" [label="https://stallman.org/spotify.html"]
+	"https;//stallman.org/something-to-fear.html" [label="https://stallman.org/something-to-fear.html"]
+	"https;//stallman.org/facebook-presence.html" [label="https://stallman.org/facebook-presence.html"]
+	"https;//stallman.org/enslaved-workers.html" [label="https://stallman.org/enslaved-workers.html"]
+	"https;//stallman.org/ex-boyfriends-list.html" [label="https://stallman.org/ex-boyfriends-list.html"]
+	"https;//stallman.org/saint.html" [label="https://stallman.org/saint.html"]
+	"https;//stallman.org/puns.html" [label="https://stallman.org/puns.html"]
+	"https;//stallman.org/pearlharbor.html" [label="https://stallman.org/pearlharbor.html"]
+	"https;//stallman.org/eventbrite.html" [label="https://stallman.org/eventbrite.html"]
+	"https;//stallman.org/jinwicked-rms.html" [label="https://stallman.org/jinwicked-rms.html"]
+	"https;//stallman.org/gpg.html" [label="https://stallman.org/gpg.html"]
+	"https;//stallman.org/home.html" [label="https://stallman.org/home.html"]
+	"https;//stallman.org/knock.html" [label="https://stallman.org/knock.html"]
+	"https;//stallman.org/solidarity-economy.pt.html" [label="https://stallman.org/solidarity-economy.pt.html"]
+	"https;//stallman.org/facebook-presence.fr.html" [label="https://stallman.org/facebook-presence.fr.html"]
+	"https;//stallman.org/genoa-experience.html" [label="https://stallman.org/genoa-experience.html"]
+	"https;//stallman.org/missile-defense.html" [label="https://stallman.org/missile-defense.html"]
+	"https;//stallman.org/uber" [label="https://stallman.org/uber"]
+	"https;//stallman.org/netflix.html" [label="https://stallman.org/netflix.html"]
+	"https;//stallman.org/skype.html" [label="https://stallman.org/skype.html"]
+	"https;//stallman.org/discord.html" [label="https://stallman.org/discord.html"]
+	"https;//stallman.org/olympics.html" [label="https://stallman.org/olympics.html"]
+	"https;//stallman.org/facebook.html" [label="https://stallman.org/facebook.html"]
+	"https;//stallman.org/repairing-links.html" [label="https://stallman.org/repairing-links.html"]
+	"https;//stallman.org/futon-physics.html" [label="https://stallman.org/futon-physics.html"]
+	"https;//stallman.org/linguistic-swifties.html" [label="https://stallman.org/linguistic-swifties.html"]
+	"https;//stallman.org/huns-writs.html" [label="https://stallman.org/huns-writs.html"]
+	"https;//stallman.org/airlines-complete.html" [label="https://stallman.org/airlines-complete.html"]
+	"https;//stallman.org/" [label="https://stallman.org/"]
+	"https;//stallman.org/amazon.html" [label="https://stallman.org/amazon.html"]
+	"https;//stallman.org/amtrak.html" [label="https://stallman.org/amtrak.html"]
+	"https;//stallman.org/we-three-laws.html" [label="https://stallman.org/we-three-laws.html"]
+	"https;//stallman.org/solidarity-economy.es.html" [label="https://stallman.org/solidarity-economy.es.html"]
+	"https;//stallman.org/isds" [label="https://stallman.org/isds"]
+	"https;//stallman.org/war-victim.html" [label="https://stallman.org/war-victim.html"]
+	"https;//stallman.org/harry2.html" [label="https://stallman.org/harry2.html"]
+	"https;//stallman.org/grubhub.html" [label="https://stallman.org/grubhub.html"]
+	"https;//stallman.org/patreon.html" [label="https://stallman.org/patreon.html"]
+	"https;//stallman.org/airlines.html" [label="https://stallman.org/airlines.html"]
+	"https;//stallman.org/antiglossary.html" [label="https://stallman.org/antiglossary.html"]
+	"https;//stallman.org/internet-music.html" [label="https://stallman.org/internet-music.html"]
+	"https;//stallman.org/falkvinge.html" [label="https://stallman.org/falkvinge.html"]
+	"https;//stallman.org/longterm.html" [label="https://stallman.org/longterm.html"]
+	"https;//stallman.org/glossary.html" [label="https://stallman.org/glossary.html"]
+	"https;//stallman.org/spanish-puns.html" [label="https://stallman.org/spanish-puns.html"]
+	"https;//stallman.org/editorfather.html" [label="https://stallman.org/editorfather.html"]
+	"https;//stallman.org/sinister-publisher.html" [label="https://stallman.org/sinister-publisher.html"]
+	"https;//stallman.org/trance-pacific-partnership.html" [label="https://stallman.org/trance-pacific-partnership.html"]
+	"https;//stallman.org/intel.html" [label="https://stallman.org/intel.html"]
+	"https;//stallman.org/media.html" [label="https://stallman.org/media.html"]
+	"https;//stallman.org/ticketmaster.html" [label="https://stallman.org/ticketmaster.html"]
+	"https;//stallman.org/linkpolicy.html" [label="https://stallman.org/linkpolicy.html"]
+	"https;//stallman.org/quotes.html" [label="https://stallman.org/quotes.html"]
+	"https;//stallman.org/there-ought-to-be-a-law.html" [label="https://stallman.org/there-ought-to-be-a-law.html"]
+	"http;//stallman.org/grav-mass.html" [label="http://stallman.org/grav-mass.html"]
+	"https;//stallman.org/internet-voting.html" [label="https://stallman.org/internet-voting.html"]
+	"https;//stallman.org/doxing.html" [label="https://stallman.org/doxing.html"]
+	"https;//stallman.org/german-puns.html" [label="https://stallman.org/german-puns.html"]
+	"https;//stallman.org/linkedin.html" [label="https://stallman.org/linkedin.html"]
+	"https;//stallman.org/policestate.html" [label="https://stallman.org/policestate.html"]
+	"https;//stallman.org/paris-police.html" [label="https://stallman.org/paris-police.html"]
+	"https;//stallman.org/evernote.html" [label="https://stallman.org/evernote.html"]
+	"https;//stallman.org/lyft.html" [label="https://stallman.org/lyft.html"]
+	"https;//stallman.org/wendys.html" [label="https://stallman.org/wendys.html"]
+	"https;//stallman.org/guantanamero.html" [label="https://stallman.org/guantanamero.html"]
+	"https;//stallman.org/republican-election-rigging.html" [label="https://stallman.org/republican-election-rigging.html"]
+	"https;//stallman.org/bad-border-policy-countries.html" [label="https://stallman.org/bad-border-policy-countries.html"]
+	"https;//stallman.org/stay-away-countries.html" [label="https://stallman.org/stay-away-countries.html"]
+	"https;//stallman.org/doggerel.html" [label="https://stallman.org/doggerel.html"]
+	"https;//stallman.org/skype.es.html" [label="https://stallman.org/skype.es.html"]
+	"https;//stallman.org/sayings.html" [label="https://stallman.org/sayings.html"]
+	"https;//stallman.org/facebook2.html" [label="https://stallman.org/facebook2.html"]
+	"https;//stallman.org/yuen-b.html" [label="https://stallman.org/yuen-b.html"]
+	"https;//stallman.org/yuen-a.html" [label="https://stallman.org/yuen-a.html"]
+	"https;//stallman.org/pay-toilets.html" [label="https://stallman.org/pay-toilets.html"]
+	"https;//stallman.org/zoom.html" [label="https://stallman.org/zoom.html"]
+	"https;//stallman.org/harry-potter.html" [label="https://stallman.org/harry-potter.html"]
+	"https;//stallman.org/solidarity-economy.html" [label="https://stallman.org/solidarity-economy.html"]
+	"https;//stallman.org/italian-puns.html" [label="https://stallman.org/italian-puns.html"]
+	"https;//stallman.org/malentendido-gracioso.html" [label="https://stallman.org/malentendido-gracioso.html"]
+	"https;//stallman.org/solidarity-economy.fr.html" [label="https://stallman.org/solidarity-economy.fr.html"]
+	"https;//stallman.org/index.html" [label="https://stallman.org/index.html"]
+	"https;//stallman.org/slack.html" [label="https://stallman.org/slack.html"]
+	"https;//stallman.org/whatsapp.html" [label="https://stallman.org/whatsapp.html"]
+	"https;//stallman.org/salsalabs-method.html" [label="https://stallman.org/salsalabs-method.html"]
+	"https;//stallman.org/food-delivery.html" [label="https://stallman.org/food-delivery.html"]
+	"https;//stallman.org/bad-connection-airports.html" [label="https://stallman.org/bad-connection-airports.html"]
+	"https;//stallman.org/genoa.html" [label="https://stallman.org/genoa.html"]
+	"https;//stallman.org/google.html" [label="https://stallman.org/google.html"]
+	"https;//stallman.org/french-puns.html" [label="https://stallman.org/french-puns.html"]
+	"https;//stallman.org/airbnb.html" [label="https://stallman.org/airbnb.html"]
+	"https;//stallman.org/empire.html" [label="https://stallman.org/empire.html"]
+	"https;//stallman.org/human-rights-us-china.html" [label="https://stallman.org/human-rights-us-china.html"]
+	"https;//stallman.org/archive.html" [label="https://stallman.org/archive.html"]
+	"https;//stallman.org/talks.html" [label="https://stallman.org/talks.html"]
+	"https;//stallman.org/non-oppressive-ebooks.html" [label="https://stallman.org/non-oppressive-ebooks.html"]
+	"https;//stallman.org/vaasa.html" [label="https://stallman.org/vaasa.html"]
+	"https;//stallman.org/favorite-photos.html" [label="https://stallman.org/favorite-photos.html"]
+	"https;//stallman.org/rms-assange-snowden.jpg" [label="https://stallman.org/rms-assange-snowden.jpg"]
+	"https;//stallman.org/links.html" [label="https://stallman.org/links.html"]
+	"https;//stallman.org/watchmen.html" [label="https://stallman.org/watchmen.html"]
+	"https;//stallman.org/bustfund.html" [label="https://stallman.org/bustfund.html"]
+	"https;//stallman.org/colombian-free-press.html" [label="https://stallman.org/colombian-free-press.html"]
+	"https;//stallman.org/solidarity-economy.it.html" [label="https://stallman.org/solidarity-economy.it.html"]
+	"https;//stallman.org/good-fences.html" [label="https://stallman.org/good-fences.html"]
+	"https;//stallman.org/moffat.html" [label="https://stallman.org/moffat.html"]
+	"https;//stallman.org/military-courts.html" [label="https://stallman.org/military-courts.html"]
+	"https;//stallman.org/photos" [label="https://stallman.org/photos"]
+	"https;//stallman.org/photos/" [label="https://stallman.org/photos/"]
+	"https;//stallman.org" -> "https;//stallman.org/quebec.html"
+	"https;//stallman.org" -> "https;//stallman.org/bolzaneto.html"
+	"https;//stallman.org" -> "https;//stallman.org/poppycock.html"
+	"https;//stallman.org" -> "https;//stallman.org/blair.html"
+	"https;//stallman.org" -> "https;//stallman.org/yuen-c.html"
+	"https;//stallman.org" -> "https;//stallman.org/ancestry.html"
+	"https;//stallman.org" -> "https;//stallman.org/salsanlabs-method.html"
+	"https;//stallman.org" -> "https;//stallman.org/comics.html"
+	"https;//stallman.org" -> "https;//stallman.org/Bob-Chassell/"
+	"https;//stallman.org" -> "https;//stallman.org/portuguese-puns.html"
+	"https;//stallman.org" -> "https;//stallman.org/apple.html"
+	"https;//stallman.org" -> "https;//stallman.org/gofundme.html"
+	"https;//stallman.org" -> "https;//stallman.org/stopping-terrorists.html"
+	"https;//stallman.org" -> "https;//stallman.org/watch-over-me.html"
+	"https;//stallman.org" -> "https;//stallman.org/chavez.html"
+	"https;//stallman.org" -> "https;//stallman.org/millions.html"
+	"https;//stallman.org" -> "https;//stallman.org/twitter.html"
+	"https;//stallman.org" -> "https;//stallman.org/uber.html"
+	"https;//stallman.org" -> "https;//stallman.org/evoting.html"
+	"https;//stallman.org" -> "https;//stallman.org/business-supremacy-treaties.html"
+	"https;//stallman.org" -> "https;//stallman.org/civillibertiesminute/"
+	"https;//stallman.org" -> "https;//stallman.org/rms-lifestyle.html"
+	"https;//stallman.org" -> "https;//stallman.org/biographies.html"
+	"https;//stallman.org" -> "https;//stallman.org/why-harry-harry.html"
+	"https;//stallman.org" -> "https;//stallman.org/microsoft.html"
+	"https;//stallman.org" -> "https;//stallman.org/spotify.html"
+	"https;//stallman.org" -> "https;//stallman.org/something-to-fear.html"
+	"https;//stallman.org" -> "https;//stallman.org/facebook-presence.html"
+	"https;//stallman.org" -> "https;//stallman.org/enslaved-workers.html"
+	"https;//stallman.org" -> "https;//stallman.org/ex-boyfriends-list.html"
+	"https;//stallman.org" -> "https;//stallman.org/saint.html"
+	"https;//stallman.org" -> "https;//stallman.org/puns.html"
+	"https;//stallman.org" -> "https;//stallman.org/pearlharbor.html"
+	"https;//stallman.org" -> "https;//stallman.org/eventbrite.html"
+	"https;//stallman.org" -> "https;//stallman.org/jinwicked-rms.html"
+	"https;//stallman.org" -> "https;//stallman.org/gpg.html"
+	"https;//stallman.org" -> "https;//stallman.org/home.html"
+	"https;//stallman.org" -> "https;//stallman.org/knock.html"
+	"https;//stallman.org" -> "https;//stallman.org/solidarity-economy.pt.html"
+	"https;//stallman.org" -> "https;//stallman.org/facebook-presence.fr.html"
+	"https;//stallman.org" -> "https;//stallman.org/genoa-experience.html"
+	"https;//stallman.org" -> "https;//stallman.org/missile-defense.html"
+	"https;//stallman.org" -> "https;//stallman.org/uber"
+	"https;//stallman.org" -> "https;//stallman.org/netflix.html"
+	"https;//stallman.org" -> "https;//stallman.org/skype.html"
+	"https;//stallman.org" -> "https;//stallman.org/discord.html"
+	"https;//stallman.org" -> "https;//stallman.org/olympics.html"
+	"https;//stallman.org" -> "https;//stallman.org/facebook.html"
+	"https;//stallman.org" -> "https;//stallman.org/repairing-links.html"
+	"https;//stallman.org" -> "https;//stallman.org/futon-physics.html"
+	"https;//stallman.org" -> "https;//stallman.org/linguistic-swifties.html"
+	"https;//stallman.org" -> "https;//stallman.org/huns-writs.html"
+	"https;//stallman.org" -> "https;//stallman.org/airlines-complete.html"
+	"https;//stallman.org" -> "https;//stallman.org/amazon.html"
+	"https;//stallman.org" -> "https;//stallman.org/amtrak.html"
+	"https;//stallman.org" -> "https;//stallman.org/we-three-laws.html"
+	"https;//stallman.org" -> "https;//stallman.org/solidarity-economy.es.html"
+	"https;//stallman.org" -> "https;//stallman.org/isds"
+	"https;//stallman.org" -> "https;//stallman.org/war-victim.html"
+	"https;//stallman.org" -> "https;//stallman.org/harry2.html"
+	"https;//stallman.org" -> "https;//stallman.org/grubhub.html"
+	"https;//stallman.org" -> "https;//stallman.org/patreon.html"
+	"https;//stallman.org" -> "https;//stallman.org/airlines.html"
+	"https;//stallman.org" -> "https;//stallman.org/antiglossary.html"
+	"https;//stallman.org" -> "https;//stallman.org/internet-music.html"
+	"https;//stallman.org" -> "https;//stallman.org/falkvinge.html"
+	"https;//stallman.org" -> "https;//stallman.org/longterm.html"
+	"https;//stallman.org" -> "https;//stallman.org/glossary.html"
+	"https;//stallman.org" -> "https;//stallman.org/spanish-puns.html"
+	"https;//stallman.org" -> "https;//stallman.org/editorfather.html"
+	"https;//stallman.org" -> "https;//stallman.org/sinister-publisher.html"
+	"https;//stallman.org" -> "https;//stallman.org/trance-pacific-partnership.html"
+	"https;//stallman.org" -> "https;//stallman.org/intel.html"
+	"https;//stallman.org" -> "https;//stallman.org/media.html"
+	"https;//stallman.org" -> "https;//stallman.org/ticketmaster.html"
+	"https;//stallman.org" -> "https;//stallman.org/linkpolicy.html"
+	"https;//stallman.org" -> "https;//stallman.org/quotes.html"
+	"https;//stallman.org" -> "https;//stallman.org/there-ought-to-be-a-law.html"
+	"https;//stallman.org" -> "http;//stallman.org/grav-mass.html"
+	"https;//stallman.org" -> "https;//stallman.org/internet-voting.html"
+	"https;//stallman.org" -> "https;//stallman.org/doxing.html"
+	"https;//stallman.org" -> "https;//stallman.org/german-puns.html"
+	"https;//stallman.org" -> "https;//stallman.org/linkedin.html"
+	"https;//stallman.org" -> "https;//stallman.org/policestate.html"
+	"https;//stallman.org" -> "https;//stallman.org/paris-police.html"
+	"https;//stallman.org" -> "https;//stallman.org/evernote.html"
+	"https;//stallman.org" -> "https;//stallman.org/lyft.html"
+	"https;//stallman.org" -> "https;//stallman.org/wendys.html"
+	"https;//stallman.org" -> "https;//stallman.org/guantanamero.html"
+	"https;//stallman.org" -> "https;//stallman.org/republican-election-rigging.html"
+	"https;//stallman.org" -> "https;//stallman.org/bad-border-policy-countries.html"
+	"https;//stallman.org" -> "https;//stallman.org/stay-away-countries.html"
+	"https;//stallman.org" -> "https;//stallman.org/doggerel.html"
+	"https;//stallman.org" -> "https;//stallman.org/skype.es.html"
+	"https;//stallman.org" -> "https;//stallman.org/sayings.html"
+	"https;//stallman.org" -> "https;//stallman.org/facebook2.html"
+	"https;//stallman.org" -> "https;//stallman.org/yuen-b.html"
+	"https;//stallman.org" -> "https;//stallman.org/yuen-a.html"
+	"https;//stallman.org" -> "https;//stallman.org/pay-toilets.html"
+	"https;//stallman.org" -> "https;//stallman.org/zoom.html"
+	"https;//stallman.org" -> "https;//stallman.org/harry-potter.html"
+	"https;//stallman.org" -> "https;//stallman.org/solidarity-economy.html"
+	"https;//stallman.org" -> "https;//stallman.org/italian-puns.html"
+	"https;//stallman.org" -> "https;//stallman.org/malentendido-gracioso.html"
+	"https;//stallman.org" -> "https;//stallman.org/solidarity-economy.fr.html"
+	"https;//stallman.org" -> "https;//stallman.org/index.html"
+	"https;//stallman.org" -> "https;//stallman.org/slack.html"
+	"https;//stallman.org" -> "https;//stallman.org/whatsapp.html"
+	"https;//stallman.org" -> "https;//stallman.org/salsalabs-method.html"
+	"https;//stallman.org" -> "https;//stallman.org/food-delivery.html"
+	"https;//stallman.org" -> "https;//stallman.org/bad-connection-airports.html"
+	"https;//stallman.org" -> "https;//stallman.org/genoa.html"
+	"https;//stallman.org" -> "https;//stallman.org/google.html"
+	"https;//stallman.org" -> "https;//stallman.org/french-puns.html"
+	"https;//stallman.org" -> "https;//stallman.org/airbnb.html"
+	"https;//stallman.org" -> "https;//stallman.org/empire.html"
+	"https;//stallman.org" -> "https;//stallman.org/human-rights-us-china.html"
+	"https;//stallman.org" -> "https;//stallman.org/archive.html"
+	"https;//stallman.org" -> "https;//stallman.org/talks.html"
+	"https;//stallman.org" -> "https;//stallman.org/non-oppressive-ebooks.html"
+	"https;//stallman.org" -> "https;//stallman.org/vaasa.html"
+	"https;//stallman.org" -> "https;//stallman.org/favorite-photos.html"
+	"https;//stallman.org" -> "https;//stallman.org/rms-assange-snowden.jpg"
+	"https;//stallman.org" -> "https;//stallman.org/links.html"
+	"https;//stallman.org" -> "https;//stallman.org/watchmen.html"
+	"https;//stallman.org" -> "https;//stallman.org/bustfund.html"
+	"https;//stallman.org" -> "https;//stallman.org/colombian-free-press.html"
+	"https;//stallman.org" -> "https;//stallman.org/solidarity-economy.it.html"
+	"https;//stallman.org" -> "https;//stallman.org/good-fences.html"
+	"https;//stallman.org" -> "https;//stallman.org/moffat.html"
+	"https;//stallman.org" -> "https;//stallman.org/military-courts.html"
+	"https;//stallman.org" -> "https;//stallman.org/photos"
+	"https;//stallman.org" -> "https;//stallman.org/photos/"
+	"https;//stallman.org/Bob-Chassell/" -> "https;//stallman.org/Bob-Chassell/On-Land.html"
+	"https;//stallman.org/Bob-Chassell/" -> "https;//stallman.org/Bob-Chassell/Choice-and-Constraint.html"
+	"https;//stallman.org/Bob-Chassell/" -> "https;//stallman.org/Bob-Chassell/Never_at_Sea.html"
+	"https;//stallman.org/Bob-Chassell/" -> "https;//stallman.org/Bob-Chassell/Farther_and_Alien.html"
+	"https;//stallman.org/Bob-Chassell/" -> "https;//stallman.org/Bob-Chassell/A_Better_Earth.html"
+	"https;//stallman.org/photos/rms-working/" -> "https;//stallman.org/photos/rms-working/."
+	"https;//stallman.org/" -> "https;//stallman.org/quebec.html"
+	"https;//stallman.org/" -> "https;//stallman.org/bolzaneto.html"
+	"https;//stallman.org/" -> "https;//stallman.org/poppycock.html"
+	"https;//stallman.org/" -> "https;//stallman.org/blair.html"
+	"https;//stallman.org/" -> "https;//stallman.org/yuen-c.html"
+	"https;//stallman.org/" -> "https;//stallman.org/ancestry.html"
+	"https;//stallman.org/" -> "https;//stallman.org/salsanlabs-method.html"
+	"https;//stallman.org/" -> "https;//stallman.org/comics.html"
+	"https;//stallman.org/" -> "https;//stallman.org/Bob-Chassell/"
+	"https;//stallman.org/" -> "https;//stallman.org/portuguese-puns.html"
+	"https;//stallman.org/" -> "https;//stallman.org/apple.html"
+	"https;//stallman.org/" -> "https;//stallman.org/gofundme.html"
+	"https;//stallman.org/" -> "https;//stallman.org/stopping-terrorists.html"
+	"https;//stallman.org/" -> "https;//stallman.org/watch-over-me.html"
+	"https;//stallman.org/" -> "https;//stallman.org/chavez.html"
+	"https;//stallman.org/" -> "https;//stallman.org/millions.html"
+	"https;//stallman.org/" -> "https;//stallman.org/twitter.html"
+	"https;//stallman.org/" -> "https;//stallman.org/uber.html"
+	"https;//stallman.org/" -> "https;//stallman.org/evoting.html"
+	"https;//stallman.org/" -> "https;//stallman.org/business-supremacy-treaties.html"
+	"https;//stallman.org/" -> "https;//stallman.org/civillibertiesminute/"
+	"https;//stallman.org/" -> "https;//stallman.org/rms-lifestyle.html"
+	"https;//stallman.org/" -> "https;//stallman.org/biographies.html"
+	"https;//stallman.org/" -> "https;//stallman.org/why-harry-harry.html"
+	"https;//stallman.org/" -> "https;//stallman.org/microsoft.html"
+	"https;//stallman.org/" -> "https;//stallman.org/spotify.html"
+	"https;//stallman.org/" -> "https;//stallman.org/something-to-fear.html"
+	"https;//stallman.org/" -> "https;//stallman.org/facebook-presence.html"
+	"https;//stallman.org/" -> "https;//stallman.org/enslaved-workers.html"
+	"https;//stallman.org/" -> "https;//stallman.org/ex-boyfriends-list.html"
+	"https;//stallman.org/" -> "https;//stallman.org/saint.html"
+	"https;//stallman.org/" -> "https;//stallman.org/puns.html"
+	"https;//stallman.org/" -> "https;//stallman.org/pearlharbor.html"
+	"https;//stallman.org/" -> "https;//stallman.org/eventbrite.html"
+	"https;//stallman.org/" -> "https;//stallman.org/jinwicked-rms.html"
+	"https;//stallman.org/" -> "https;//stallman.org/gpg.html"
+	"https;//stallman.org/" -> "https;//stallman.org/home.html"
+	"https;//stallman.org/" -> "https;//stallman.org/knock.html"
+	"https;//stallman.org/" -> "https;//stallman.org/solidarity-economy.pt.html"
+	"https;//stallman.org/" -> "https;//stallman.org/facebook-presence.fr.html"
+	"https;//stallman.org/" -> "https;//stallman.org/genoa-experience.html"
+	"https;//stallman.org/" -> "https;//stallman.org/missile-defense.html"
+	"https;//stallman.org/" -> "https;//stallman.org/uber"
+	"https;//stallman.org/" -> "https;//stallman.org/netflix.html"
+	"https;//stallman.org/" -> "https;//stallman.org/skype.html"
+	"https;//stallman.org/" -> "https;//stallman.org/discord.html"
+	"https;//stallman.org/" -> "https;//stallman.org/olympics.html"
+	"https;//stallman.org/" -> "https;//stallman.org/facebook.html"
+	"https;//stallman.org/" -> "https;//stallman.org/repairing-links.html"
+	"https;//stallman.org/" -> "https;//stallman.org/futon-physics.html"
+	"https;//stallman.org/" -> "https;//stallman.org/linguistic-swifties.html"
+	"https;//stallman.org/" -> "https;//stallman.org/huns-writs.html"
+	"https;//stallman.org/" -> "https;//stallman.org/airlines-complete.html"
+	"https;//stallman.org/" -> "https;//stallman.org/amazon.html"
+	"https;//stallman.org/" -> "https;//stallman.org/amtrak.html"
+	"https;//stallman.org/" -> "https;//stallman.org/we-three-laws.html"
+	"https;//stallman.org/" -> "https;//stallman.org/solidarity-economy.es.html"
+	"https;//stallman.org/" -> "https;//stallman.org/isds"
+	"https;//stallman.org/" -> "https;//stallman.org/war-victim.html"
+	"https;//stallman.org/" -> "https;//stallman.org/harry2.html"
+	"https;//stallman.org/" -> "https;//stallman.org/grubhub.html"
+	"https;//stallman.org/" -> "https;//stallman.org/patreon.html"
+	"https;//stallman.org/" -> "https;//stallman.org/airlines.html"
+	"https;//stallman.org/" -> "https;//stallman.org/antiglossary.html"
+	"https;//stallman.org/" -> "https;//stallman.org/internet-music.html"
+	"https;//stallman.org/" -> "https;//stallman.org/falkvinge.html"
+	"https;//stallman.org/" -> "https;//stallman.org/longterm.html"
+	"https;//stallman.org/" -> "https;//stallman.org/glossary.html"
+	"https;//stallman.org/" -> "https;//stallman.org/spanish-puns.html"
+	"https;//stallman.org/" -> "https;//stallman.org/editorfather.html"
+	"https;//stallman.org/" -> "https;//stallman.org/sinister-publisher.html"
+	"https;//stallman.org/" -> "https;//stallman.org/trance-pacific-partnership.html"
+	"https;//stallman.org/" -> "https;//stallman.org/intel.html"
+	"https;//stallman.org/" -> "https;//stallman.org/media.html"
+	"https;//stallman.org/" -> "https;//stallman.org/ticketmaster.html"
+	"https;//stallman.org/" -> "https;//stallman.org/linkpolicy.html"
+	"https;//stallman.org/" -> "https;//stallman.org/quotes.html"
+	"https;//stallman.org/" -> "https;//stallman.org/there-ought-to-be-a-law.html"
+	"https;//stallman.org/" -> "http;//stallman.org/grav-mass.html"
+	"https;//stallman.org/" -> "https;//stallman.org/internet-voting.html"
+	"https;//stallman.org/" -> "https;//stallman.org/doxing.html"
+	"https;//stallman.org/" -> "https;//stallman.org/german-puns.html"
+	"https;//stallman.org/" -> "https;//stallman.org/linkedin.html"
+	"https;//stallman.org/" -> "https;//stallman.org/policestate.html"
+	"https;//stallman.org/" -> "https;//stallman.org/paris-police.html"
+	"https;//stallman.org/" -> "https;//stallman.org/evernote.html"
+	"https;//stallman.org/" -> "https;//stallman.org/lyft.html"
+	"https;//stallman.org/" -> "https;//stallman.org/wendys.html"
+	"https;//stallman.org/" -> "https;//stallman.org/guantanamero.html"
+	"https;//stallman.org/" -> "https;//stallman.org/republican-election-rigging.html"
+	"https;//stallman.org/" -> "https;//stallman.org/bad-border-policy-countries.html"
+	"https;//stallman.org/" -> "https;//stallman.org/stay-away-countries.html"
+	"https;//stallman.org/" -> "https;//stallman.org/doggerel.html"
+	"https;//stallman.org/" -> "https;//stallman.org/skype.es.html"
+	"https;//stallman.org/" -> "https;//stallman.org/sayings.html"
+	"https;//stallman.org/" -> "https;//stallman.org/facebook2.html"
+	"https;//stallman.org/" -> "https;//stallman.org/yuen-b.html"
+	"https;//stallman.org/" -> "https;//stallman.org/yuen-a.html"
+	"https;//stallman.org/" -> "https;//stallman.org/pay-toilets.html"
+	"https;//stallman.org/" -> "https;//stallman.org/zoom.html"
+	"https;//stallman.org/" -> "https;//stallman.org/harry-potter.html"
+	"https;//stallman.org/" -> "https;//stallman.org/solidarity-economy.html"
+	"https;//stallman.org/" -> "https;//stallman.org/italian-puns.html"
+	"https;//stallman.org/" -> "https;//stallman.org/malentendido-gracioso.html"
+	"https;//stallman.org/" -> "https;//stallman.org/solidarity-economy.fr.html"
+	"https;//stallman.org/" -> "https;//stallman.org/index.html"
+	"https;//stallman.org/" -> "https;//stallman.org/slack.html"
+	"https;//stallman.org/" -> "https;//stallman.org/whatsapp.html"
+	"https;//stallman.org/" -> "https;//stallman.org/salsalabs-method.html"
+	"https;//stallman.org/" -> "https;//stallman.org/food-delivery.html"
+	"https;//stallman.org/" -> "https;//stallman.org/bad-connection-airports.html"
+	"https;//stallman.org/" -> "https;//stallman.org/genoa.html"
+	"https;//stallman.org/" -> "https;//stallman.org/google.html"
+	"https;//stallman.org/" -> "https;//stallman.org/french-puns.html"
+	"https;//stallman.org/" -> "https;//stallman.org/airbnb.html"
+	"https;//stallman.org/" -> "https;//stallman.org/empire.html"
+	"https;//stallman.org/" -> "https;//stallman.org/human-rights-us-china.html"
+	"https;//stallman.org/" -> "https;//stallman.org/archive.html"
+	"https;//stallman.org/" -> "https;//stallman.org/talks.html"
+	"https;//stallman.org/" -> "https;//stallman.org/non-oppressive-ebooks.html"
+	"https;//stallman.org/" -> "https;//stallman.org/vaasa.html"
+	"https;//stallman.org/" -> "https;//stallman.org/favorite-photos.html"
+	"https;//stallman.org/" -> "https;//stallman.org/rms-assange-snowden.jpg"
+	"https;//stallman.org/" -> "https;//stallman.org/links.html"
+	"https;//stallman.org/" -> "https;//stallman.org/watchmen.html"
+	"https;//stallman.org/" -> "https;//stallman.org/bustfund.html"
+	"https;//stallman.org/" -> "https;//stallman.org/colombian-free-press.html"
+	"https;//stallman.org/" -> "https;//stallman.org/solidarity-economy.it.html"
+	"https;//stallman.org/" -> "https;//stallman.org/good-fences.html"
+	"https;//stallman.org/" -> "https;//stallman.org/moffat.html"
+	"https;//stallman.org/" -> "https;//stallman.org/military-courts.html"
+	"https;//stallman.org/" -> "https;//stallman.org/photos"
+	"https;//stallman.org/" -> "https;//stallman.org/photos/"
+	"https;//stallman.org/photos" -> "https;//stallman.org/photos/greece"
+	"https;//stallman.org/photos" -> "https;//stallman.org/photos/rms-working/"
+	"https;//stallman.org/photos" -> "https;//stallman.org/photos/index.html"
+	"https;//stallman.org/photos" -> "https;//stallman.org/photos/greece/"
+	"https;//stallman.org/photos/" -> "https;//stallman.org/photos/greece"
+	"https;//stallman.org/photos/" -> "https;//stallman.org/photos/rms-working/"
+	"https;//stallman.org/photos/" -> "https;//stallman.org/photos/index.html"
+	"https;//stallman.org/photos/" -> "https;//stallman.org/photos/greece/"
+}
