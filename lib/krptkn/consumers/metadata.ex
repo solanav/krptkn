@@ -20,25 +20,27 @@ defmodule Krptkn.Consumers.Metadata do
   defp extract_metadata(buffer) do
     Krptkn.Api.add(:metadata)
 
-    Extractor.flat_extract(buffer)
-    |> Enum.map(fn metadata ->
-      metadata
-      |> Enum.filter(fn {_, type, _, _, _} ->
-        Krptkn.MetadataFilter.interesting_type?(to_string(type))
-      end)
-      |> Enum.map(fn {_, type, _, _, data} ->
-        data = to_string(data)
-        if String.starts_with?(data, "\nexif") do
-          {to_string(type), Krptkn.PngExtractor.exifstr2map(data)}
-        else
-          {to_string(type), data}
-        end
-      end)
-      |> Map.new()
-    end)
-    |> Enum.filter(fn metadata ->
-      map_size(metadata) > 0
-    end)
+    #Extractor.flat_extract(buffer)
+    #|> Enum.map(fn metadata ->
+    #  metadata
+    #  |> Enum.filter(fn {_, type, _, _, _} ->
+    #    Krptkn.MetadataFilter.interesting_type?#(to_string(type))
+    #  end)
+    #  |> Enum.map(fn {_, type, _, _, data} ->
+    #    data = to_string(data)
+    #    if String.starts_with?(data, "\nexif") do
+    #      {to_string(type), Krptkn.PngExtractor.#exifstr2map(data)}
+    #    else
+    #      {to_string(type), data}
+    #    end
+    #  end)
+    #  |> Map.new()
+    #end)
+    #|> Enum.filter(fn metadata ->
+    #  map_size(metadata) > 0
+    #end)
+
+    []
   end
 
   def handle_events(events, _from, state) do

@@ -1,0 +1,32 @@
+La idea inicial de c\'omo deber\'ia funcionar el software no ha cambiado desde las primeras iteraciones, a continuación se muestra en forma de pseudocódigo el n\'ucleo del sistema:
+
+\begin{minted}{python}
+# Datos de salida
+urls_no_visitadas = []
+urls_visitadas = []
+metadatos = []
+
+# Datos de entrada
+urls_no_visitadas.push(input_usuario())
+
+# Funcion principal
+for url in urls_no_visitadas:
+    # Descargamos los datos de la URL
+    archivo = descargar(url)
+    
+    # Si es HTML, extraemos URLs del archivo
+    if is_html(archivo):
+        nuevas_urls = extraer_urls(archivo)
+        urls_no_visitadas.push(nuevas_urls)
+    # Si no es HTML, extraemos metadatos
+    else:
+        nuevos_metadatos = extraer_metadatos(archivo)
+        metadatos.push(nuevos_metadatos)
+
+\end{minted}
+
+Aunque el núcleo del sistema es ese, necesitamos varios mecanismos para cumplir los distintos requisitos propuestos. También existen varias partes del núcleo que al ser escritos en Elixir se ven transformados. Tanto `urls\_no\_visitadas` como `urls\_visitadas` se convierten en dos tablas de ETS (Erlang Term Storage). Esto nos permite tener una base de datos en memoria similar a Redis con la ventaja de que no es necesario un servicio externo. Por otro lado, `metadatos` no se guarda en una tabla, entra directamente a la base de datos externa para su uso posterior. También es externo `extraer\_metadatos` ya que como se ver\'a en la sección de extracción de metadatos, se ha implementado una interfaz que llama a código nativo escrito en C.
+
+\begin{figure}[Arquitectura general de Krptkn]{FIG:ARQUITECTURA}{Vista de \'aguila de la arquitectura de Krptkn}
+        \image{\textwidth}{}{final_form.png}
+\end{figure}

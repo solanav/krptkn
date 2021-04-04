@@ -11,7 +11,21 @@ defmodule Krptkn.PngExtractor do
 
   defstruct [:width, :height, :bit_depth, :color_type, :compression, :filter, :interlace, :chunks]
 
-  defp exifstr2map(data) do
+  @doc """
+  Turns EXIF data into map. Uses Exexif.
+
+  Returns a dictionary with EXIF data.
+
+  ## Examples
+
+      iex> Krptkn.PngExtractor.exifstr2map(data)
+      %{
+        size: "160x160",
+        "Created By Software": "Adobe Photoshop CC 2017 (Macintosh)",
+      }
+
+  """
+  def exifstr2map(data) do
     data = String.split(data, "\n")
 
     # Get the lenght

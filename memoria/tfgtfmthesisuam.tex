@@ -1,0 +1,82 @@
+% arara: clean: {files: [tfgtfmthesisuam.aux, tfgtfmthesisuam.idx, tfgtfmthesisuam.ilg, tfgtfmthesisuam.ind, tfgtfmthesisuam.bbl, tfgtfmthesisuam.bcf, tfgtfmthesisuam.blg, tfgtfmthesisuam.run.xml, tfgtfmthesisuam.fdb_latexmk, tfgtfmthesisuam.fls, tfgtfmthesisuam.loe, tfgtfmthesisuam.lof, tfgtfmthesisuam.lol, tfgtfmthesisuam.lot, tfgtfmthesisuam.ltb, tfgtfmthesisuam.out, tfgtfmthesisuam.toc, tfgtfmthesisuam.upa, tfgtfmthesisuam.upb, tfgtfmthesisuam.acn, tfgtfmthesisuam.acr, tfgtfmthesisuam.alg, tfgtfmthesisuam.glg, tfgtfmthesisuam.glo, tfgtfmthesisuam.gls, tfgtfmthesisuam.glsdefs, tfgtfmthesisuam.idx,  tfgtfmthesisuam.ilg, tfgtfmthesisuam.xdy, tfgtfmthesisuam.loa, tfgtfmthesisuam.gnuploterrors , tfgtfmthesisuam.mw, tfgtfmthesisuam.fdb_latexmk ]}
+% arara: pdflatex: {shell: yes}
+% arara: makeglossaries
+% arara: makeindex: {style: tfgtfmthesisuam.ist }
+% arara: bibtex
+% arara: pdflatex: {shell: yes}
+% arara: pdflatex: {shell: yes}
+% arara: clean: {files: [tfgtfmthesisuam.aux, tfgtfmthesisuam.idx, tfgtfmthesisuam.ilg, tfgtfmthesisuam.ind, tfgtfmthesisuam.bbl, tfgtfmthesisuam.bcf, tfgtfmthesisuam.blg, tfgtfmthesisuam.run.xml, tfgtfmthesisuam.fdb_latexmk, tfgtfmthesisuam.fls, tfgtfmthesisuam.loe, tfgtfmthesisuam.lof, tfgtfmthesisuam.lol, tfgtfmthesisuam.lot, tfgtfmthesisuam.ltb, tfgtfmthesisuam.out, tfgtfmthesisuam.toc, tfgtfmthesisuam.upa, tfgtfmthesisuam.upb, tfgtfmthesisuam.acn, tfgtfmthesisuam.acr, tfgtfmthesisuam.alg, tfgtfmthesisuam.glg, tfgtfmthesisuam.glo, tfgtfmthesisuam.gls, tfgtfmthesisuam.glsdefs, tfgtfmthesisuam.idx,  tfgtfmthesisuam.ilg, tfgtfmthesisuam.xdy, tfgtfmthesisuam.loa, tfgtfmthesisuam.gnuploterrors , tfgtfmthesisuam.mw, tfgtfmthesisuam.fdb_latexmk ]}
+
+
+\documentclass[epsbased,copyright,final,printable,covers,extendedindex,firstnumbered,tfg,gnuplot]{tfgtfmthesisuam}
+
+\advisor{Jaime Lopez S\'anchez}
+\levelin{Ingeniería Inform\'atica}
+\title{Análisis automatizado de metadatos expuestos en ficheros públicos}
+\author{Antonio Solana Vera}
+\privateaddress{C\textbackslash\ Francisco Tomás y Valiente Nº 11}
+\copyrightdate{3 de Noviembre de 2017}
+
+\dedication{A mi familia y a mis amigos}
+\resumenfile{_inicio/resumen}
+\abstractfile{_inicio/abstract}
+
+\keywords{Metadatos}
+\palabrasclave{TFG}
+
+\coverdata
+{
+  Escuela Politécnica Superior \\
+  Universidad Autónoma de Madrid \\
+  C\textbackslash Francisco Tomás y Valiente nº 11
+}
+
+\bibliographyconfig{tfgtfmthesisuam}
+
+\graphicsdir{img}
+\logosdir{img}
+
+\usepackage{minted}
+
+\begin{document}
+
+\chapter{Introducci\'on\label{CAP:ESTETICA}}{_intro/intro}
+  \section{Motivaci\'on y objetivos\label{SEC:TIPODOC}}{_intro/motivacion}
+  \section{Fases de realizaci\'on del proyecto\label{SEC:COLORES}}{_intro/fases}
+  \section{Estructura del documento\label{SEC:USOCOLORES}}{_intro/estructura}
+
+\chapter{Estado del arte\label{CAP:ESTRUCTURA}}{_arte/arte}
+  \section{Introducci\'on\label{SEC:VARIABLES}}{_arte/intro}
+  \section{Foca\label{SEC:INDICES}}{_arte/foca}
+  \section{National Library of New Zealand's Metadata Extraction Tool\label{SEC:INDICES}}{_arte/zealand}
+  \section{Harvard's File Information Tool Set\label{SEC:INDICES}}{_arte/harvard}
+
+\chapter{An\'alisis de requisitos\label{CAP:PRIMEROSPASOS}}{_requisitos/requisitos}
+  \section{Introducci\'on\label{SEC:ESTRUCTURAR}}{_requisitos/intro}
+  \section{Requisitos funcionales\label{SEC:ESTRUCTURAR}}{_requisitos/funcionales}
+  \section{Requisitos no funcionales\label{SEC:ESTRUCTURAR}}{_requisitos/no_funcionales}
+
+\chapter{Desarrollo de la soluci\'on\label{CAP:ELEMINT}}{_desarrollo/desarrollo}
+  \section{Introducci\'on y arquitectura\label{SEC:CUADROS}}{_desarrollo/arquitectura}
+  \section{Creaci\'on de una ara\~na\label{SEC:CUADROS}}{_desarrollo/arana}
+    \subsection{Parseo de HTML y limpieza de URLs\label{SS:PRESUPUESTOS}}{_desarrollo/html}
+  \section{Extracci\'on de metadatos\label{SEC:FIGURAS}}{_desarrollo/extraccion}
+    \subsection{Libextractor\label{SS:PRESUPUESTOS}}{_desarrollo/libextractor}
+    \subsection{Filtros\label{SS:PRESUPUESTOS}}{_desarrollo/filtros}
+    \subsection{Base de datos\label{SS:PRESUPUESTOS}}{_desarrollo/basedatos}
+  \section{Interfaz web\label{SEC:CUADROS}}{_desarrollo/interfaz}
+
+\chapter{Resultados\label{CAP:ELEMINT}}{_resultados/resultados}
+
+\chapter{Conclusiones y trabajo futuro\label{CAP:ELEMINT}}{_conclusiones/conclusiones}
+
+\appendix
+
+\chapter{Word\textsuperscript{\textregistered} vs. \LaTeXe\label{CAP:WORDLATEX}}{varios/wordlatex}
+\chapter{Instalación\label{CAP:INSTALACION}}{varios/instalacion}
+\chapter{Packetes incluidos\label{CAP:PAQUETES}}{varios/paquetes}
+\chapter{Resumen de opciones del estilo\label{CAP:OPCIONES}}{varios/opciones}
+\chapter{Funciones y entornos\label{CAP:FUNCENT}}{varios/funciones}
+
+
+\end{document}

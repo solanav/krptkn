@@ -24,7 +24,7 @@ defmodule Krptkn.MixProject do
   def application do
     [
       mod: {Krptkn.Application, []},
-      extra_applications: [:logger, :runtime_tools, :observer]
+      extra_applications: [:logger, :runtime_tools, :observer, :tools]
     ]
   end
 
