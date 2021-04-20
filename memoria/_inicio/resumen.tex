@@ -1,5 +1,9 @@
-Los metadatos son una parte muy importante en nuestro día a día. A pesar de esto, no los usamos directamente. Solo otros programas se aprovechan de los metadatos de ciertos archivos para facilitar su uso y visualización. Es por esta razón que muchos de los archivos que se suben a internet contienen metadatos que pueden filtrar información sensible. Aunque las gran mayoría de las redes sociales y otros servicios de subida de archivos eliminan los metadatos de forma automática, muchas empresas más pequeñas no lo hacen. Y aunque estas empresas intentaran visualizar estos metadatos, actualmente no existe una herramienta o librería estándar que permita la recopilación automática de metadatos en páginas web de forma fácil.
+Los metadatos son "datos que nos dan información sobre otros datos". Por ejemplo: la fecha de edición de un archivo, el autor de un documento o el programa usado para editar una foto.
 
-A lo largo de este trabajo, se desarrollará un framework que sirva para la extracción de estos metadatos sin necesidad de tener conocimientos técnicos. Este framework, denominado "Krptkn", va a ser desarrollado en el lenguaje de programación Elixir con algunos módulos escritos en C para aprovechar algunas librerías interesantes.
+La mayor parte del software que se ejecuta en nuestros ordenadores guarda mucha información sobre nuestros archivos. Gran parte de esta información es inofensiva (fecha de guardado, dimensiones de una foto, licencia de un archivo, etc) pero debemos tener cuidado de eliminar la que no lo es (geolocalización, nombres, comentarios privados, etc).
+
+La gran mayoría de las redes sociales y servicios de subida de ficheros eliminan los metadatos de forma automática pero muchas empresas más pequeñas no lo hacen. Y aunque lo intentaran corregir, actualmente no existe una herramienta o librería estándar que facilite esta tarea.
+
+El propósito de este trabajo es el desarrollo de un framework que sirva para extraer estos metadatos de una página web, filtrar los que sean potencialmente peligrosos y generar informes con toda la información relevante. 
 
 \palabrasclave{metadatos, seguridad, framework, tesis, trabajo fin de grado}

@@ -1,5 +1,9 @@
-Metadata are a crucial part of our day to day. Despite this, we have no direct contact with them. Only other programs take advantage of the metadata of files to facilitate their use and offer us interesting information. Because of this, many of the files uploaded to the internet contain metadata that may be leaking sensitive information. Even though most of the commonly used social media networks do remove the metadata from your files automatically, many smaller or non-tech companies do not. And even if these smaller companies had an interest in checking the metadata they upload, there is no standard tool they can rely on.
+Metadata is usually defined as "data that gives us information about other data." For example: the date a file was edited, the author of a document, or the program used to edit a photograph.
 
-In this project, a framework is going to be developed to help extract, filter and visualize this metadata without requiring technical knowledge. This framework is going to be developed in Elixir with some modules written in C to take advantage of existing libraries. 
+Most of the software that runs on our computers stores a lot of information about our files. Much of this information is harmless (modification date, dimensions of a photograph, license of a file, etc.) but we must be careful not to reveal compromising information (geolocation, names, private comments, etc).
+
+The vast majority of social media and file upload services remove metadata automatically, but many smaller companies do not. And even if they tried to correct it, there is currently no standard tool or library that facilitates this task.
+
+The purpose of this thesis is the development of a framework that serves to extract this metadata from a web page, filter those that are potentially dangerous, and generate reports with all the relevant information.
 
 \keywords{metadata, security, framework, thesis, final degree project}
