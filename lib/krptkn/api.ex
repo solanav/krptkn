@@ -134,6 +134,44 @@ defmodule Krptkn.Api do
     GenServer.call(__MODULE__, {:history, type}) |> Enum.reverse()
   end
 
+  # Metadata
+
+  @doc """
+  Adds a piece of metadata and increments the count of metadata.
+  There is no need to call Krptkn.Api.add(:metadata) if you call this method.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Krptkn.Api.add_metadata(%{...})
+      :ok
+
+  """
+  def add_metadata(metadata) do
+    add(:metadata)
+    GenServer.cast(__MODULE__, {:add_metadata, metadata})
+  end
+
+  @doc """
+  Returns the metadata we have saved until now.
+
+  Returns list of maps.
+
+  ## Examples
+
+      iex> Krptkn.Api.metadata()
+      [
+        %{...},
+        %{...},
+        %{...}
+      ]
+
+  """
+  def metadata do
+    GenServer.call(__MODULE__, :metadata)
+  end
+
   # Dangerous metadata
 
   @doc """
@@ -271,6 +309,7 @@ defmodule Krptkn.Api do
       processes: [],
       scheduler: [],
 
+      metadata: [],
       dangerous_metadata: [],
 
       last_urls: [],
@@ -338,6 +377,11 @@ defmodule Krptkn.Api do
   end
 
   @impl true
+  def handle_cast({:add_metadata, metadata}, state) do
+    {:noreply, %{state | metadata: [metadata | state.metadata]}}
+  end
+
+  @impl true
   def handle_cast({:add_dangerous_metadata, metadata}, state) do
     {:noreply, %{state | dangerous_metadata: [metadata | state.dangerous_metadata]}}
   end
@@ -362,6 +406,11 @@ defmodule Krptkn.Api do
   @impl true
   def handle_call(:processes, _from, state) do
     {:reply, state.processes, state}
+  end
+
+  @impl true
+  def handle_call(:metadata, _from, state) do
+    {:reply, state.metadata, state}
   end
 
   @impl true

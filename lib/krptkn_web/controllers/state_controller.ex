@@ -68,7 +68,7 @@ defmodule KrptknWeb.StateController do
   end
 
   def index(conn, %{"param" => "last_metadata"}) do
-    json(conn, Krptkn.Api.dangerous_metadata())
+    json(conn, Krptkn.Api.metadata())
   end
 
   def index(conn, %{"param" => "last_urls"}) do
