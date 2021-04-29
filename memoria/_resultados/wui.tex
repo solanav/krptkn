@@ -1,0 +1,28 @@
+La interfáz gráfica consta de una sola página HTML y usa Javascript para hacer llamadas a la API descrita en la sección \ref{SEC:API}.
+
+Como se puede observar en la figura \ref{FIG:EMPTY} en la parte superior de la página tenemos cuatro contadores básicos.
+
+\begin{itemize}
+  \item URLs. Número de URLs visitadas.
+  \item Danger. Número de metadatos peligrosos encontrados.
+  \item Metadata. Número de metadatos detectados por la librería interna (libextractor por defecto).
+  \item F. Metadata. Número de metadatos filtrados. Este filtrado elimina elementos vacíos o irrelevantes.
+\end{itemize}
+
+En la sección ``Control Panel'' se encuentran todas las funciones que necesita un administrador. Una pequeña bombilla con la etiqueta ``State'' nos indica si el programa esta ejecutándose (verde), pausado (amarillo) o parado (rojo). Justo debajo tenemos un cuadro para insertar una URL en la cola. Los botones ``Resume'', ``Pause'' y ``Stop'' nos permiten continuar, pausar o parar el sistema respectivamente. ``Clear RAM'' y ``Clear Database'' permiten resetear el estado interno de Krptkn en caso de haber un problema y limpiar la base de datos si fuera necesario (por haber generado ya los informes relevantes por ejemplo).
+
+\begin{figure}[emtpy]{FIG:EMPTY}{Página principal de Krptkn (Panel de administración)}
+        \image{\textwidth}{}{empty}
+\end{figure}
+
+En la figura \ref{FIG:RUNNING} se ve la página de administración con las dos últimas secciones ``Last URLs'' y ``Last Metadata'' mostrando información. Ambas guardan solo una fracción de los datos: los suficientes para que el administrador pueda asegurarse del funcionamiento correcto de la aplicación.
+
+\begin{figure}[running]{FIG:RUNNING}{Panel de administración durante la ejecución de un análisis}
+        \image{\textwidth}{}{running_short}
+\end{figure}
+
+En esta última figura \ref{FIG:OLD} se muestra una visualización (no presente en la versión final de Krptkn) que mostraba datos sobre la CPU, la memoria y los procesos ejecutándose en la máquina virtual de Erlang. Aunque la API correspondiente sigue presente para su uso futuro, esta parte de la interfaz desapareció durante la fase de depurado debido a unos problemas con la biblioteca que se usaba para dibujar los gráficos. Actualmente se usa una herramienta de depurado desarrollada en Erlang llamada :observer\footnote{\url{https://erlang.org/doc/man/observer.html}}.
+
+\begin{figure}[old]{FIG:OLD}{Panel de administración antiguo}
+        \image{\textwidth}{}{old_endpoint}
+\end{figure}
