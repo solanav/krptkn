@@ -36,3 +36,5 @@ npm-debug.log
 # Ignore the PSQL database for nix
 .tmp/
 .vscode/
+
+*.Identifier
