@@ -12,11 +12,11 @@ Una vez hemos parseado el HTML se buscan los nodos que contienen una propiedad '
 
 Esta limpieza es heurística y pasa por varias etapas:
 
-\begin{itemize}
+\begin{enumerate}
   \item Se comprueba si la URL pertenece al dominio objetivo. Si estamos analizando ''example.org´´ la URL ''https://code.jquery.com/jquery-3.6.0.js´´ se descarta.
   \item Agregado o eliminado de barras oblicuas al final de la URL. Por ejemplo ''http://example.org/blog´´ se convierte en ''http://example.org/blog/´´ y ''http://example.org/index.html´´ se queda igual. 
   \item HTML permite usar links del estilo ''/index.html´´ cuando en realidad la URL completa sería ''http://example.org/index.html". Otra de las funciones de la heurística se encarga de completar este tipo de URLs.
   \item Por último se filtran los links que usan otros protcolos como FTP, SSH, IPFS, etc. Por ejemplo, descartamos la URL ''mailto:help@example.org".
-\end{itemize}
+\end{enumerate}
 
-Una vez se ha hecho esto, se eliminan los duplicados y el resto se insertan en la cola de URLs. La cola de URLs se ocupa de comprobar si ya hemos visitado el link que le hemos pasado.
+Una vez se ha hecho esto, se eliminan los duplicados y los que nos quedan se insertan en la cola de URLs. La cola de URLs se ocupa de comprobar si ya hemos visitado el link que le hemos pasado.

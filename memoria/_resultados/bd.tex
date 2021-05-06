@@ -1,4 +1,4 @@
-La base de datos en la que se guarda la información es un PostgreSQL\footnote{\url{https://www.postgresql.org/}}. La estructura es extremadamente simple. Consta de dos tablas: metadata (figura \ref{FIG:DBMETADATA}) y urls (figura \ref{FIG:DBURLS}).
+La base de datos en la que se guarda la información es un PostgreSQL\footnote{\url{https://www.postgresql.org/}}. La estructura es extremadamente simple. Consta de dos tablas: ``metadata'' (figura \ref{FIG:DBMETADATA}) y ``urls'' (figura \ref{FIG:DBURLS}).
 
 \begin{figure}[dbmetadata]{FIG:DBMETADATA}{Metadatos almacenados en la base de datos}
         \image{\textwidth}{}{database_metadata}
@@ -10,12 +10,12 @@ La base de datos en la que se guarda la información es un PostgreSQL\footnote{\
 
 Ambas tablas comparten los siguientes campos:
 \begin{itemize}
-  \item id. Campo que identifica de forma única cada entrada.
-  \item session. Nombre que identifica la sesión actual. Resulta muy útil para filtrar resultados en caso de almacenar varios objetivos a la vez en la base de datos.
-  \item url. URL en la que se encontró un metadato (tabla metadata) o una URL visitada (tabla urls).
-  \item type. Indica el tipo MIME\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types}} de la fila.
-  \item inserted\_at. Fecha en la que se insertó la entrada. No cambia nunca.
-  \item updated\_at. Fecha de la última actualización de la entrada. Puede cambiar.
+  \item ``id''. Campo que identifica de forma única cada entrada.
+  \item ``session''. Nombre que identifica la sesión actual. Resulta muy útil para filtrar resultados en caso de almacenar varios objetivos a la vez en la base de datos.
+  \item ``url''. Lugar en la que se encontró un metadato (tabla metadata) o la URL visitada (tabla urls).
+  \item ``type''. Indica el tipo MIME\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types}} de la fila.
+  \item ``inserted\_at''. Fecha en la que se insertó la entrada. No cambia nunca.
+  \item ``updated\_at''. Fecha de la última actualización de la entrada. Podría cambiar, pero en la versión actual no lo hace.
 \end{itemize}
 
 La única columna que no es compartida es metadata (en la tabla metadata). En ella se guarda en formato JSON la información encontrada sobre todos los archivos de la base de datos.

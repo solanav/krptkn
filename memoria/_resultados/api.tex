@@ -1,4 +1,4 @@
-La API, o ``Application Programming Interface'', proporciona una interfaz para la comunicación entre la página web y el núcleo de la aplicación a través de HTTP. Se ha utilizado el framework Phoenix\footnote{\url{https://www.phoenixframework.org/}} para su desarrollo y las respuestas se dan en formato JSON por su amplica compatibilidad. En la figura \ref{FIG:JSONAPI} se puede observar un ejemplo de respuesta tras unos minutos analizando una web. La petición se realiza a una URL como ´´http://localhost:4000/state/last\_metadata''.
+La API, o ``Application Programming Interface'', proporciona una interfaz para la comunicación entre la página web y el núcleo de la aplicación a través de HTTP. Se ha utilizado el framework Phoenix para su desarrollo y las respuestas se dan en formato JSON por su amplica compatibilidad. En la figura \ref{FIG:JSONAPI} se puede observar un ejemplo de respuesta tras unos minutos analizando una web. La petición se realiza a una URL como ``http://localhost:4000/state/last\_metadata''.
 
 \begin{figure}[jsonapi]{FIG:JSONAPI}{Metadatos mostrados en la API}
         \image{\textwidth}{}{json_api}
@@ -13,4 +13,4 @@ La API proporciona acceso a muchos más datos sobre el estado interno de la apli
   \item Últimas URLs visitadas.
 \end{itemize}
 
-Estos endpoints ((TODO: definir endpoint)) se usan a través de la interfaz como veremos más adelante. La excepción es los de CPU, memoria y procesos. Esta parte de la API se uso durante la fase de depurado del proyecto para mejorar el rendimiento y el uso de memoria de Krptkn.
+Estos \dfnp{endpoints} se usan a través de la interfaz como veremos más adelante. La excepción es los de CPU, memoria y procesos. Estos últimos fueron utlizados durante la fase de depurado del proyecto para mejorar el rendimiento y el uso de memoria de Krptkn pero no en su versión final.
