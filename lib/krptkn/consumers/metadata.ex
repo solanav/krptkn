@@ -28,7 +28,7 @@ defmodule Krptkn.Consumers.Metadata do
       |> Enum.map(fn {_, type, _, _, data} ->
         data = to_string(data)
         if String.starts_with?(data, "\nexif") do
-          {to_string(type), Krptkn.PngExtractor.exifstr2map(data)}
+          {to_string(type), Krptkn.Parsers.Png.exifstr2map(data)}
         else
           {to_string(type), data}
         end
