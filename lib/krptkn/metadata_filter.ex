@@ -61,7 +61,7 @@ defmodule Krptkn.MetadataFilter do
       ]
 
   """
-  defp extract_emails(string) do
+  def extract_emails(string) do
     email_regex = ~r/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/
     Enum.at(Regex.scan(email_regex, string), 0)
     |> Enum.uniq()
