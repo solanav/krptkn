@@ -30,14 +30,14 @@ Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
 
 Admin Web UI:
 
-![Web UI](wui_demo.png "Web UI")
+![Web UI](images/empty.png "Web UI")
 
-Debug Web UI:
+Report example:
 
-![Debug UI](debug_demo.png "Debug UI")
+![Web UI](images/portada.png "Web UI")
 
 # Schematics
 
 Krptkn's data flow:
 
-![Data flow for krptkn](final_form.png "Data flow for krptkn")
+![Data flow for krptkn](images/architecture.png "Data flow for krptkn")
