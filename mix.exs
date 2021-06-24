@@ -24,7 +24,7 @@ defmodule Krptkn.MixProject do
   def application do
     [
       mod: {Krptkn.Application, []},
-      extra_applications: [:logger, :runtime_tools, :observer, :tools]
+      extra_applications: [:logger, :runtime_tools, :tools]
     ]
   end
 
@@ -53,7 +53,7 @@ defmodule Krptkn.MixProject do
 
       # General
       {:gen_stage, "~> 1.0.0"},
-      {:extractor, git: "git@github.com:solanav/extractor.git"},
+      {:extractor, git: "https://github.com/solanav/extractor.git"},
 
       # HTTP and HTML
       {:httpoison, "~> 1.6"},

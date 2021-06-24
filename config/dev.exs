@@ -2,11 +2,11 @@ use Mix.Config
 
 # Configure your database
 config :krptkn, Krptkn.Repo,
-  username: "krptkn-dev",
-  password: "xz3uz3Md4lFeHXOi3lOH",
-  database: "krptkn_dev",
-  #socket_dir: "./",
-  hostname: "192.168.1.144",
+  username: System.get_env("PGUSER"),
+  password: System.get_env("PGPASSWORD"),
+  database: System.get_env("PGDATABASE"),
+  hostname: System.get_env("PGHOST"),
+  port: System.get_env("PGPORT") |> String.to_integer,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
