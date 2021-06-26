@@ -13,7 +13,7 @@ services:
       # Variables to connect to our Postgres server
       PGUSER: postgres
       PGPASSWORD: postgres
-      PGDATABASE: database_name
+      PGDATABASE: krptkn
       PGPORT: 5432
       # Hostname of our Postgres container
       PGHOST: db

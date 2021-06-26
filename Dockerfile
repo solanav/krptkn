@@ -10,7 +10,7 @@ WORKDIR /krptkn
 ENV LANG C.UTF-8
 ENV PGUSER postgres
 ENV PGPASSWORD postgres
-ENV PGDATABASE database_name
+ENV PGDATABASE krptkn
 ENV PGHOST db
 ENV PGPORT 5432
 
@@ -31,14 +31,13 @@ RUN apt-get install -y nodejs npm
 RUN npm cache clean --force
 RUN npm install
 
-# Install hex package manager
-# By using --force, we don’t need to type “Y” to confirm the installation
+# Install hex package manager (elixir)
 RUN mix local.hex --force
 
-# Install rebar3
+# Install rebar3 package manager (erlang)
 RUN mix local.rebar --force
 
-# Get mix dependencies
+# Get mix dependencies and compile them
 RUN mix deps.get
 RUN mix deps.compile
 
@@ -48,4 +47,3 @@ RUN mix compile
 # Run everything
 RUN chmod +x /krptkn/entrypoint.sh
 CMD ["/krptkn/entrypoint.sh"]
-# CMD ["/bin/bash"]
