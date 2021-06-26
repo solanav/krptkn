@@ -19,17 +19,18 @@ defmodule Krptkn.Consumers.Db do
     Krptkn.Repo.insert!(url)
   end
 
-  defp insert_metadata(type, url, metadata) do
+  defp insert_metadata(type, url, metadata, dangerous) do
     session = Application.get_env(:krptkn, Krptkn.Application)[:session_name]
 
-    url = %Krptkn.Metadata{
+    metadata = %Krptkn.Metadata{
       metadata: metadata,
       session: session,
       type: type,
       url: url,
+      dangerous: dangerous,
     }
 
-    Krptkn.Repo.insert!(url)
+    Krptkn.Repo.insert!(metadata)
   end
 
   def start_link(_) do
@@ -45,7 +46,7 @@ defmodule Krptkn.Consumers.Db do
     # Insert the elements into the database
     Enum.map(events, fn
       {:url, {type, url}} -> insert_url(type, url)
-      {:metadata, {type, url, metadata}} -> insert_metadata(type, url, metadata)
+      {:metadata, {type, url, metadata, dangerous}} -> insert_metadata(type, url, metadata, dangerous)
       _ -> Logger.error("Unknown event in db inserter")
     end)
 

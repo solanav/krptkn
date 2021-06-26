@@ -1,5 +1,5 @@
 # Version of docker-compose
-version: '3'
+version: '3.1'
 
 # Containers we are going to run
 services:
@@ -16,14 +16,16 @@ services:
       PGDATABASE: krptkn
       PGPORT: 5432
       # Hostname of our Postgres container
-      PGHOST: db
+      PGHOST: phoenix_db
     ports:
       # Mapping the port to make the Phoenix app accessible outside of the container
       - "4000:4000"
     depends_on:
       # The db container needs to be started before we start this container
-      - db
-  db:
+      - phoenix_db
+      # The testing website should probably be started before phoenix is
+      - web
+  phoenix_db:
     # We use the predefined Postgres image
     image: postgres:9.6
     environment:
@@ -35,6 +37,15 @@ services:
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
+  web:
+    image: nginx
+    volumes:
+      - ./test/www:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=80
 # Define the volumes
 volumes:
   pgdata:

@@ -7,6 +7,7 @@ defmodule Krptkn.Metadata do
     field :session, :string
     field :type, :string
     field :url, :string
+    field :dangerous, :boolean
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule Krptkn.Metadata do
   @doc false
   def changeset(metadata, attrs) do
     metadata
-    |> cast(attrs, [:session, :url, :type, :metadata])
-    |> validate_required([:session, :url, :type, :metadata])
+    |> cast(attrs, [:session, :url, :type, :metadata, :dangerous])
+    |> validate_required([:session, :url, :type, :metadata, :dangerous])
   end
 end
