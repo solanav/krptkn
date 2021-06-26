@@ -1,6 +1,6 @@
 # Krptkn
 
-Krptkn is a spider, metadata extractor, metadata analyzer and report generator.
+Krptkn, pronounced /kroh-pot-kin/, is a metadata extraction framework for websites. It contains a spider, metadata extractor, metadata analyzer and report generator.
 
 # Installation
 Build both Krptkn and PostgreSQL:
