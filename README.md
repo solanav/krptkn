@@ -2,7 +2,7 @@
 
 Krptkn, pronounced /kroh-pot-kin/, is a metadata extraction framework for websites. It contains a spider, metadata extractor, metadata analyzer and report generator.
 
-# Installation
+# Installation (docker)
 Build both Krptkn and PostgreSQL:
 ```bash
 $ docker-compose build
