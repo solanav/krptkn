@@ -11,25 +11,23 @@ ENV LANG C.UTF-8
 ENV PGUSER postgres
 ENV PGPASSWORD postgres
 ENV PGDATABASE krptkn
-ENV PGHOST db
+ENV PGHOST phoenix_db
 ENV PGPORT 5432
 
 # Install dependencies
-RUN apt-get update
-RUN apt-get install -y wget curl git gnupg cmake postgresql-client inotify-tools libextractor-dev
+RUN apt-get update && apt-get install -y wget curl git gnupg cmake postgresql-client inotify-tools libextractor-dev
 
 # Install erlang and elixir
 RUN wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
 RUN dpkg -i erlang-solutions_2.0_all.deb
 RUN rm erlang-solutions_2.0_all.deb
-RUN apt-get update
-RUN apt-get install -y esl-erlang elixir
+RUN apt-get update && apt-get install -y esl-erlang elixir
 
 # Compile assets
 # RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs npm
 RUN npm cache clean --force
-RUN npm install
+RUN cd assets && npm install
 
 # Install hex package manager (elixir)
 RUN mix local.hex --force

@@ -1,38 +1,19 @@
-# Version of docker-compose
 version: '3.1'
 
-# Containers we are going to run
 services:
-  # Our Phoenix container
   phoenix:
-    # The build parameters for this container.
     build:
-      # Here we define that it should build from the current directory
       context: .
-    environment:
-      # Variables to connect to our Postgres server
-      PGUSER: postgres
-      PGPASSWORD: postgres
-      PGDATABASE: krptkn
-      PGPORT: 5432
-      # Hostname of our Postgres container
-      PGHOST: phoenix_db
     ports:
-      # Mapping the port to make the Phoenix app accessible outside of the container
       - "4000:4000"
     depends_on:
-      # The db container needs to be started before we start this container
       - phoenix_db
-      # The testing website should probably be started before phoenix is
       - web
   phoenix_db:
-    # We use the predefined Postgres image
     image: postgres:9.6
     environment:
-      # Set user/password for Postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      # Set a path where Postgres should store the data
       PGDATA: /var/lib/postgresql/data/pgdata
     restart: always
     volumes:
@@ -46,6 +27,6 @@ services:
     environment:
       - NGINX_HOST=foobar.com
       - NGINX_PORT=80
-# Define the volumes
+
 volumes:
   pgdata:

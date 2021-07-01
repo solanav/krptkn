@@ -34,24 +34,14 @@ defmodule Krptkn.Consumers.Metadata do
 
         {to_string(type), data}
       end)
+      # Clean stuff
+      |> Enum.filter(fn {_type, data} -> data != "" end)
       # Turn the list of key-values into a map
       |> Map.new()
     end)
-    # Remove empty or duplicated stuff
     |> Enum.uniq()
-    |> Enum.filter(fn metadata ->
-      map_size(metadata) > 0
-    end)
-    |> Enum.map(fn metadata ->
-      Enum.filter(metadata, fn {_key, value} ->
-        value != ""
-      end)
-      |> Map.new()
-    end)
-    # Add the metadata to the UI
-    |> Enum.map(fn dict ->
-      Krptkn.Api.add_metadata(dict)
-    end)
+    |> Enum.filter(&(map_size(&1) > 0))
+    |> Enum.map(Krptkn.Api.add_metadata)
 
     metadata
   end
@@ -61,6 +51,7 @@ defmodule Krptkn.Consumers.Metadata do
     events = Enum.flat_map(events, fn {type, url, buffer} ->
       # Extract metadata from the file
       extract_metadata(buffer)
+      |> Enum.filter(Enum.empty?)
       # Mark metadata if its dangerous
       |> Enum.map(fn metadata ->
         dangerous = Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
@@ -73,15 +64,8 @@ defmodule Krptkn.Consumers.Metadata do
         {:metadata, {type, url, metadata, dangerous}}
       end)
     end)
-    # Remove empty maps
-    |> Enum.filter(fn {:metadata, {_type, _url, m, _dangerous}} ->
-      not Enum.empty?(m)
-    end)
     # Count metadata that has passed all filters
-    |> Enum.map(fn v ->
-      Krptkn.Api.add(:fmetadata)
-      v
-    end)
+    |> Enum.each(fn -> Krptkn.Api.add(:fmetadata) end)
 
     {:noreply, events, state}
   end
