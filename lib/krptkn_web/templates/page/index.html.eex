@@ -8,7 +8,7 @@
           <div class="col-md-3">
             <div class="box box1">
               <div class="details">
-                <h3 id="url_count">Unknown</h3>
+                <h3 id="url_count">0</h3>
                 <h4>URLs</h4>
               </div>
             </div>
@@ -16,7 +16,7 @@
           <div class="col-md-3">
             <div class="box box2">
               <div class="details">
-                <h3 id="danger_count">Unknown</h3>
+                <h3 id="danger_count">0</h3>
                 <h4>Danger</h4>
               </div>
             </div>
@@ -24,7 +24,7 @@
           <div class="col-md-3">
             <div class="box box3">
               <div class="details">
-                <h3 id="metadata_count">Unknown</h3>
+                <h3 id="metadata_count">0</h3>
                 <h4>Metadata</h4>
               </div>
             </div>
@@ -32,7 +32,7 @@
           <div class="col-md-3">
             <div class="box box4">
               <div class="details">
-                <h3 id="fmetadata_count">Unknown</h3>
+                <h3 id="fmetadata_count">0</h3>
                 <h4>F. Metadata</h4>
               </div>
             </div>
@@ -44,7 +44,7 @@
 
           <div class="row">
             <div class="form-group col-md-1">
-              <p>State <span id="queue_state"><div class=\"led led-blue\"></div></span></p>
+              <p>State <span id="queue_state"></span> </p>
             </div>
           </div>
 
@@ -132,90 +132,3 @@
     </div>
   </div>
 </div>
-
-<script>
-function updateCounters() {
-  // Update the URL count
-  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "url") %>", function(data) {
-    document.getElementById("url_count").innerHTML = data
-  });
-
-  // Update the Danger count
-  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "danger") %>", function(data) {
-    document.getElementById("danger_count").innerHTML = data
-  });
-
-  // Update the Metadata count
-  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "metadata") %>", function(data) {
-    document.getElementById("metadata_count").innerHTML = data
-  });
-
-  // Update the Fmetadata count
-  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "count", "fmetadata") %>", function(data) {
-    document.getElementById("fmetadata_count").innerHTML = data
-  });
-}
-
-function updateState() {
-  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "queue_state") %>", function(state) {
-    console.log(state)
-    if (state == "running") {
-      document.getElementById("queue_state").innerHTML = "<div class=\"led led-green\"></div>"
-    } else if (state == "stopped") {
-      document.getElementById("queue_state").innerHTML = "<div class=\"led led-red\"></div>"
-    } else if (state == "paused") {
-      document.getElementById("queue_state").innerHTML = "<div class=\"led led-yellow\"></div>"
-    } else {
-      document.getElementById("queue_state").innerHTML = "<div class=\"led led-blue\"></div>"
-    }
-  });
-}
-
-function updateTable() {
-  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "last_urls") %>", function(url) {
-    nuHTML = ""
-
-    for (p of url) {
-      nuHTML += "<tr><td>" + p.index + "</td><td>" + p.url + "</td></tr>";
-    }
-
-    document.getElementById("url_table").innerHTML = nuHTML
-  });
-}
-
-function updateTableMetadata() {
-  $.getJSON("<%= Routes.state_url(KrptknWeb.Endpoint, :index, "last_metadata") %>", function(metadata) {
-    nuHTML = ""
-
-    for (p of metadata) {
-      nuHTML += "<tr><td><ul>";
-
-      for (var key of Object.keys(p)) {
-        nuHTML += "<li>" + key + " -> " + p[key] + "</li>"
-        console.log(key + " -> " + p[key])
-      }
-
-      nuHTML += "</ul></td></tr>";
-    }
-
-    document.getElementById("metadata_table").innerHTML = nuHTML
-  });
-}
-
-$(document).ready(function() {
-  // Fill the charts
-  updateTable();
-
-  // Change font color
-  Chart.defaults.global.defaultFontColor = 'white';
-
-  /* Start the update interval */
-  const interval = setInterval(function() {
-    updateTable();
-    updateTableMetadata();
-    updateState();
-    updateCounters();
-  }, 1000);
-});
-
-</script>

@@ -18,7 +18,6 @@ defmodule KrptknWeb.Router do
 
     get "/", PageController, :index
     post "/", PageController, :new
-    get "/info", InfoController, :index
     get "/state/:param", StateController, :index
     get "/state/:param/:type", StateController, :index
   end

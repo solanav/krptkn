@@ -34,7 +34,6 @@ defmodule Krptkn.Consumers.Db do
   end
 
   def start_link(_) do
-    Krptkn.Api.register_process(__MODULE__, "", self())
     GenStage.start_link(__MODULE__, [])
   end
 

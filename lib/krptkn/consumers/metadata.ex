@@ -9,7 +9,6 @@ defmodule Krptkn.Consumers.Metadata do
   use GenStage
 
   def start_link(name) do
-    Krptkn.Api.register_process(__MODULE__, name, self())
     GenStage.start_link(__MODULE__, [], name: name)
   end
 
@@ -41,7 +40,9 @@ defmodule Krptkn.Consumers.Metadata do
     end)
     |> Enum.uniq()
     |> Enum.filter(&(map_size(&1) > 0))
-    |> Enum.map(Krptkn.Api.add_metadata)
+
+    # Add metadata to API
+    Enum.each(metadata, &Krptkn.Api.add_metadata/1)
 
     metadata
   end
@@ -51,7 +52,7 @@ defmodule Krptkn.Consumers.Metadata do
     events = Enum.flat_map(events, fn {type, url, buffer} ->
       # Extract metadata from the file
       extract_metadata(buffer)
-      |> Enum.filter(Enum.empty?)
+      |> Enum.filter(&Enum.empty?/1)
       # Mark metadata if its dangerous
       |> Enum.map(fn metadata ->
         dangerous = Krptkn.MetadataFilter.interesting_data?(inspect(metadata))
@@ -64,8 +65,9 @@ defmodule Krptkn.Consumers.Metadata do
         {:metadata, {type, url, metadata, dangerous}}
       end)
     end)
+
     # Count metadata that has passed all filters
-    |> Enum.each(fn -> Krptkn.Api.add(:fmetadata) end)
+    Enum.each(events, fn _ -> Krptkn.Api.add(:fmetadata) end)
 
     {:noreply, events, state}
   end

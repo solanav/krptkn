@@ -136,16 +136,9 @@ defmodule Krptkn.UrlQueue do
       :queue.in(url, q)
     end)
 
-    {:ok, {q, :running}}
-  end
+    state_update()
 
-  @impl true
-  def handle_call(:state, _from, {queue, state}) do
-    if state == :running and :queue.is_empty(queue) do
-      {:reply, :stopped, {queue, state}}
-    else
-      {:reply, state, {queue, state}}
-    end
+    {:ok, {q, :running}}
   end
 
   @impl true
@@ -179,5 +172,27 @@ defmodule Krptkn.UrlQueue do
   @impl true
   def handle_cast(:clear_queue, {_old_queue, state}) do
     {:noreply, {:queue.new(), state}}
+  end
+
+  # Automatic stuff
+  defp state_update do
+    Process.send_after(self(), :state_update, 2_000)
+  end
+
+  @impl true
+  def handle_info(:state_update, {queue, state}) do
+    actual_state = if state == :running and :queue.is_empty(queue) do
+      :stopped
+    else
+      state
+    end
+
+    KrptknWeb.Endpoint.broadcast!("live_updates:lobby", "state", %{
+      state: actual_state
+    })
+
+    state_update()
+
+    {:noreply, {queue, state}}
   end
 end

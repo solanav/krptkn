@@ -9,7 +9,6 @@ defmodule Krptkn.Spider do
   use GenStage, restart: :transient
 
   def start_link(name) do
-    Krptkn.Api.register_process(__MODULE__, name, self())
     GenStage.start_link(__MODULE__, name, name: name)
   end
 
@@ -89,11 +88,10 @@ defmodule Krptkn.Spider do
 
         # Add count to url
         Krptkn.Api.add(:url)
-        Krptkn.Api.add_file_type(type)
 
         # Add url to list
         index = Krptkn.Api.count(:url)
-        Krptkn.Api.add_last_url({index, url})
+        Krptkn.Api.add_last_url(%{index: index, url: url})
 
         {:noreply, [{type, url, body}], name}
       :error ->

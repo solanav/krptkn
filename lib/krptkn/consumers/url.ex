@@ -8,7 +8,6 @@ defmodule Krptkn.Consumers.Url do
   use GenStage
 
   def start_link(name) do
-    Krptkn.Api.register_process(__MODULE__, name, self())
     GenStage.start_link(__MODULE__, [], name: name)
   end
 
