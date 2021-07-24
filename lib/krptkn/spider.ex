@@ -84,8 +84,6 @@ defmodule Krptkn.Spider do
 
     case res do
       {:ok, type, url, body} ->
-        #Logger.info("#{name} | #{url}")
-
         # Add count to url
         Krptkn.Api.add(:url)
 

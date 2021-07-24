@@ -145,9 +145,9 @@ defmodule Krptkn.Api do
 
       iex> Krptkn.Api.last_urls()
       [
-        "https://hexdocs.pm/elixir/GenServer.html",
-        "https://hexdocs.pm/elixir/Kernel.SpecialForms.html",
-        "https://hexdocs.pm/elixir/Atom.html",
+        %{index: 3, url: "https://hexdocs.pm/elixir/GenServer.html"},
+        %{index: 2, url: "https://hexdocs.pm/elixir/Kernel.SpecialForms.html"},
+        %{index: 1, url: "https://hexdocs.pm/elixir/Atom.html"},
       ]
 
   """
@@ -162,7 +162,11 @@ defmodule Krptkn.Api do
 
   ## Examples
 
-      iex> Krptkn.Api.add_last_url("https://stallman.org/")
+      iex> index = Krptkn.Api.count(:url)
+      iex> Krptkn.Api.add_last_url(%{
+        index: index,
+        url: "https://stallman.org/"}
+      )
       :ok
 
   """
